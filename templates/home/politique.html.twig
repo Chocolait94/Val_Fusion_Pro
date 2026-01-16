@@ -1,0 +1,535 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de confidentialité - VAL FUSION{% endblock %}
+
+{% block body %}
+<style>
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes pageEntrance {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-wrapper {
+    animation: pageEntrance 0.5s ease-out;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease-out forwards;
+}
+
+.animate-rotateIn {
+    animation: rotateIn 1s ease-out forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.section-card {
+    transition: all 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateX(5px);
+    background-color: #f9fafb;
+}
+
+.bg-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+}
+
+.icon-float {
+    transition: transform 0.3s ease;
+}
+
+.card-hover:hover .icon-float {
+    transform: translateY(-5px) rotate(10deg);
+}
+
+.pulse-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.1s !important; }
+.stagger-2 { animation-delay: 0.2s !important; }
+.stagger-3 { animation-delay: 0.3s !important; }
+.stagger-4 { animation-delay: 0.4s !important; }
+.stagger-5 { animation-delay: 0.5s !important; }
+.stagger-6 { animation-delay: 0.6s !important; }
+.stagger-7 { animation-delay: 0.7s !important; }
+.stagger-8 { animation-delay: 0.8s !important; }
+.stagger-9 { animation-delay: 0.9s !important; }
+.stagger-10 { animation-delay: 1s !important; }
+</style>
+
+<div class="page-wrapper">
+{# Hero Section #}
+<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white py-16">
+    <div class="absolute inset-0 bg-shimmer"></div>
+    <div class="pulse-circle" style="top: -10%; right: -10%;"></div>
+    <div class="pulse-circle" style="bottom: -10%; left: -10%; animation-delay: 1.5s;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mb-4 animate-rotateIn" style="opacity: 0;">
+            <i class="fas fa-lock text-3xl text-white"></i>
+        </div>
+        <h1 class="text-4xl lg:text-5xl font-bold mb-4 text-red-600 animate-bounceIn stagger-2" style="opacity: 0;">Politique de confidentialité</h1>
+        <p class="text-xl text-gray-300 animate-fadeInUp stagger-3" style="opacity: 0;">
+            Protection des données personnelles - VAL FUSION
+        </p>
+        <p class="text-sm text-gray-400 mt-2 animate-fadeInUp stagger-4" style="opacity: 0;">
+            Dernière mise à jour : 24/12/2025
+        </p>
+    </div>
+</section>
+
+{# Content Section #}
+<section class="relative py-20 bg-gray-50 overflow-hidden">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 card-hover animate-fadeInUp stagger-1" style="opacity: 0;">
+            <div class="prose prose-lg max-w-none">
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8 rounded-r-lg transition-all duration-300 hover:border-l-8 animate-slideInRight stagger-2" style="opacity: 0;">
+                    <h2 class="text-2xl font-bold text-red-600 mb-3 flex items-center">
+                        <i class="fas fa-shield-alt mr-3"></i>
+                        POLITIQUE DE CONFIDENTIALITÉ ET DE PROTECTION DES DONNÉES PERSONNELLES
+                    </h2>
+                    <p class="text-blue-800 mb-0">VAL FUSION - Dernière mise à jour : 24/12/2025</p>
+                </div>
+                
+                {# Article 1 #}
+                <div class="mb-8 section-card animate-fadeInUp stagger-3" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 1 : IDENTITÉ DU RESPONSABLE DU TRAITEMENT</h3>
+                    <p class="text-gray-700 mb-3">
+                        La collecte et le traitement des données personnelles effectués dans le cadre des activités de VAL FUSION sont placés sous la responsabilité de :
+                    </p>
+                    <ul class="list-none space-y-2 ml-0 text-gray-700">
+                        <li><strong>Dénomination sociale :</strong> VAL FUSION</li>
+                        <li><strong>Représentant légal :</strong> M. Kadir GORDUK, en qualité de Président</li>
+                        <li><strong>Siège social :</strong> 101 Rue Grande – 27100 Val-de-Reuil</li>
+                        <li><strong>Contact téléphonique :</strong> <a href="tel:0232405803" class="text-blue-600 hover:underline transition-all duration-300 hover:text-blue-800">02.32.40.58.03</a></li>
+                        <li><strong>Contact email :</strong> <a href="mailto:contact@valfusion.fr" class="text-blue-600 hover:underline transition-all duration-300 hover:text-blue-800">contact@valfusion.fr</a></li>
+                    </ul>
+                    <p class="text-gray-700 mt-3">
+                        VAL FUSION s'engage à ce que la collecte et le traitement de vos données soient conformes au Règlement Général sur la Protection des Données (RGPD) et à la Loi Informatique et Libertés.
+                    </p>
+                </div>
+                
+                {# Article 2 #}
+                <div class="mb-8 bg-gray-50 p-6 rounded-lg section-card animate-fadeInUp stagger-4" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 2 : NATURE DES DONNÉES COLLECTÉES</h3>
+                    <p class="text-gray-700 mb-4">
+                        Dans le cadre de l'utilisation de nos services et de la navigation sur notre site internet, VAL FUSION est amenée à collecter et traiter les catégories de données suivantes :
+                    </p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span><strong>Données d'identification :</strong> Nom, prénom, civilité.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span><strong>Données de contact :</strong> Adresse postale, adresse électronique, numéro de téléphone.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span><strong>Données professionnelles :</strong> Fonction, nom de la société, numéro SIRET.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span><strong>Données économiques et financières :</strong> Devis, bons de commande, factures, coordonnées bancaires (RIB).</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                            <span><strong>Données de connexion (uniquement via le site web) :</strong> Adresse IP, journaux de connexion, cookies et statistiques d'utilisation.</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                {# Article 3 #}
+                <div class="mb-8 animate-fadeInUp stagger-5" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 3 : FINALITÉS DU TRAITEMENT</h3>
+                    <p class="text-gray-700 mb-4">
+                        Les données collectées sont nécessaires à l'activité de VAL FUSION. Elles sont traitées pour les objectifs explicites, légitimes et déterminés suivants :
+                    </p>
+                    <div class="space-y-3 text-gray-700">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold">1</span>
+                            </div>
+                            <div>
+                                <strong>Gestion de la relation commerciale :</strong> Administration des clients, partenaires et fournisseurs.
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold">2</span>
+                            </div>
+                            <div>
+                                <strong>Exécution des services :</strong> Réalisation des prestations commandées par le client.
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold">3</span>
+                            </div>
+                            <div>
+                                <strong>Gestion administrative et comptable :</strong> Établissement des devis, contrats, facturation, recouvrement et suivi de trésorerie.
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold">4</span>
+                            </div>
+                            <div>
+                                <strong>Communication et prospection :</strong> Envoi d'informations commerciales ou techniques (uniquement si vous y avez consenti ou dans le cadre d'une relation existante).
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                <span class="text-blue-600 font-bold">5</span>
+                            </div>
+                            <div>
+                                <strong>Conformité légale :</strong> Respect des obligations légales, fiscales et réglementaires incombant à l'entreprise.
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mt-4 italic">
+                        Toutes les données sont traitées dans le respect du RGPD (UE 2016/679) et de la Loi Informatique et Libertés.
+                    </p>
+                </div>
+                
+                {# Article 4 #}
+                <div class="mb-8 bg-gray-50 p-6 rounded-lg section-card animate-fadeInUp stagger-6" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 4 : DURÉE DE CONSERVATION DES DONNÉES</h3>
+                    <p class="text-gray-700 mb-4">
+                        VAL FUSION conserve vos données uniquement le temps nécessaire aux finalités poursuivies, conformément aux prescriptions légales :
+                    </p>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-500 mt-1 mr-2"></i>
+                            <span><strong>Gestion de la relation client :</strong> Pendant toute la durée de la relation contractuelle.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-500 mt-1 mr-2"></i>
+                            <span><strong>Prospection commerciale :</strong> 3 ans à compter du dernier contact émanant du prospect ou de la fin de la relation commerciale.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-blue-500 mt-1 mr-2"></i>
+                            <span><strong>Documents comptables et fiscaux :</strong> 10 ans (factures, bons de commande), conformément à l'article L.123-22 du Code de commerce.</span>
+                        </li>
+                    </ul>
+                    <p class="text-gray-700 mt-4">
+                        Une fois ces délais expirés, les données sont soit supprimées, soit archivées de manière anonymisée à des fins statistiques.
+                    </p>
+                </div>
+                
+                {# Article 5 #}
+                <div class="mb-8 animate-fadeInUp stagger-7" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 5 : DESTINATAIRES DES DONNÉES</h3>
+                    <p class="text-gray-700 mb-3">
+                        Les données personnelles collectées sont destinées exclusivement à l'usage de VAL FUSION et de ses sociétés affiliées.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        Elles peuvent toutefois être transmises à des tiers sous-traitants uniquement lorsque cela est strictement nécessaire à l'exécution du service (ex : établissements bancaires, experts-comptables, assureurs, prestataires informatiques).
+                    </p>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                        <p class="text-green-800 font-semibold mb-0">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Engagement de confidentialité : VAL FUSION garantit qu'aucune donnée personnelle n'est vendue, louée ou cédée à des tiers à des fins commerciales.
+                        </p>
+                    </div>
+                </div>
+                
+                {# Article 6 #}
+                <div class="mb-8 bg-gray-50 p-6 rounded-lg section-card animate-fadeInUp stagger-8" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 6 : DROITS DES PERSONNES CONCERNÉES</h3>
+                    <p class="text-gray-700 mb-4">
+                        Conformément à la réglementation en vigueur (RGPD), vous disposez des droits suivants sur vos données :
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-eye text-blue-500 mr-2 icon-float"></i>
+                                Droit d'accès
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez demander à connaître les données que nous détenons sur vous.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-edit text-green-500 mr-2 icon-float"></i>
+                                Droit de rectification
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez demander la correction des informations inexactes ou incomplètes.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-trash text-red-500 mr-2 icon-float"></i>
+                                Droit à l'effacement
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez demander la suppression de vos données, sous réserve des obligations légales.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-ban text-orange-500 mr-2 icon-float"></i>
+                                Droit d'opposition
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez vous opposer à l'utilisation de vos données à des fins de prospection.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-pause text-purple-500 mr-2 icon-float"></i>
+                                Droit à la limitation
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez demander le gel temporaire de l'utilisation de vos données.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-gray-200 card-hover">
+                            <h4 class="font-bold text-gray-900 mb-2 flex items-center">
+                                <i class="fas fa-download text-teal-500 mr-2 icon-float"></i>
+                                Droit à la portabilité
+                            </h4>
+                            <p class="text-sm text-gray-700">Vous pouvez récupérer vos données dans un format structuré.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                {# Article 7 #}
+                <div class="mb-8 animate-fadeInUp stagger-9" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 7 : MODALITÉS D'EXERCICE DES DROITS</h3>
+                    <p class="text-gray-700 mb-4">
+                        Pour exercer l'un de ces droits, vous pouvez adresser votre demande à notre service dédié, en précisant l'objet de votre demande :
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-blue-900 mb-3 flex items-center">
+                                <i class="fas fa-envelope text-blue-600 mr-2"></i>
+                                Par courrier postal
+                            </h4>
+                            <p class="text-blue-800 text-sm">
+                                VAL FUSION – Service RGPD<br>
+                                101 Rue Grande<br>
+                                27100 Val-de-Reuil
+                            </p>
+                        </div>
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h4 class="font-bold text-green-900 mb-3 flex items-center">
+                                <i class="fas fa-at text-green-600 mr-2"></i>
+                                Par email
+                            </h4>
+                            <p class="text-green-800 text-sm">
+                                <a href="mailto:contact@valfusion.fr" class="underline hover:text-green-900">contact@valfusion.fr</a>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mt-4 font-semibold">
+                        VAL FUSION s'engage à vous répondre dans un délai maximal de 30 jours à compter de la réception de votre demande.
+                    </p>
+                </div>
+                
+                {# Article 8 #}
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-r-lg transition-all duration-300 hover:border-l-8 animate-slideInLeft stagger-10" style="opacity: 0;">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">ARTICLE 8 : RÉCLAMATION AUPRÈS DE L'AUTORITÉ DE CONTRÔLE</h3>
+                    <p class="text-gray-700 mb-4">
+                        Si vous estimez, après nous avoir contactés, que vos droits « Informatique et Libertés » ne sont pas respectés, vous avez la possibilité d'adresser une réclamation à la CNIL :
+                    </p>
+                    <div class="bg-white p-4 rounded-lg">
+                        <p class="text-gray-800 font-semibold mb-2">Commission Nationale de l'Informatique et des Libertés (CNIL)</p>
+                        <p class="text-gray-700 text-sm">
+                            3 Place de Fontenoy – TSA 80715<br>
+                            75334 Paris Cedex 07<br>
+                            Site internet : <a href="https://www.cnil.fr" target="_blank" class="text-blue-600 hover:underline">www.cnil.fr</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {# Contact Box #}
+        <div class="mt-8 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-2xl shadow-xl p-8 text-center card-hover animate-scaleIn" style="opacity: 0;">
+            <h3 class="text-2xl font-bold mb-4">Des questions sur notre politique de confidentialité ?</h3>
+            <p class="mb-6">
+                Notre équipe est à votre disposition pour répondre à toutes vos questions concernant la protection de vos données personnelles.
+            </p>
+            <a href="{{ path('app_contact') }}" class="inline-flex items-center gap-3 bg-white text-blue-700 px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:scale-110 group">
+                <span>Contactez-nous</span>
+                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Trigger entrance animations on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('[style*="opacity: 0"]');
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Add smooth hover effects
+    const cards = document.querySelectorAll('.card-hover, .section-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = this.classList.contains('section-card') ? 'translateX(5px)' : 'translateY(-8px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = this.classList.contains('section-card') ? 'translateX(0)' : 'translateY(0)';
+        });
+    });
+});
+</script>
+{% endblock %}

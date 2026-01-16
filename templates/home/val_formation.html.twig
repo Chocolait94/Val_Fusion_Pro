@@ -1,0 +1,660 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VAL FORMATION - Centre de formation{% endblock %}
+
+{% block body %}
+<style>
+/* Animations personnalisées pour VAL FORMATION */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes slideInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Page entrance animation */
+@keyframes pageEntrance {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-wrapper {
+    animation: pageEntrance 0.5s ease-out;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease-out forwards;
+}
+
+.animate-rotateIn {
+    animation: rotateIn 1s ease-out forwards;
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.6s ease-out forwards;
+}
+
+.animate-slideInBottom {
+    animation: slideInBottom 0.8s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-hover:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.card-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.6s ease;
+}
+
+.card-hover:hover::before {
+    left: 100%;
+}
+
+.icon-bounce {
+    transition: transform 0.3s ease;
+}
+
+.card-hover:hover .icon-bounce {
+    animation: float 1s ease-in-out infinite;
+}
+
+.bg-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #059669 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-icon-entrance {
+    animation: rotateIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+.formation-card-header {
+    transition: transform 0.3s ease;
+}
+
+.card-hover:hover .formation-card-header {
+    transform: scale(1.1);
+}
+
+.check-icon {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover .check-icon {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.1s !important; }
+.stagger-2 { animation-delay: 0.2s !important; }
+.stagger-3 { animation-delay: 0.3s !important; }
+.stagger-4 { animation-delay: 0.4s !important; }
+.stagger-5 { animation-delay: 0.5s !important; }
+.stagger-6 { animation-delay: 0.6s !important; }
+.stagger-7 { animation-delay: 0.7s !important; }
+.stagger-8 { animation-delay: 0.8s !important; }
+.stagger-9 { animation-delay: 0.9s !important; }
+.stagger-10 { animation-delay: 1s !important; }
+
+.pulse-circle {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.pulse-circle:first-child {
+    top: 10%;
+    right: 10%;
+}
+
+.pulse-circle:last-child {
+    bottom: 10%;
+    left: 10%;
+}
+
+.icon-float {
+    animation: float 2s ease-in-out infinite;
+}
+
+.shimmer-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.info-card .bg-white\/10 {
+    transition: all 0.3s ease;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Trigger entrance animations on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('[style*="opacity: 0"]');
+    animatedElements.forEach(el => observer.observe(el));
+    
+    // Add hover effect to formation cards
+    const cards = document.querySelectorAll('.card-hover');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-12px) scale(1.02)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+</script>
+
+<div class="page-wrapper">
+{# Hero Section #}
+<section class="relative bg-gradient-to-br from-green-900 via-green-800 to-teal-900 text-white py-20 lg:py-32">
+    <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1920')"></div>
+    <div class="absolute inset-0 bg-shimmer"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-green-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-teal-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6 hero-icon-entrance">
+                    <i class="fas fa-graduation-cap text-4xl text-white"></i>
+                </div>
+                <h1 class="text-4xl lg:text-6xl font-bold mb-6 text-gradient animate-bounceIn stagger-2" style="opacity: 0;">VAL FORMATION</h1>
+                <h2 class="text-2xl lg:text-3xl font-semibold text-red-200 mb-6 animate-slideInRight stagger-4" style="opacity: 0;">
+                    Développez Vos Compétences avec VAL FORMATION
+                </h2>
+                <p class="text-lg text-gray-200 leading-relaxed mb-4 animate-fadeInUp stagger-6" style="opacity: 0;">
+                    VAL FORMATION propose des formations spécialisées dans le BTP, la sécurité et le nettoyage.
+                </p>
+                <p class="text-lg text-gray-200 leading-relaxed mb-4 animate-fadeInUp stagger-7" style="opacity: 0;">
+                    Notre objectif est d'accompagner les professionnels dans leur montée en compétences et d'assurer la conformité aux normes en vigueur.
+                </p>
+                <p class="text-lg text-gray-200 leading-relaxed animate-fadeInUp stagger-8" style="opacity: 0;">
+                    Grâce à nos méthodes pédagogiques innovantes, nous offrons des programmes variés qui répondent aux besoins spécifiques de chaque professionnel.
+                </p>
+            </div>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl aspect-square flex items-center justify-center border border-white/20 card-hover animate-slideInRight stagger-9" style="opacity: 0;">
+                <i class="fas fa-chalkboard-teacher text-9xl text-white/30 animate-float"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Why VAL FORMATION #}
+<section class="relative py-20 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-4xl mx-auto text-center space-y-4 md:space-y-6">
+            <p class="text-base md:text-lg text-gray-700 leading-relaxed animate-fadeInUp stagger-1" style="opacity: 0;">
+                Que vous soyez en phase de reconversion, d'amélioration de vos compétences ou simplement à la recherche d'une mise à jour de vos connaissances, VAL FORMATION a la solution adaptée à vos attentes.
+            </p>
+            <p class="text-lg md:text-xl font-semibold text-gray-900 animate-scaleIn stagger-3" style="opacity: 0;">
+                Découvrez nos formations sur mesure et engagez-vous dans une démarche de perfectionnement continu.
+            </p>
+        </div>
+    </div>
+</section>
+
+{# Formations Section #}
+<section class="relative py-20 bg-gray-50 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">FORMATIONS PROPOSÉES</h2>
+            <p class="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed animate-fadeInUp stagger-2" style="opacity: 0;">
+                Explorez notre large gamme de formations, du BTP au transport, sécurité, nettoyage, et même restauration, en passant par la création d'entreprise, la communication et le management.
+            </p>
+            <p class="text-xl font-semibold text-green-700 mt-4 animate-bounceIn stagger-3" style="opacity: 0;">
+                Ensemble ! Développez vos compétences et bâtissez un avenir solide pour votre entreprise avec VAL FORMATION.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {# BTP #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-4" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-hard-hat text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">BTP et métiers du bâtiment</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Formations pratiques et théoriques pour maçons, façadiers, peintres, électriciens et techniciens du bâtiment.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Maçonnerie et gros œuvre</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Façades et ravalement</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Second œuvre et finitions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Sécurité #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-5" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-red-500 to-red-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-shield-alt text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Sécurité et prévention</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Formations SST, risques chimiques, amiante, échafaudages et prévention incendie pour garantir la sécurité sur les chantiers.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">SST (Sauveteur Secouriste du Travail)</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Prévention incendie</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Travail en hauteur et échafaudages</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Transport et Nettoyage #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-6" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-truck text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Transport et Nettoyage</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Formations pratiques pour le transport de matériel et la gestion logistique sur chantiers.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Apprentissage des techniques de nettoyage et d'entretien des sites dans le respect des normes de sécurité.
+                    </p>
+                    <p class="text-sm font-semibold text-gray-800">
+                        Compétences développées : efficacité, ponctualité et respect des règles environnementales.
+                    </p>
+                </div>
+            </div>
+            
+            {# Insertion professionnelle #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-7" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-users text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Insertion professionnelle et accompagnement</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Programmes pour jeunes, adultes et personnes en reconversion, incluant coaching, suivi individuel et découverte des métiers.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Coaching personnalisé</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Découverte des métiers</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Accompagnement à l'emploi</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Additional Formations #}
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gradient mb-4 animate-scaleIn" style="opacity: 0;">Autres formations disponibles</h2>
+            <p class="text-lg text-gray-700 animate-fadeInUp stagger-2" style="opacity: 0;">Des formations complètes pour tous vos besoins professionnels</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {# Création entreprise #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-slideInLeft stagger-3" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-green-500 to-green-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-briefcase text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Création et gestion d'entreprise</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Formations en gestion administrative, comptabilité, ressources humaines et communication pour futurs entrepreneurs.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Gestion financière et comptable</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Management d'équipe</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Stratégie commerciale</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Communication #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-slideInRight stagger-3" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-bullhorn text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Communication et marketing</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Développez vos compétences en stratégies de communication, réseaux sociaux, création de contenu et relations clients pour promouvoir efficacement votre activité.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Marketing digital</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Réseaux sociaux professionnels</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Restauration #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-slideInLeft stagger-4" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-utensils text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Métiers de la restauration</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Formez-vous aux métiers de la restauration, de la cuisine à la gestion d'établissement.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Techniques culinaires professionnelles</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Hygiène et sécurité alimentaire (HACCP)</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Service et accueil client</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            {# Compétences transversales #}
+            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-slideInRight stagger-4" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-pink-500 to-pink-600 h-48 flex items-center justify-center formation-card-header">
+                    <i class="fas fa-lightbulb text-6xl text-white icon-bounce"></i>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-2xl font-bold text-red-600 mb-4">Compétences transversales</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        Renforcez vos compétences en communication interpersonnelle, gestion du temps, travail en équipe et résolution de problèmes.
+                    </p>
+                    <ul class="mt-4 space-y-2">
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Leadership et management</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Gestion du stress</span>
+                        </li>
+                        <li class="flex items-start group transition-all hover:translate-x-2">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
+                            <span class="text-gray-700">Productivité et organisation</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# CTA Section #}
+<section class="py-20 bg-gradient-to-br from-red-600 to-green-600 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <div class="pulse-circle"></div>
+        <div class="pulse-circle" style="animation-delay: 0.5s;"></div>
+    </div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 animate-scaleIn" style="opacity: 0;">
+                Prêt à transformer votre carrière ?
+            </h2>
+            <p class="text-xl text-white mb-8 max-w-3xl mx-auto animate-fadeInUp stagger-2" style="opacity: 0;">
+                Rejoignez VAL FORMATION et accédez à des formations de qualité adaptées à vos besoins professionnels.
+            </p>
+            <a href="{{ path('app_contact') }}" class="inline-flex items-center gap-3 bg-white text-red-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-110 animate-bounceIn stagger-3 shimmer-btn group" style="opacity: 0;">
+                <span>CONTACTEZ-NOUS</span>
+                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

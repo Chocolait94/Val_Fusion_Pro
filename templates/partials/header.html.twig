@@ -1,0 +1,156 @@
+<header class="bg-white shadow-md sticky top-0 z-50">
+    {# Top Bar with Logo and Social Links #}
+    <div class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-2 sm:py-3">
+                <div class="flex items-center">
+                    <a href="{{ path('app_home') }}" class="text-white text-xl sm:text-2xl font-bold tracking-wider hover:text-gray-300 transition">
+                        VAL FUSION
+                    </a>
+                </div>
+                
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <a href="https://www.facebook.com/profile.php?id=61579488735876" target="_blank" rel="noopener" aria-label="Facebook" class="text-white hover:text-blue-500 transition">
+                        <i class="fab fa-facebook text-base sm:text-lg"></i>
+                    </a>
+                    <a href="https://www.instagram.com/valfusion27/" target="_blank" rel="noopener" aria-label="Instagram" class="text-white hover:text-pink-500 transition">
+                        <i class="fab fa-instagram text-base sm:text-lg"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@valfusion27" target="_blank" rel="noopener" aria-label="TikTok" class="text-white hover:text-gray-300 transition">
+                        <i class="fab fa-tiktok text-base sm:text-lg"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@VALFUSIONGROUPE" target="_blank" rel="noopener" aria-label="Youtube" class="text-white hover:text-red-500 transition">
+                        <i class="fab fa-youtube text-base sm:text-lg"></i>
+                    </a>
+                    <a href="mailto:contact@valfusion.fr" aria-label="Email" class="text-white hover:text-yellow-400 transition">
+                        <i class="fas fa-envelope text-base sm:text-lg"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {# Navigation Menu #}
+    <nav class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                {# Desktop Navigation #}
+                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                    <a href="{{ path('app_home') }}" class="text-gray-700 hover:text-gray-900 font-semibold text-sm uppercase tracking-wide transition">
+                        Accueil
+                    </a>
+                    <a href="{{ path('app_about') }}" class="text-gray-700 hover:text-gray-900 font-semibold text-sm uppercase tracking-wide transition">
+                        À propos
+                    </a>
+                    
+                    {# Dropdown for Entities #}
+                    <div class="relative group">
+                        <button class="text-gray-700 hover:text-gray-900 font-semibold text-sm uppercase tracking-wide transition flex items-center">
+                            Nos Entités
+                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-56 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <a href="{{ path('app_val_btp') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fas fa-hard-hat mr-2 text-orange-500"></i> VAL BTP
+                            </a>
+                            <a href="{{ path('app_val_concept') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> VAL CONCEPT
+                            </a>
+                            <a href="{{ path('app_val_securikom') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fas fa-shield-alt mr-2 text-red-500"></i> VAL SECURIKOM
+                            </a>
+                            <a href="{{ path('app_val_formation') }}" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 transition">
+                                <i class="fas fa-graduation-cap mr-2 text-green-500"></i> VAL FORMATION
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="{{ path('app_contact') }}" class="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-full font-semibold text-sm uppercase hover:from-red-700 hover:to-red-800 transition shadow-md">
+                        Contact
+                    </a>
+                </div>
+                
+                {# Mobile menu button #}
+                <button id="mobile-menu-button" class="lg:hidden text-gray-700 hover:text-gray-900 focus:outline-none transition-transform duration-200 active:scale-95">
+                    <svg class="h-6 w-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                
+                <div class="hidden lg:block">
+                    <p class="text-xs text-gray-600 uppercase tracking-wider">Spécialiste de la construction et du management</p>
+                </div>
+            </div>
+        </div>
+        
+        {# Mobile Navigation #}
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-200 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0">
+            <div class="px-4 py-3 space-y-1">
+                <a href="{{ path('app_home') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md font-semibold text-sm uppercase">
+                    <i class="fas fa-home mr-2"></i> Accueil
+                </a>
+                <a href="{{ path('app_about') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md font-semibold text-sm uppercase">
+                    <i class="fas fa-info-circle mr-2"></i> À propos
+                </a>
+                
+                {# Mobile Entities Section #}
+                <div class="border-t border-gray-200 mt-2 pt-2">
+                    <p class="px-3 py-2 text-xs font-bold text-gray-500 uppercase tracking-wider">Nos Entités</p>
+                    <a href="{{ path('app_val_btp') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm">
+                        <i class="fas fa-hard-hat mr-2 text-orange-500"></i> VAL BTP
+                    </a>
+                    <a href="{{ path('app_val_concept') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm">
+                        <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> VAL CONCEPT
+                    </a>
+                    <a href="{{ path('app_val_securikom') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm">
+                        <i class="fas fa-shield-alt mr-2 text-red-500"></i> VAL SECURIKOM
+                    </a>
+                    <a href="{{ path('app_val_formation') }}" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-md text-sm">
+                        <i class="fas fa-graduation-cap mr-2 text-green-500"></i> VAL FORMATION
+                    </a>
+                </div>
+                
+                <a href="{{ path('app_contact') }}" class="block mt-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 rounded-lg font-semibold text-sm uppercase text-center hover:from-red-700 hover:to-red-800 transition">
+                    <i class="fas fa-envelope mr-2"></i> Contact
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+// Mobile menu toggle with smooth animation
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const menuIcon = document.getElementById('menu-icon');
+const closeIcon = document.getElementById('close-icon');
+
+if (mobileMenuButton) {
+    mobileMenuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        
+        if (isHidden) {
+            // Ouvrir le menu
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.style.maxHeight = '500px';
+                mobileMenu.classList.remove('opacity-0');
+                mobileMenu.classList.add('opacity-100');
+            }, 10);
+        } else {
+            // Fermer le menu
+            mobileMenu.style.maxHeight = '0';
+            mobileMenu.classList.remove('opacity-100');
+            mobileMenu.classList.add('opacity-0');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+            }, 300);
+        }
+        
+        // Animation de l'icône
+        menuIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+    });
+}
+</script>

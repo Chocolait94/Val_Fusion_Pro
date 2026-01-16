@@ -1,0 +1,650 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VAL BTP - Entreprise de construction{% endblock %}
+
+{% block body %}
+<style>
+/* Animations personnalisées pour VAL BTP */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-200deg) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+/* Page entrance animation */
+@keyframes pageEntrance {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.page-wrapper {
+    animation: pageEntrance 0.5s ease-out;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-zoomIn {
+    animation: zoomIn 0.6s ease-out forwards;
+}
+
+.animate-bounceIn {
+    animation: bounceIn 0.8s ease-out forwards;
+}
+
+.animate-slideInBottom {
+    animation: slideInBottom 0.8s ease-out forwards;
+}
+
+.animate-rotateIn {
+    animation: rotateIn 0.8s ease-out forwards;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.icon-rotate {
+    transition: transform 0.6s ease;
+}
+
+.card-hover:hover .icon-rotate {
+    transform: rotate(360deg);
+}
+
+.bg-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.service-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.service-card:hover::before {
+    left: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(234, 88, 12, 0.8), rgba(220, 38, 38, 0.8));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.gallery-item i {
+    position: relative;
+    z-index: 10;
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover i {
+    transform: scale(1.3);
+    color: white !important;
+}
+
+/* Entrance animations trigger on load */
+.hero-icon-entrance {
+    animation: rotateIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+.stagger-1 { animation-delay: 0.1s !important; }
+.stagger-2 { animation-delay: 0.2s !important; }
+.stagger-3 { animation-delay: 0.3s !important; }
+.stagger-4 { animation-delay: 0.4s !important; }
+.stagger-5 { animation-delay: 0.5s !important; }
+.stagger-6 { animation-delay: 0.6s !important; }
+.stagger-7 { animation-delay: 0.7s !important; }
+.stagger-8 { animation-delay: 0.8s !important; }
+.stagger-9 { animation-delay: 0.9s !important; }
+.stagger-10 { animation-delay: 1s !important; }
+</style>
+
+<div class="page-wrapper">
+{# Hero Section #}
+<section class="relative bg-gradient-to-br from-orange-900 via-orange-800 to-red-900 text-white py-20 lg:py-32">
+    <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920')"></div>
+    <div class="absolute inset-0 bg-shimmer"></div>
+    <div class="absolute top-0 left-0 w-96 h-96 bg-orange-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-64 h-64 bg-red-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6 hero-icon-entrance icon-rotate">
+                <i class="fas fa-hard-hat text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-bold mb-6 text-gradient animate-bounceIn stagger-2" style="opacity: 0;">
+                VAL BTP
+            </h1>
+            <h2 class="text-2xl lg:text-3xl font-semibold text-red-200 mb-6 animate-slideInRight stagger-4" style="opacity: 0;">
+                Votre Partenaire Idéal pour tous vos Travaux
+            </h2>
+            <p class="text-lg text-gray-200 leading-relaxed mb-4 animate-fadeInUp stagger-6" style="opacity: 0;">
+                Dans le secteur dynamique du bâtiment et des travaux publics, VAL BTP se positionne comme un acteur stimulant à Val-De-Reuil.
+            </p>
+            <p class="text-lg text-gray-200 leading-relaxed mb-4 animate-fadeInUp stagger-7" style="opacity: 0;">
+                Que vous ayez besoin d'une entreprise de construction, d'une large gamme de matériaux de construction ou d'équipements de sécurité, nous proposons des solutions sur mesure adaptées à vos projets.
+            </p>
+            <p class="text-lg text-gray-300 leading-relaxed animate-fadeInUp stagger-8" style="opacity: 0;">
+                Notre expertise couvre tous les corps d'état : maçonnerie, plomberie, électricité, menuiserie, peinture, ravalement de façade et bardage ITE...
+            </p>
+        </div>
+    </div>
+</section>
+
+{# Services Section #}
+<section class="relative py-20 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">Équipe qui est à votre écoute !</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
+            {# Façades & ravalement #}
+            <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 lg:p-8 shadow-lg card-hover service-card animate-slideInLeft h-full" style="opacity: 0; animation-delay: 0.2s;">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="w-12 h-12 flex-shrink-0 bg-orange-500 rounded-full flex items-center justify-center animate-float">
+                        <i class="fas fa-building text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 leading-tight">Façades & ravalement</h3>
+                </div>
+                <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+                    Nous intervenons auprès des particuliers, collectivités et entreprises pour des projets de construction et de réhabilitation, avec une expertise reconnue en gros œuvre et second œuvre.
+                </p>
+            </div>
+            
+            {# Maçonnerie générale #}
+            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 lg:p-8 shadow-lg card-hover service-card animate-slideInRight h-full" style="opacity: 0; animation-delay: 0.4s;">
+                <div class="flex items-start gap-4 mb-4">
+                    <div class="w-12 h-12 flex-shrink-0 bg-red-500 rounded-full flex items-center justify-center animate-float" style="animation-delay: 0.5s;">
+                        <i class="fas fa-hard-hat text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-red-600 leading-tight">Maçonnerie générale</h3>
+                </div>
+                <ul class="space-y-3 text-sm sm:text-base text-gray-700">
+                    <li class="flex items-start gap-3 group transition-all hover:translate-x-2">
+                        <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0 transition-transform group-hover:scale-125"></i>
+                        <span class="leading-relaxed">Respect des délais et des normes de sécurité (SST, amiante, échafaudages)</span>
+                    </li>
+                    <li class="flex items-start gap-3 group transition-all hover:translate-x-2">
+                        <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0 transition-transform group-hover:scale-125"></i>
+                        <span class="leading-relaxed">Utilisation de matériaux durables et techniques respectueuses de l'environnement</span>
+                    </li>
+                    <li class="flex items-start gap-3 group transition-all hover:translate-x-2">
+                        <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0 transition-transform group-hover:scale-125"></i>
+                        <span class="leading-relaxed">Accompagnement personnalisé de l'étude jusqu'à la livraison</span>
+                    </li>
+                    <li class="flex items-start gap-3 group transition-all hover:translate-x-2">
+                        <i class="fas fa-check-circle text-green-500 mt-1 flex-shrink-0 transition-transform group-hover:scale-125"></i>
+                        <span class="leading-relaxed">Garantie décennale et assurance professionnelle</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Un Service sur Mesure #}
+<section class="py-20 bg-gray-50 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-64 h-64 bg-orange-200 opacity-20 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-red-200 opacity-20 rounded-full blur-3xl"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">Un Service sur Mesure !</h2>
+            <p class="text-xl text-gray-700 leading-relaxed mb-4 max-w-3xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.2s;">
+                Chaque projet est unique.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.4s;">
+                C'est pourquoi nos équipes apportent une approche sur mesure, adaptée à vos besoins spécifiques et à vos exigences particulières. De la conception à la réalisation, nous mettons en œuvre toutes les ressources nécessaires pour la réussite de vos travaux.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+            <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center animate-fadeInUp" style="opacity: 0; animation-delay: 0.6s;">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float">
+                    <i class="fas fa-pencil-ruler text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Conception</h3>
+                <p class="text-gray-600">Étude et planification de votre projet</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center animate-fadeInUp" style="opacity: 0; animation-delay: 0.8s;">
+                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float" style="animation-delay: 0.5s;">
+                    <i class="fas fa-cogs text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Réalisation</h3>
+                <p class="text-gray-600">Mise en œuvre par nos équipes qualifiées</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center animate-fadeInUp" style="opacity: 0; animation-delay: 1s;">
+                <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float" style="animation-delay: 1s;">
+                    <i class="fas fa-check-double text-white text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Livraison</h3>
+                <p class="text-gray-600">Finition et remise clés en main</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Expertise Section #}
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">Menuiserie, Construction, Rénovation, Plomberie, Electricité</h2>
+            <p class="text-lg text-gray-700 leading-relaxed mb-4 max-w-4xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.2s;">
+                Nos équipes s'engagent à fournir des solutions durables et performantes, adaptées aux besoins de chaque client.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed mb-4 max-w-4xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.3s;">
+                Nous privilégions des méthodes respectueuses de l'environnement et conformes aux normes de sécurité.
+            </p>
+            <p class="text-xl font-semibold text-orange-700 max-w-4xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.4s;">
+                Avec VAL BTP, vos projets prennent vie dans les meilleures conditions.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="bg-gradient-to-br from-orange-100 to-red-100 rounded-2xl aspect-square flex items-center justify-center shadow-xl card-hover animate-slideInLeft" style="opacity: 0;">
+                <i class="fas fa-tools text-9xl text-orange-600/30 animate-float"></i>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-xl p-6 shadow-lg card-hover animate-slideInRight" style="opacity: 0; animation-delay: 0.2s;">
+                    <div class="flex items-start group">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center w-12 h-12 bg-orange-100 rounded-full icon-rotate">
+                                <i class="fas fa-hammer text-orange-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Construction & Rénovation</h3>
+                            <p class="text-gray-600">Du gros œuvre au second œuvre, nous maîtrisons toutes les étapes de vos projets.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg card-hover animate-slideInRight" style="opacity: 0; animation-delay: 0.4s;">
+                    <div class="flex items-start group">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full icon-rotate">
+                                <i class="fas fa-wrench text-blue-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Plomberie & Électricité</h3>
+                            <p class="text-gray-600">Des installations conformes aux normes et réalisées par des professionnels qualifiés.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg card-hover animate-slideInRight" style="opacity: 0; animation-delay: 0.6s;">
+                    <div class="flex items-start group">
+                        <div class="flex-shrink-0">
+                            <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full icon-rotate">
+                                <i class="fas fa-paint-roller text-green-600 text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Menuiserie & Finitions</h3>
+                            <p class="text-gray-600">Des finitions soignées pour sublimer vos espaces intérieurs et extérieurs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Galerie Section #}
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">GALERIE DES CHANTIERS VAL BTP</h2>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.2s;">
+                Explorez notre galerie d'images des projets réalisés par VAL BTP, mettant en avant notre expertise dans le domaine de la construction et des matériaux. Ces visuels illustrent notre engagement envers la qualité et la satisfaction de nos clients.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.1s;">
+                <i class="fas fa-image text-5xl text-orange-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.2s;">
+                <i class="fas fa-image text-5xl text-red-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.3s;">
+                <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.4s;">
+                <i class="fas fa-image text-5xl text-orange-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.5s;">
+                <i class="fas fa-image text-5xl text-red-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.6s;">
+                <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.7s;">
+                <i class="fas fa-image text-5xl text-orange-600/30"></i>
+            </div>
+            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.8s;">
+                <i class="fas fa-image text-5xl text-red-600/30"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# CTA Section #}
+<section class="py-20 bg-gradient-to-r from-orange-600 to-red-600 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-shimmer"></div>
+    <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-10 rounded-full translate-x-1/2 translate-y-1/2 animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="animate-scaleIn" style="opacity: 0;">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-6">Prêt à démarrer votre projet de construction ?</h2>
+            <p class="text-lg lg:text-xl mb-8 max-w-3xl mx-auto">
+                Contactez VAL BTP dès aujourd'hui pour un devis gratuit et personnalisé.
+            </p>
+            <a href="{{ path('app_contact') }}" class="inline-block bg-white text-orange-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl transform hover:scale-110 hover:shadow-2xl group">
+                <span>Demander un devis</span>
+                <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-2 transition-transform"></i>
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 card-hover animate-fadeInUp" style="opacity: 0; animation-delay: 0.2s;">
+                <i class="fas fa-phone text-4xl mb-3 animate-float"></i>
+                <h3 class="font-bold text-lg mb-2">Contactez-nous</h3>
+                <p class="text-sm text-white/80">Disponibles du lundi au samedi</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 card-hover animate-fadeInUp" style="opacity: 0; animation-delay: 0.4s;">
+                <i class="fas fa-file-invoice text-4xl mb-3 animate-float" style="animation-delay: 0.5s;"></i>
+                <h3 class="font-bold text-lg mb-2">Devis gratuit</h3>
+                <p class="text-sm text-white/80">Sans engagement sous 48h</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 card-hover animate-fadeInUp" style="opacity: 0; animation-delay: 0.6s;">
+                <i class="fas fa-handshake text-4xl mb-3 animate-float" style="animation-delay: 1s;"></i>
+                <h3 class="font-bold text-lg mb-2">Accompagnement</h3>
+                <p class="text-sm text-white/80">De A à Z sur votre projet</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Animation au scroll avec Intersection Observer
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observer tous les éléments avec animations
+    document.querySelectorAll('[style*="opacity: 0"]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Animation spéciale pour le hero icon
+    const heroIcon = document.querySelector('.icon-rotate');
+    if (heroIcon) {
+        heroIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'rotate(360deg) scale(1.1)';
+        });
+        heroIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotate(0deg) scale(1)';
+        });
+    }
+
+    // Animation des éléments de la galerie
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05) rotate(2deg)';
+        });
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    });
+
+    // Effet de rotation sur les icônes
+    const iconRotate = document.querySelectorAll('.icon-rotate');
+    iconRotate.forEach(icon => {
+        icon.parentElement.addEventListener('mouseenter', function() {
+            icon.style.transform = 'rotate(360deg)';
+        });
+        icon.parentElement.addEventListener('mouseleave', function() {
+            icon.style.transform = 'rotate(0deg)';
+        });
+    });
+
+    // Trigger entrance animations on page load
+    setTimeout(() => {
+        document.querySelectorAll('.hero-icon-entrance, [class*="stagger-"]').forEach(el => {
+            el.style.opacity = '1';
+        });
+    }, 100);
+
+    // Add sequential entrance animation to service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        setTimeout(() => {
+            card.style.opacity = '1';
+        }, 100 + (index * 150));
+    });
+});
+</script>
+</div>
+{% endblock %}

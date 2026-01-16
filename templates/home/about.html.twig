@@ -1,0 +1,372 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos de nous - VAL FUSION{% endblock %}
+
+{% block body %}
+<style>
+/* Animations personnalisées */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fadeInDown {
+    animation: fadeInDown 0.8s ease-out forwards;
+}
+
+.animate-scaleIn {
+    animation: scaleIn 0.6s ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slideInRight {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.icon-wrapper {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover .icon-wrapper {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    background-size: 1000px 100%;
+    animation: shimmer 3s infinite;
+}
+
+/* Effet de parallaxe */
+.parallax-bg {
+    transition: transform 0.3s ease-out;
+}
+</style>
+
+{# Hero Section #}
+<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white py-20">
+    <div class="absolute inset-0 bg-cover bg-center opacity-10 parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920')"></div>
+    <div class="absolute inset-0 bg-shimmer"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl lg:text-6xl font-bold mb-6 text-red-600 animate-fadeInDown" style="animation-delay: 0.2s; opacity: 0;">
+            L'essence de VAL FUSION GROUPE
+        </h1>
+        <p class="text-xl lg:text-2xl text-gray-200 max-w-3xl mx-auto animate-fadeInUp" style="animation-delay: 0.4s; opacity: 0;">
+            Chez VAL FUSION, nous sommes passionnés par la construction et la gestion.
+        </p>
+        <p class="text-lg lg:text-xl text-gray-300 mt-4 max-w-3xl mx-auto animate-fadeInUp" style="animation-delay: 0.6s; opacity: 0;">
+            Notre équipe est composée d'experts dans divers domaines pour vous offrir des services de qualité supérieure.
+        </p>
+    </div>
+</section>
+
+{# Content Section #}
+<section class="relative py-20 bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-12 md:mb-20">
+            <div class="space-y-4 md:space-y-6 animate-slideInLeft" style="opacity: 0;">
+                <h2 class="text-2xl md:text-3xl font-bold text-gradient">Notre Vision</h2>
+                <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                    Le Groupe VAL FUSION réunit plusieurs pôles complémentaires dédiés au BTP et aux services associés. 
+                    Notre mission est d'apporter une offre intégrée et innovante alliant construction, gestion, sécurité, formation et services.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Nous accompagnons nos clients avec professionnalisme, proximité et sens de l'innovation. 
+                    Acteur engagé, nous plaçons la qualité, la sécurité et l'insertion au cœur de nos actions.
+                </p>
+                
+                {# Statistiques animées #}
+                <div class="grid grid-cols-2 gap-3 md:gap-4 pt-4 md:pt-6">
+                    <div class="text-center p-3 md:p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-xl animate-scaleIn" style="animation-delay: 0.2s; opacity: 0;">
+                        <div class="text-2xl md:text-3xl font-bold text-red-600 counter" data-target="15">0</div>
+                        <div class="text-xs md:text-sm text-gray-600 mt-1">Ans d'expérience</div>
+                    </div>
+                    <div class="text-center p-3 md:p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl animate-scaleIn" style="animation-delay: 0.4s; opacity: 0;">
+                        <div class="text-2xl md:text-3xl font-bold text-blue-600 counter" data-target="500">0</div>
+                        <div class="text-xs md:text-sm text-gray-600 mt-1">Projets réalisés</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 md:gap-4 animate-slideInRight" style="opacity: 0;">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl aspect-square flex items-center justify-center shadow-lg card-hover group">
+                    <i class="fas fa-users text-4xl md:text-6xl text-blue-600 icon-wrapper animate-float" style="animation-delay: 0s;"></i>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl aspect-square flex items-center justify-center shadow-lg card-hover group">
+                    <i class="fas fa-chart-line text-4xl md:text-6xl text-green-600 icon-wrapper animate-float" style="animation-delay: 0.5s;"></i>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl aspect-square flex items-center justify-center shadow-lg card-hover group">
+                    <i class="fas fa-handshake text-4xl md:text-6xl text-orange-600 icon-wrapper animate-float" style="animation-delay: 1s;"></i>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl aspect-square flex items-center justify-center shadow-lg card-hover group">
+                    <i class="fas fa-award text-4xl md:text-6xl text-purple-600 icon-wrapper animate-float" style="animation-delay: 1.5s;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Values Section #}
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-gradient mb-4 animate-scaleIn" style="opacity: 0;">Nos Valeurs</h2>
+            <p class="text-lg text-gray-600 animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0;">Ce qui nous guide au quotidien</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group animate-fadeInUp" style="animation-delay: 0.1s; opacity: 0;">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mb-6 icon-wrapper">
+                    <i class="fas fa-star text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-red-600 mb-4">Qualité</h3>
+                <p class="text-gray-600">
+                    Nous nous engageons à fournir des services de la plus haute qualité à chacun de nos clients.
+                </p>
+                <div class="mt-6 h-1 w-0 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded transition-all duration-500 group-hover:w-full"></div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group animate-fadeInUp" style="animation-delay: 0.3s; opacity: 0;">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full mb-6 icon-wrapper">
+                    <i class="fas fa-shield-alt text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-red-600 mb-4">Sécurité</h3>
+                <p class="text-gray-600">
+                    La sécurité est au cœur de toutes nos interventions, pour protéger nos équipes et nos clients.
+                </p>
+                <div class="mt-6 h-1 w-0 bg-gradient-to-r from-green-500 to-green-600 mx-auto rounded transition-all duration-500 group-hover:w-full"></div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 text-center card-hover group animate-fadeInUp" style="animation-delay: 0.5s; opacity: 0;">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full mb-6 icon-wrapper">
+                    <i class="fas fa-lightbulb text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-red-600 mb-4">Innovation</h3>
+                <p class="text-gray-600">
+                    Nous adoptons les dernières technologies et méthodes pour rester à la pointe de notre secteur.
+                </p>
+                <div class="mt-6 h-1 w-0 bg-gradient-to-r from-purple-500 to-purple-600 mx-auto rounded transition-all duration-500 group-hover:w-full"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# CTA Section #}
+<section class="py-20 bg-gradient-to-r from-red-600 to-red-800 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-shimmer"></div>
+    <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-white opacity-5 rounded-full translate-x-1/2 translate-y-1/2 animate-pulse" style="animation-delay: 1s;"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center animate-scaleIn" style="opacity: 0;">
+            <h2 class="text-3xl lg:text-4xl font-bold mb-6">Prêt à nous rejoindre pour construire l'avenir ?</h2>
+            <p class="text-lg lg:text-xl mb-8 max-w-3xl mx-auto">
+                Que vous soyez à la recherche de services de construction, de conseils en gestion ou de formations spécialisées, nous avons ce qu'il vous faut !
+            </p>
+            <h3 class="text-2xl font-bold mb-8">Rejoignez-nous dans notre mission !</h3>
+            <a href="{{ path('app_contact') }}" class="inline-block bg-white text-red-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl transform hover:scale-110 hover:shadow-2xl animate-pulse">
+                Contactez-nous
+            </a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl aspect-square flex flex-col items-center justify-center p-6 card-hover group animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0;">
+                <i class="fas fa-building text-6xl text-white/80 mb-4 icon-wrapper"></i>
+                <p class="text-white font-semibold text-lg">Projets BTP</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl aspect-square flex flex-col items-center justify-center p-6 card-hover group animate-fadeInUp" style="animation-delay: 0.4s; opacity: 0;">
+                <i class="fas fa-graduation-cap text-6xl text-white/80 mb-4 icon-wrapper"></i>
+                <p class="text-white font-semibold text-lg">Formations</p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl aspect-square flex flex-col items-center justify-center p-6 card-hover group animate-fadeInUp" style="animation-delay: 0.6s; opacity: 0;">
+                <i class="fas fa-briefcase text-6xl text-white/80 mb-4 icon-wrapper"></i>
+                <p class="text-white font-semibold text-lg">Services Pro</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Animation au scroll avec Intersection Observer
+document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observer tous les éléments avec animations
+    document.querySelectorAll('[style*="opacity: 0"]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Animation des compteurs
+    const counters = document.querySelectorAll('.counter');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        entry.target.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        entry.target.textContent = target + '+';
+                    }
+                };
+                
+                updateCounter();
+                counterObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    counters.forEach(counter => {
+        counterObserver.observe(counter);
+    });
+
+    // Effet parallaxe sur le hero
+    const parallaxBg = document.querySelector('.parallax-bg');
+    if (parallaxBg) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.5;
+            parallaxBg.style.transform = `translateY(${rate}px)`;
+        });
+    }
+
+    // Animation de hover sur les cartes
+    const cards = document.querySelectorAll('.card-hover');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.zIndex = '10';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.zIndex = '1';
+        });
+    });
+});
+</script>
+{% endblock %}

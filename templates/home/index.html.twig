@@ -1,0 +1,766 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VAL FUSION - Construction et Management{% endblock %}
+
+{% block body %}
+<style>
+    @keyframes float-home {
+        0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+        33% { transform: translateY(-30px) translateX(10px) rotate(5deg); }
+        66% { transform: translateY(-15px) translateX(-10px) rotate(-5deg); }
+    }
+    
+    @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 30px rgba(255, 8, 68, 0.6); }
+        50% { box-shadow: 0 0 60px rgba(255, 8, 68, 0.9); }
+    }
+    
+    @keyframes shimmer {
+        0% { transform: translateX(-100%) rotate(45deg); }
+        100% { transform: translateX(200%) rotate(45deg); }
+    }
+    
+    @keyframes particle-float {
+        0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+        50% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
+    }
+    
+    .animate-float-home {
+        animation: float-home 5s ease-in-out infinite;
+    }
+    
+    .animate-pulse-glow {
+        animation: pulse-glow 2.5s ease-in-out infinite;
+    }
+    
+    .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    
+    .card-shimmer {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card-shimmer::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transform: translateX(-100%) rotate(45deg);
+        transition: all 0.6s;
+    }
+    
+    .card-shimmer:hover::before {
+        animation: shimmer 1.5s;
+    }
+    
+    .parallax-layer {
+        transform: translateZ(0);
+        will-change: transform;
+    }
+</style>
+
+{# Hero Section - Style Maquette Pure #}
+<section class="relative text-white overflow-hidden h-screen flex items-center justify-center">
+    {# BTP Background Pattern - Texture béton/construction #}
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
+    <div class="absolute inset-0 opacity-10" style="background-image: 
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px);
+        background-size: 100px 100px;">
+    </div>
+    <div class="absolute inset-0" style="background: radial-gradient(circle at 30% 40%, rgba(251, 146, 60, 0.1) 0%, transparent 50%), 
+        radial-gradient(circle at 70% 60%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);">
+    </div>
+    
+    {# Background Video #}
+    <video autoplay muted loop playsinline class="parallax-layer absolute inset-0 w-full h-full object-cover">
+        <source src="{{ asset('img/video 4k.mp4') }}" type="video/mp4">
+        Votre navigateur ne supporte pas la vidéo.
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50"></div>
+    
+    {# Floating Particles #}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="particle w-2 h-2 top-[10%] left-[15%] animate-float-home" style="animation-delay: 0s;"></div>
+        <div class="particle w-3 h-3 top-[20%] left-[80%] animate-float-home" style="animation-delay: 1s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[40%] left-[10%] animate-float-home" style="animation-delay: 2s;"></div>
+        <div class="particle w-2.5 h-2.5 top-[60%] left-[70%] animate-float-home" style="animation-delay: 1.5s;"></div>
+        <div class="particle w-2 h-2 top-[80%] left-[30%] animate-float-home" style="animation-delay: 3s;"></div>
+        <div class="particle w-3 h-3 top-[15%] left-[50%] animate-float-home" style="animation-delay: 2.5s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[70%] left-[85%] animate-float-home" style="animation-delay: 0.5s;"></div>
+    </div>
+    
+    {# Content #}
+    <div class="relative z-10 text-center px-4">
+        <div class="mb-8" data-aos="zoom-in" data-aos-duration="800">
+            <img src="{{ asset('img/Val_Fusion_groupe-removebg-preview.png') }}" alt="Val Fusion Groupe" class="w-40 h-40 mx-auto object-contain" style="filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));">
+        </div>
+        <h1 class="text-7xl sm:text-8xl md:text-9xl font-bold leading-none tracking-tight neon-text"
+            data-aos="fade-up" 
+            data-aos-duration="1000">
+            VAL FUSION GROUPE
+        </h1>
+        <h2 class="mt-6 text-2xl sm:text-3xl md:text-4xl text-gray-700 neon-subtitle"
+            data-aos="fade-up" 
+            data-aos-delay="200" 
+            data-aos-duration="1000">
+            Bienvenue dans notre univers !
+        </h2>
+        <div class="mt-12" data-aos="fade-up" data-aos-delay="400">
+            <a href="#services" class="inline-flex items-center gap-3 bg-red-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition-all duration-500 shadow-2xl hover:shadow-red-900/50 transform hover:scale-110 hover:-translate-y-2 group">
+                <span>Découvrir nos services</span>
+                <i class="fas fa-arrow-down text-xl group-hover:translate-y-2 transition-transform duration-300"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+.neon-text {
+    background: linear-gradient(135deg, #ff0844 0%, #ff6b6b 25%, #ff0844 50%, #c41e3a 75%, #ff0844 100%);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 20px rgba(255, 8, 68, 0.6))
+            drop-shadow(0 0 40px rgba(255, 8, 68, 0.4));
+    animation: gradient-shift 4s ease infinite;
+}
+
+.neon-subtitle {
+    color: #e5e7eb;
+    text-shadow: 
+        0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+</style>
+
+{# About Section - Design Épuré #}
+<section id="about" class="relative py-24 sm:py-32 bg-white overflow-hidden">
+    {# Decorative Background Elements #}
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-20 right-10 w-96 h-96 bg-red-50 rounded-full blur-3xl opacity-30 animate-pulse-glow"></div>
+        <div class="absolute bottom-20 left-10 w-80 h-80 bg-blue-50 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-red-600 mb-12 leading-tight relative inline-block">
+                VAL FUSION GROUPE
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-40 h-1.5 bg-red-600 rounded-full"></div>
+            </h2>
+            <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-8">
+                Le Groupe VAL FUSION réunit plusieurs pôles complémentaires dédiés au BTP et aux services associés.
+            </p>
+            <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-8">
+                Notre mission est d'apporter une offre intégrée et innovante alliant construction, gestion, sécurité, formation et services.
+            </p>
+            <p class="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-12">
+                Nous accompagnons nos clients avec professionnalisme, proximité et sens de l'innovation.
+            </p>
+            
+            <div class="flex justify-center floating" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card-shimmer overflow-hidden rounded-2xl shadow-2xl max-w-md group hover:shadow-red-500/30 transition-all duration-500 hover:-translate-y-4">
+                    <img src="{{ asset('img/Val Fusion Groupe.png') }}" alt="Val Fusion Groupe" 
+                    class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Fusionner Section - Style Minimaliste #}
+<section id="fusionner" class="relative py-24 sm:py-32 bg-gray-50 overflow-hidden">
+    {# Decorative Background #}
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-gradient-to-br from-red-100 to-orange-100 rounded-full blur-3xl opacity-40 animate-float-home"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full blur-3xl opacity-40 animate-float-home" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-6xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <div class="mb-8" data-aos="zoom-in">
+                <i class="fas fa-rocket text-6xl text-red-600" style="filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.3));"></i>
+            </div>
+            <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-red-600 mb-16 relative inline-block">
+                Fusionner avec le futur !
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-48 h-1.5 bg-red-600 rounded-full"></div>
+            </h1>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-12 leading-tight" data-aos="fade-up" data-aos-delay="100">
+                SPECIALISTE DE LA CONSTRUCTION ET DU MANAGEMENT 
+            </h2>
+            <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="200">
+                Nous unissons construction, gestion et formation pour construire un monde plus sûr et plus efficace.<br>
+                Explorez nos solutions innovantes aujourd'hui !
+            </p>
+            
+            {# YouTube Short Video #}
+            <div class="flex justify-center mt-16" data-aos="fade-up" data-aos-delay="300">
+                <div class="card-shimmer relative w-full max-w-xs mx-auto group hover:shadow-2xl hover:shadow-red-500/30 transition-all duration-500 hover:-translate-y-4" style="aspect-ratio: 9/16;">
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full rounded-2xl shadow-2xl"
+                        src="https://www.youtube.com/embed/NuFfnzLpOa0" 
+                        title="YouTube Short - Val Fusion" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Services Section - 3D Image Slider Carousel #}
+<section id="services" class="relative py-24 sm:py-32 bg-white overflow-hidden">
+    {# Animated Background #}
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/3 left-20 w-80 h-80 bg-blue-100 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-1/3 right-20 w-96 h-96 bg-red-100 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold text-red-600 mb-16 relative inline-block">
+                Les Entités 
+                <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-40 h-1.5 bg-red-600 rounded-full"></div>
+            </h2>
+            <p class="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-8">
+                Découvrez nos différentes branches qui font vibrer le cœur de VAL FUSION.
+                Nous nous engageons à vous fournir des solutions de la plus haute qualité.
+            </p>
+        </div>
+        
+        {# 3D Carousel Slider #}
+        <div class="banner">
+            <div class="slider" style="--quantity: 4">
+                {# Service Card 1 - VAL BTP #}
+                <div class="item" style="--position: 1">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3 class="card-title">VAL BTP</h3>
+                        <p class="card-description">
+                            Entreprise générale BTP : maçonnerie, façades, rénovation, second œuvre.
+                        </p>
+                        <a href="{{ path('app_val_btp') }}" class="card-link">
+                            En savoir plus
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                {# Service Card 2 - VAL CONCEPT #}
+                <div class="item" style="--position: 2">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="card-title">VAL CONCEPT</h3>
+                        <p class="card-description">
+                            Cabinet de gestion et d'accompagnement BTP spécialisé.
+                        </p>
+                        <a href="{{ path('app_val_concept') }}" class="card-link">
+                            En savoir plus
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                {# Service Card 3 - VAL SECURIKOM #}
+                <div class="item" style="--position: 3">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="card-title">VAL SECURIKOM</h3>
+                        <p class="card-description">
+                            Solutions en sécurité et équipements professionnels.
+                        </p>
+                        <a href="{{ path('app_val_securikom') }}" class="card-link">
+                            En savoir plus
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                {# Service Card 4 - VAL FORMATION #}
+                <div class="item" style="--position: 4">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="card-title">VAL FORMATION</h3>
+                        <p class="card-description">
+                            Centre de formation spécialisé BTP et sécurité.
+                        </p>
+                        <a href="{{ path('app_val_formation') }}" class="card-link">
+                            En savoir plus
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Animation pour le fond */
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+/* Banner Container - 3D Carousel */
+.banner {
+    width: 100%;
+    height: 100vh;
+    min-height: 900px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D Slider Container */
+.banner .slider {
+    position: absolute;
+    width: 260px;
+    height: 340px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    animation: autoRun 30s linear infinite;
+}
+
+/* Rotation automatique du carousel */
+@keyframes autoRun {
+    from {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+/* Positionnement des cartes sur le carousel */
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+        translateZ(350px);
+}
+
+/* Service Card Styling */
+.service-card {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    padding: 28px 20px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.2),
+        0 0 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Icon */
+.card-icon {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+    transition: all 0.4s ease;
+}
+
+.service-card:hover .card-icon {
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 0 15px 40px rgba(59, 130, 246, 0.5);
+}
+
+.card-icon i {
+    font-size: 28px;
+    color: white;
+}
+
+/* Card Title */
+.card-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Card Description */
+.card-description {
+    font-size: 13px;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* Card Link */
+.card-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #3b82f6;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.card-link:hover {
+    color: #2563eb;
+    gap: 14px;
+}
+
+.card-link i {
+    font-size: 13px;
+    transition: transform 0.3s ease;
+}
+
+.card-link:hover i {
+    transform: translateX(5px);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .banner {
+        min-height: 800px;
+    }
+    
+    .banner .slider {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(300px);
+    }
+    
+    .logo-circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .logo-text {
+        font-size: 22px;
+    }
+    
+    .service-card {
+        padding: 28px 22px;
+    }
+    
+    .card-icon {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .card-icon i {
+        font-size: 32px;
+    }
+    
+    .card-title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        min-height: 700px;
+    }
+    
+    .banner .slider {
+        width: 240px;
+        height: 340px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(280px);
+    }
+    
+    @keyframes autoRun {
+        from {
+            transform: translate(-50%, -50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
+        }
+        to {
+            transform: translate(-50%, -50%) perspective(1000px) rotateX(-16deg) rotateY(360deg);
+        }
+    }
+    
+    .logo-circle {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .logo-text {
+        font-size: 18px;
+    }
+    
+    .service-card {
+        padding: 24px 18px;
+    }
+    
+    .card-icon {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+    }
+    
+    .card-icon i {
+        font-size: 28px;
+    }
+    
+    .card-title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+    
+    .card-description {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        min-height: 650px;
+    }
+    
+    .banner .slider {
+        width: 200px;
+        height: 300px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(240px);
+    }
+    
+    @keyframes autoRun {
+        from {
+            transform: translate(-50%, -50%) perspective(800px) rotateX(-16deg) rotateY(0deg);
+        }
+        to {
+            transform: translate(-50%, -50%) perspective(800px) rotateX(-16deg) rotateY(360deg);
+        }
+    }
+    
+    .logo-circle {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .logo-text {
+        font-size: 16px;
+    }
+    
+    .service-card {
+        padding: 20px 14px;
+    }
+    
+    .card-icon {
+        width: 56px;
+        height: 56px;
+        margin-bottom: 16px;
+    }
+    
+    .card-icon i {
+        font-size: 24px;
+    }
+    
+    .card-title {
+        font-size: 17px;
+        margin-bottom: 10px;
+    }
+    
+    .card-description {
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .card-link {
+        font-size: 13px;
+    }
+}
+</style>
+
+{# CTA Section - Style Épuré #}
+<section class="block py-10 sm:py-12 md:py-14 bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 text-white" style="position: static; overflow: visible; min-height: auto;">
+    <div class="relative max-w-4xl mx-auto px-6 sm:px-8 text-center" data-aos="zoom-in" style="z-index: 1;">
+        <div class="inline-block mb-4 p-2.5 bg-white/10 backdrop-blur-sm rounded-full animate-pulse-glow">
+            <i class="fas fa-paper-plane text-3xl text-white"></i>
+        </div>
+        
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight drop-shadow-lg">
+            Prêt à démarrer votre projet ?
+        </h2>
+        <p class="text-base sm:text-lg mb-6 text-blue-100 drop-shadow">
+            Contactez-nous pour discuter de vos besoins en construction et management.
+        </p>
+        <a href="{{ path('app_contact') }}" 
+            class="group inline-flex items-center gap-3 bg-white text-blue-600 px-8 py-3 text-base font-bold hover:bg-blue-50 transition-all duration-500 shadow-2xl hover:shadow-blue-900/50 rounded-full transform hover:scale-110 hover:-translate-y-2">
+            <span>Nous contacter</span>
+            <i class="fas fa-arrow-right text-base group-hover:translate-x-2 transition-transform duration-300"></i>
+        </a>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Parallax effect for video background
+    const videoElement = document.querySelector('.parallax-layer');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        if (videoElement && scrolled < window.innerHeight) {
+            const speed = 0.5;
+            videoElement.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
+        }
+    });
+    
+    // 3D tilt effect on service cards in orbital section
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Pause orbital rotation on hover
+            const orbitCard = card.closest('.orbit-card');
+            if (orbitCard) {
+                orbitCard.style.animationPlayState = 'paused';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            // Resume orbital rotation
+            const orbitCard = card.closest('.orbit-card');
+            if (orbitCard) {
+                orbitCard.style.animationPlayState = 'running';
+            }
+        });
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Animated number counters (if you add stats section later)
+    const animateValue = (element, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            element.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    };
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+    
+    // Observe card-shimmer elements
+    document.querySelectorAll('.card-shimmer').forEach(el => observer.observe(el));
+});
+</script>
+{% endblock %}

@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:8.0
+    container_name: valfusion_database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: valfusion
+      MYSQL_USER: valfusion
+      MYSQL_PASSWORD: valfusion
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - valfusion_network
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: valfusion_php
+    restart: always
+    volumes:
+      - .:/var/www/html
+    networks:
+      - valfusion_network
+    depends_on:
+      - database
+
+  nginx:
+    image: nginx:alpine
+    container_name: valfusion_nginx
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - valfusion_network
+    depends_on:
+      - php
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: valfusion_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: database
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8082:80"
+    networks:
+      - valfusion_network
+    depends_on:
+      - database
+
+volumes:
+  db_data:
+
+networks:
+  valfusion_network:
+    driver: bridge
+
