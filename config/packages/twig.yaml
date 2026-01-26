@@ -1,5 +1,7 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    # Auto-escaping is enabled by default with 'html' strategy
+    strict_variables: true
 
 when@test:
     twig:

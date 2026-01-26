@@ -21,14 +21,16 @@ class ContactType extends AbstractType
                 'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Votre nom',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'maxlength' => 255
                 ],
             ])
             ->add('email', EmailType::class, [
                 'label' => 'E-Mail',
                 'attr' => [
                     'placeholder' => 'votre.email@exemple.com',
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'maxlength' => 255
                 ],
             ])
             ->add('message', TextareaType::class, [
@@ -36,7 +38,8 @@ class ContactType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Votre message...',
                     'class' => 'form-control',
-                    'rows' => 5
+                    'rows' => 5,
+                    'maxlength' => 5000
                 ],
             ])
             ->add('consent', CheckboxType::class, [
@@ -49,6 +52,8 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'form-check-input'
                 ],
+                'mapped' => true,
+                'required' => true,
             ])
         ;
     }

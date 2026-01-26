@@ -17,15 +17,32 @@ class Contact
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Le nom doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le nom ne peut pas dépasser {{ limit }} caractères'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-ZÀ-ÿ\s\-\']+$/u',
+        message: 'Le nom ne peut contenir que des lettres, espaces, tirets et apostrophes'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: 'L\'email est obligatoire')]
     #[Assert\Email(message: 'L\'email {{ value }} n\'est pas valide')]
+    #[Assert\Length(max: 255)]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: 'Le message est obligatoire')]
+    #[Assert\Length(
+        min: 10,
+        max: 5000,
+        minMessage: 'Le message doit contenir au moins {{ limit }} caractères',
+        maxMessage: 'Le message ne peut pas dépasser {{ limit }} caractères'
+    )]
     private ?string $message = null;
 
     #[ORM\Column]
