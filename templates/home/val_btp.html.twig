@@ -254,6 +254,204 @@
     left: 100%;
 }
 
+/* Animation pour le fond */
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes pulse-slow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2) rotate(5deg);
+    }
+}
+
+@keyframes float-slow {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px);
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+    }
+}
+
+@keyframes float-medium {
+    0%, 100% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-15px) translateX(15px) rotate(5deg);
+    }
+    66% {
+        transform: translateY(15px) translateX(-10px) rotate(-5deg);
+    }
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-medium {
+    animation: float-medium 6s ease-in-out infinite;
+}
+
+/* Banner Container - 3D Carousel */
+.banner {
+    width: 100%;
+    height: 100vh;
+    min-height: 900px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D Slider Container */
+.banner .slider {
+    position: absolute;
+    width: 260px;
+    height: 340px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    animation: autoRun 30s linear infinite;
+}
+
+/* Rotation automatique du carousel */
+@keyframes autoRun {
+    from {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+/* Positionnement des cartes sur le carousel */
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: 
+        rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+        translateZ(350px);
+}
+
+/* Service Image Styling */
+.service-image {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 20px;
+    padding: 28px 20px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.15),
+        0 0 1px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.service-image:hover {
+    transform: scale(1.05);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.2),
+        0 0 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .banner {
+        min-height: 800px;
+    }
+    
+    .banner .slider {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(300px);
+    }
+}
+
+@media (max-width: 768px) {
+    .banner {
+        min-height: 700px;
+    }
+    
+    .banner .slider {
+        width: 240px;
+        height: 340px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(280px);
+    }
+    
+    @keyframes autoRun {
+        from {
+            transform: translate(-50%, -50%) perspective(1000px) rotateX(-16deg) rotateY(0deg);
+        }
+        to {
+            transform: translate(-50%, -50%) perspective(1000px) rotateX(-16deg) rotateY(360deg);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        min-height: 650px;
+    }
+    
+    .banner .slider {
+        width: 200px;
+        height: 300px;
+    }
+    
+    .banner .slider .item {
+        transform: 
+            rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
+            translateZ(240px);
+    }
+    
+    @keyframes autoRun {
+        from {
+            transform: translate(-50%, -50%) perspective(800px) rotateX(-16deg) rotateY(0deg);
+        }
+        to {
+            transform: translate(-50%, -50%) perspective(800px) rotateX(-16deg) rotateY(360deg);
+        }
+    }
+}
+
 .gallery-item {
     position: relative;
     overflow: hidden;
@@ -413,7 +611,8 @@
             
             <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center animate-fadeInUp" style="opacity: 0; animation-delay: 0.8s;">
                 <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float" style="animation-delay: 0.5s;">
-                    <i class="fas fa-cogs text-white text-2xl"></i>
+                    <i class="fas fa-hammer text-white text-xl"></i>
+                    <i class="fas fa-wrench text-white text-xl ml-1"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Réalisation</h3>
                 <p class="text-gray-600">Mise en œuvre par nos équipes qualifiées</p>
@@ -421,7 +620,7 @@
             
             <div class="bg-white rounded-xl p-6 shadow-lg card-hover text-center animate-fadeInUp" style="opacity: 0; animation-delay: 1s;">
                 <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-float" style="animation-delay: 1s;">
-                    <i class="fas fa-check-double text-white text-2xl"></i>
+                    <i class="fas fa-key text-white text-2xl"></i>
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Livraison</h3>
                 <p class="text-gray-600">Finition et remise clés en main</p>
@@ -498,40 +697,95 @@
     </div>
 </section>
 
-{# Galerie Section #}
-<section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">GALERIE DES CHANTIERS VAL BTP</h2>
-            <p class="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto animate-fadeInUp" style="opacity: 0; animation-delay: 0.2s;">
-                Explorez notre galerie d'images des projets réalisés par VAL BTP, mettant en avant notre expertise dans le domaine de la construction et des matériaux. Ces visuels illustrent notre engagement envers la qualité et la satisfaction de nos clients.
+{# Galerie Section - 3D Image Slider Carousel #}
+<section id="galerie" class="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white overflow-hidden">
+    {# Fond dynamique avec éléments animés #}
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        {# Cercles flottants avec bordures colorées #}
+        <div class="absolute top-10 left-10 w-40 h-40 border-2 border-orange-300/40 rounded-full animate-float-slow"></div>
+        <div class="absolute top-20 right-20 w-32 h-32 border-2 border-red-300/40 rounded-full animate-float-medium"></div>
+        <div class="absolute bottom-20 left-1/4 w-48 h-48 border-2 border-gray-300/40 rounded-full animate-float-slow" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-32 right-1/3 w-36 h-36 border-2 border-orange-400/40 rounded-full animate-float-medium" style="animation-delay: 0.5s;"></div>
+        
+        {# Formes géométriques colorées #}
+        <div class="absolute top-1/4 left-1/3 w-24 h-24 bg-gradient-to-br from-orange-200/30 to-transparent rounded-lg rotate-12 animate-pulse-slow"></div>
+        <div class="absolute top-2/3 right-1/4 w-32 h-32 bg-gradient-to-br from-red-200/30 to-transparent rounded-lg -rotate-12 animate-pulse-slow" style="animation-delay: 1.5s;"></div>
+        
+        {# Effets de lumière dynamique #}
+        <div class="absolute top-1/3 left-5 sm:left-10 lg:left-20 w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-gradient-to-br from-orange-200 to-yellow-100 rounded-full blur-3xl opacity-25 animate-pulse-glow" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-1/3 right-5 sm:right-10 lg:right-20 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-red-200 to-pink-100 rounded-full blur-3xl opacity-25 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-white to-orange-50 rounded-full blur-3xl opacity-60 animate-pulse-glow" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-10 sm:mb-12 lg:mb-16 relative inline-block px-4">
+                Galerie des Chantiers 
+                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-red-600 rounded-full"></div>
+            </h2>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
+                Explorez notre galerie d'images des projets réalisés par VAL BTP, mettant en avant notre expertise dans le domaine de la construction et des matériaux.
             </p>
         </div>
         
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.1s;">
-                <i class="fas fa-image text-5xl text-orange-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.2s;">
-                <i class="fas fa-image text-5xl text-red-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.3s;">
-                <i class="fas fa-image text-5xl text-yellow-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.4s;">
-                <i class="fas fa-image text-5xl text-orange-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.5s;">
-                <i class="fas fa-image text-5xl text-red-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.6s;">
-                <i class="fas fa-image text-5xl text-yellow-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.7s;">
-                <i class="fas fa-image text-5xl text-orange-600/30"></i>
-            </div>
-            <div class="bg-gradient-to-br from-red-100 to-red-50 rounded-xl aspect-square flex items-center justify-center shadow-lg gallery-item animate-scaleIn" style="opacity: 0; animation-delay: 0.8s;">
-                <i class="fas fa-image text-5xl text-red-600/30"></i>
+        {# 3D Carousel Slider #}
+        <div class="banner">
+            <div class="slider" style="--quantity: 8">
+                {# Image 1 #}
+                <div class="item" style="--position: 1">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 2 #}
+                <div class="item" style="--position: 2">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-red-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 3 #}
+                <div class="item" style="--position: 3">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 4 #}
+                <div class="item" style="--position: 4">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 5 #}
+                <div class="item" style="--position: 5">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-red-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 6 #}
+                <div class="item" style="--position: 6">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 7 #}
+                <div class="item" style="--position: 7">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
+                    </div>
+                </div>
+                
+                {# Image 8 #}
+                <div class="item" style="--position: 8">
+                    <div class="service-image">
+                        <i class="fas fa-image text-5xl text-red-600/30"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
