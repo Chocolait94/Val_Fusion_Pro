@@ -1,39 +1,15 @@
 <header class="fixed top-0 left-0 w-full z-50">
-    {# Top Bar with Logo and Social Links #}
-    <div class="bg-gradient-to-r from-gray-900/70 via-gray-800/70 to-gray-900/70 backdrop-blur-md">
+    {# Navigation Menu #}
+    <nav class="bg-white/10 backdrop-blur-sm border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between py-2 sm:py-3">
-                <div class="flex items-center">
-                    <a href="{{ path('app_home') }}" class="text-white text-xl sm:text-2xl font-bold tracking-wider hover:text-gray-300 transition">
-                        VAL FUSION
+            <div class="flex items-center justify-between h-16">
+                {# Logo #}
+                <div class="flex-shrink-0">
+                    <a href="{{ path('app_home') }}" class="flex items-center">
+                        <img src="{{ asset('img/Val_fusion_groupe-removebg-preview.png') }}" alt="Val Fusion Logo" class="h-12 sm:h-14 w-auto">
                     </a>
                 </div>
                 
-                <div class="flex items-center space-x-2 sm:space-x-4">
-                    <a href="https://www.facebook.com/profile.php?id=61579488735876" target="_blank" rel="noopener" aria-label="Facebook" class="text-white hover:text-blue-500 transition">
-                        <i class="fab fa-facebook text-base sm:text-lg"></i>
-                    </a>
-                    <a href="https://www.instagram.com/valfusion27/" target="_blank" rel="noopener" aria-label="Instagram" class="text-white hover:text-pink-500 transition">
-                        <i class="fab fa-instagram text-base sm:text-lg"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@valfusion27" target="_blank" rel="noopener" aria-label="TikTok" class="text-white hover:text-gray-300 transition">
-                        <i class="fab fa-tiktok text-base sm:text-lg"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@VALFUSIONGROUPE" target="_blank" rel="noopener" aria-label="Youtube" class="text-white hover:text-red-500 transition">
-                        <i class="fab fa-youtube text-base sm:text-lg"></i>
-                    </a>
-                    <a href="mailto:contact@valfusion.fr" aria-label="Email" class="text-white hover:text-yellow-400 transition">
-                        <i class="fas fa-envelope text-base sm:text-lg"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {# Navigation Menu #}
-    <nav class="bg-white/40 backdrop-blur-xl border-b border-white/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
                 {# Desktop Navigation #}
                 <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
                     <a href="{{ path('app_home') }}" class="text-white hover:text-gray-200 font-semibold text-sm uppercase tracking-wide transition drop-shadow-lg">
