@@ -217,7 +217,7 @@
 
 <div class="page-wrapper">
 {# Hero Section #}
-<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white py-16 overflow-hidden">
+<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white py-16 overflow-hidden" style="z-index: 1;">
     <div class="absolute inset-0 bg-shimmer"></div>
     <div class="pulse-circle" style="top: -10%; right: -10%;"></div>
     <div class="pulse-circle" style="bottom: -10%; left: -10%; animation-delay: 1.5s;"></div>
@@ -234,9 +234,9 @@
 </section>
 
 {# Content Section #}
-<section class="py-20 bg-gray-50">
+<section class="relative py-20 bg-gray-50 overflow-hidden" style="z-index: 2;">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 card-hover animate-fadeInUp stagger-1" style="opacity: 0;">
+        <div class="bg-white rounded-2xl shadow-xl p-8 lg:p-12 card-hover animate-fadeInUp stagger-1 border border-gray-200" style="opacity: 0;">
             <div class="space-y-8">
                 {# Nom de l'entreprise #}
                 <div class="border-b border-gray-200 pb-6 section-item animate-slideInRight stagger-2" style="opacity: 0;">

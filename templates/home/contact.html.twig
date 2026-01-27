@@ -156,7 +156,7 @@
 </style>
 
 {# Hero Section #}
-<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white pt-32 pb-16 overflow-hidden">
+<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white pt-32 pb-16 overflow-hidden" style="z-index: 1;">
     <div class="absolute inset-0 bg-shimmer"></div>
     <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
     <div class="absolute bottom-0 left-0 w-96 h-96 bg-red-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
@@ -175,12 +175,12 @@
 </section>
 
 {# Contact Section #}
-<section class="py-20 bg-gray-50">
+<section class="relative py-20 bg-gray-50 overflow-hidden" style="z-index: 2;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {# Contact Form #}
-            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInLeft" style="opacity: 0;">
-                <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center">
+            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInLeft border border-gray-200" style="opacity: 0;">
+                <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center ml-2">
                     <i class="fas fa-envelope text-red-600 mr-3"></i>
                     Envoyez-nous un message
                 </h2>
@@ -231,15 +231,15 @@
             
             {# Contact Info #}
             <div class="space-y-8">
-                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInRight" style="animation-delay: 0.2s; opacity: 0;">
-                    <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center">
+                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInRight border border-gray-200" style="animation-delay: 0.2s; opacity: 0;">
+                    <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center ml-2">
                         <i class="fas fa-info-circle text-red-600 mr-3"></i>
                         Nos coordonnées
                     </h2>
                     
                     <div class="space-y-6">
                         <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0">
+                            <div class="flex-shrink-0 ml-8">
                                 <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full icon-bounce transition-all group-hover:bg-blue-200">
                                     <i class="fas fa-phone text-blue-600 text-xl"></i>
                                 </div>
@@ -253,7 +253,7 @@
                         </div>
                         
                         <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0">
+                            <div class="flex-shrink-0 ml-8">
                                 <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full icon-bounce transition-all group-hover:bg-green-200">
                                     <i class="fas fa-envelope text-green-600 text-xl"></i>
                                 </div>
@@ -267,7 +267,7 @@
                         </div>
                         
                         <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0">
+                            <div class="flex-shrink-0 ml-8">
                                 <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full icon-bounce transition-all group-hover:bg-purple-200">
                                     <i class="fas fa-map-marker-alt text-purple-600 text-xl"></i>
                                 </div>

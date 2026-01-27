@@ -1,132 +1,92 @@
-<header class="fixed top-0 left-0 w-full z-50">
-    {# Navigation Menu #}
-    <nav class="bg-white/10 backdrop-blur-sm border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                {# Logo #}
-                <div class="flex-shrink-0">
-                    <a href="{{ path('app_home') }}" class="flex items-center">
-                        <img src="{{ asset('img/Val_fusion_groupe-removebg-preview.png') }}" alt="Val Fusion Logo" class="h-12 sm:h-14 w-auto">
-                    </a>
-                </div>
-                
-                {# Desktop Navigation #}
-                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
-                    <a href="{{ path('app_home') }}" class="text-white hover:text-gray-200 font-semibold text-sm uppercase tracking-wide transition drop-shadow-lg">
-                        Accueil
-                    </a>
-                    <a href="{{ path('app_about') }}" class="text-white hover:text-gray-200 font-semibold text-sm uppercase tracking-wide transition drop-shadow-lg">
-                        À propos
-                    </a>
-                    
-                    {# Dropdown for Entities #}
-                    <div class="relative group">
-                        <button class="text-white hover:text-gray-200 font-semibold text-sm uppercase tracking-wide transition flex items-center drop-shadow-lg">
-                            Nos Entités
-                            <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                        </button>
-                        <div class="absolute left-0 mt-2 w-56 bg-white/95 backdrop-blur-xl shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-white/30">
-                            <a href="{{ path('app_val_btp') }}" class="block px-4 py-3 text-sm text-gray-800 hover:bg-gray-100/50 transition">
-                                <i class="fas fa-hard-hat mr-2 text-orange-500"></i> VAL BTP
-                            </a>
-                            <a href="{{ path('app_val_concept') }}" class="block px-4 py-3 text-sm text-gray-800 hover:bg-gray-100/50 transition">
-                                <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> VAL CONCEPT
-                            </a>
-                            <a href="{{ path('app_val_securikom') }}" class="block px-4 py-3 text-sm text-gray-800 hover:bg-gray-100/50 transition">
-                                <i class="fas fa-shield-alt mr-2 text-red-500"></i> VAL SECURIKOM
-                            </a>
-                            <a href="{{ path('app_val_formation') }}" class="block px-4 py-3 text-sm text-gray-800 hover:bg-gray-100/50 transition">
-                                <i class="fas fa-graduation-cap mr-2 text-green-500"></i> VAL FORMATION
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <a href="{{ path('app_contact') }}" class="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-full font-semibold text-sm uppercase hover:from-red-700 hover:to-red-800 transition shadow-md">
-                        Contact
-                    </a>
-                </div>
-                
-                {# Mobile menu button #}
-                <button id="mobile-menu-button" class="lg:hidden text-white hover:text-gray-200 focus:outline-none transition-transform duration-200 active:scale-95">
-                    <svg class="h-6 w-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                
-                <div class="hidden lg:block">
-                    <p class="text-xs text-white uppercase tracking-wider font-semibold drop-shadow-lg">Spécialiste de la construction et du management</p>
-                </div>
-            </div>
-        </div>
-        
-        {# Mobile Navigation #}
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/20 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 bg-white/30 backdrop-blur-xl">
-            <div class="px-4 py-3 space-y-1">
-                <a href="{{ path('app_home') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md font-semibold text-sm uppercase drop-shadow-lg">
-                    <i class="fas fa-home mr-2"></i> Accueil
+<!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+<nav class="fixed top-0 left-0 right-0 bg-gray-800/95 backdrop-blur-md after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10 z-50 shadow-lg">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-16 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <!-- Mobile menu button-->
+        <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
+            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex shrink-0 items-center sm:absolute sm:left-0">
+        <a href="{{ path('app_home') }}">
+          <img src="{{ asset('img/Val_fusion_groupe-removebg-preview.png') }}" alt="Val Fusion Logo" class="h-14 w-auto" />
+        </a>
+      </div>
+      <div class="flex flex-1 items-center justify-center">
+        <div class="hidden sm:block">
+          <div class="flex space-x-4">
+            <a href="{{ path('app_home') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Accueil</a>
+            <a href="{{ path('app_about') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">À propos</a>
+            
+            {# Dropdown for Entities #}
+            <el-dropdown class="relative">
+              <button class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white flex items-center">
+                Nos Entités
+                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <el-menu anchor="bottom start" popover class="w-56 origin-top-left rounded-md bg-gray-800 py-1 outline -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+                <a href="{{ path('app_val_btp') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 focus:outline-hidden">
+                  <i class="fas fa-hard-hat mr-2 text-orange-500"></i> VAL BTP
                 </a>
-                <a href="{{ path('app_about') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md font-semibold text-sm uppercase drop-shadow-lg">
-                    <i class="fas fa-info-circle mr-2"></i> À propos
+                <a href="{{ path('app_val_concept') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 focus:outline-hidden">
+                  <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> VAL CONCEPT
                 </a>
-                
-                {# Mobile Entities Section #}
-                <div class="border-t border-white/20 mt-2 pt-2">
-                    <p class="px-3 py-2 text-xs font-bold text-white uppercase tracking-wider drop-shadow-lg">Nos Entités</p>
-                    <a href="{{ path('app_val_btp') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md text-sm drop-shadow-lg">
-                        <i class="fas fa-hard-hat mr-2 text-orange-400"></i> VAL BTP
-                    </a>
-                    <a href="{{ path('app_val_concept') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md text-sm drop-shadow-lg">
-                        <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> VAL CONCEPT
-                    </a>
-                    <a href="{{ path('app_val_securikom') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md text-sm drop-shadow-lg">
-                        <i class="fas fa-shield-alt mr-2 text-red-400"></i> VAL SECURIKOM
-                    </a>
-                    <a href="{{ path('app_val_formation') }}" class="block px-3 py-2 text-white hover:bg-white/20 rounded-md text-sm drop-shadow-lg">
-                        <i class="fas fa-graduation-cap mr-2 text-green-500"></i> VAL FORMATION
-                    </a>
-                </div>
-                
-                <a href="{{ path('app_contact') }}" class="block mt-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-3 rounded-lg font-semibold text-sm uppercase text-center hover:from-red-700 hover:to-red-800 transition">
-                    <i class="fas fa-envelope mr-2"></i> Contact
+                <a href="{{ path('app_val_securikom') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 focus:outline-hidden">
+                  <i class="fas fa-shield-alt mr-2 text-red-500"></i> VAL SECURIKOM
                 </a>
-            </div>
-        </div>
-    </nav>
-</header>
+                <a href="{{ path('app_val_formation') }}" class="block px-4 py-2 text-sm text-gray-300 hover:bg-white/5 focus:outline-hidden">
+                  <i class="fas fa-graduation-cap mr-2 text-green-500"></i> VAL FORMATION
+                </a>
+              </el-menu>
+            </el-dropdown>
 
-<script>
-// Mobile menu toggle with smooth animation
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-const closeIcon = document.getElementById('close-icon');
+            <a href="{{ path('app_contact') }}" class="rounded-md bg-gradient-to-r from-red-600 to-red-700 px-4 py-2 text-sm font-medium text-white hover:from-red-700 hover:to-red-800">Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-if (mobileMenuButton) {
-    mobileMenuButton.addEventListener('click', () => {
-        const isHidden = mobileMenu.classList.contains('hidden');
-        
-        if (isHidden) {
-            // Ouvrir le menu
-            mobileMenu.classList.remove('hidden');
-            setTimeout(() => {
-                mobileMenu.style.maxHeight = '500px';
-                mobileMenu.classList.remove('opacity-0');
-                mobileMenu.classList.add('opacity-100');
-            }, 10);
-        } else {
-            // Fermer le menu
-            mobileMenu.style.maxHeight = '0';
-            mobileMenu.classList.remove('opacity-100');
-            mobileMenu.classList.add('opacity-0');
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden');
-            }, 300);
-        }
-        
-        // Animation de l'icône
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-    });
-}
-</script>
+  <el-disclosure id="mobile-menu" hidden class="block sm:hidden">
+    <div class="space-y-1 px-2 pt-2 pb-3">
+      <a href="{{ path('app_home') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+        <i class="fas fa-home mr-2"></i> Accueil
+      </a>
+      <a href="{{ path('app_about') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+        <i class="fas fa-info-circle mr-2"></i> À propos
+      </a>
+      
+      {# Mobile Entities #}
+      <div class="border-t border-white/20 mt-2 pt-2">
+        <p class="px-3 py-1 text-xs font-semibold text-gray-400 uppercase tracking-wider">Nos Entités</p>
+        <a href="{{ path('app_val_btp') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+          <i class="fas fa-hard-hat mr-2 text-orange-400"></i> VAL BTP
+        </a>
+        <a href="{{ path('app_val_concept') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+          <i class="fas fa-lightbulb mr-2 text-yellow-400"></i> VAL CONCEPT
+        </a>
+        <a href="{{ path('app_val_securikom') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+          <i class="fas fa-shield-alt mr-2 text-red-400"></i> VAL SECURIKOM
+        </a>
+        <a href="{{ path('app_val_formation') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">
+          <i class="fas fa-graduation-cap mr-2 text-green-400"></i> VAL FORMATION
+        </a>
+      </div>
+      
+      <a href="{{ path('app_contact') }}" class="block mt-3 rounded-md bg-gradient-to-r from-red-600 to-red-700 px-4 py-3 text-base font-medium text-white hover:from-red-700 hover:to-red-800 text-center">
+        <i class="fas fa-envelope mr-2"></i> Contact
+      </a>
+    </div>
+  </el-disclosure>
+</nav>

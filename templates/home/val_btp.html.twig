@@ -330,22 +330,22 @@
 /* 3D Slider Container */
 .banner .slider {
     position: absolute;
-    width: 260px;
-    height: 340px;
+    width: 280px;
+    height: 380px;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     transform-style: preserve-3d;
-    animation: autoRun 30s linear infinite;
+    animation: autoRun 35s linear infinite;
 }
 
 /* Rotation automatique du carousel */
 @keyframes autoRun {
     from {
-        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(0deg);
+        transform: translate(-50%, -50%) perspective(1400px) rotateX(-16deg) rotateY(0deg);
     }
     to {
-        transform: translate(-50%, -50%) perspective(1200px) rotateX(-16deg) rotateY(360deg);
+        transform: translate(-50%, -50%) perspective(1400px) rotateX(-16deg) rotateY(360deg);
     }
 }
 
@@ -355,7 +355,7 @@
     inset: 0 0 0 0;
     transform: 
         rotateY(calc((var(--position) - 1) * (360deg / var(--quantity))))
-        translateZ(350px);
+        translateZ(400px);
 }
 
 /* Service Image Styling */
@@ -533,49 +533,49 @@
 </section>
 
 {# Services Section #}
-<section class="py-20 bg-white">
+<section class="relative py-20 bg-white overflow-hidden" style="z-index: 2;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">Équipe qui est à votre écoute !</h2>
         </div>
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {# Façades & ravalement #}
-            <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-lg card-hover service-card animate-slideInLeft" style="opacity: 0; animation-delay: 0.2s;">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mr-4 animate-float">
-                        <i class="fas fa-building text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-8 shadow-xl card-hover service-card animate-slideInLeft border border-orange-200" style="opacity: 0; animation-delay: 0.2s;">
+                <div class="flex items-center mb-6">
+                    <div class="w-14 h-14 bg-orange-500 rounded-full flex items-center justify-center mr-4 shadow-lg animate-float">
+                        <i class="fas fa-building text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-red-600">Façades & ravalement</h3>
+                    <h3 class="text-2xl font-bold text-red-600">Façades & ravalement</h3>
                 </div>
-                <p class="text-gray-700 leading-relaxed">
+                <p class="text-gray-700 leading-relaxed text-base">
                     Nous intervenons auprès des particuliers, collectivités et entreprises pour des projets de construction et de réhabilitation, avec une expertise reconnue en gros œuvre et second œuvre.
                 </p>
             </div>
             
             {# Maçonnerie générale #}
-            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 shadow-lg card-hover service-card animate-slideInRight" style="opacity: 0; animation-delay: 0.4s;">
-                <div class="flex items-center mb-4">
-                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4 animate-float" style="animation-delay: 0.5s;">
-                        <i class="fas fa-hard-hat text-white text-xl"></i>
+            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 shadow-xl card-hover service-card animate-slideInRight border border-red-200" style="opacity: 0; animation-delay: 0.4s;">
+                <div class="flex items-center mb-6">
+                    <div class="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center mr-4 shadow-lg animate-float" style="animation-delay: 0.5s;">
+                        <i class="fas fa-hard-hat text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-red-600">Maçonnerie générale</h3>
+                    <h3 class="text-2xl font-bold text-red-600">Maçonnerie générale</h3>
                 </div>
                 <ul class="space-y-3 text-gray-700">
                     <li class="flex items-start group transition-all hover:translate-x-2">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125"></i>
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125 flex-shrink-0"></i>
                         <span>Respect des délais et des normes de sécurité (SST, amiante, échafaudages)</span>
                     </li>
                     <li class="flex items-start group transition-all hover:translate-x-2">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125"></i>
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125 flex-shrink-0"></i>
                         <span>Utilisation de matériaux durables et techniques respectueuses de l'environnement</span>
                     </li>
                     <li class="flex items-start group transition-all hover:translate-x-2">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125"></i>
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125 flex-shrink-0"></i>
                         <span>Accompagnement personnalisé de l'étude jusqu'à la livraison</span>
                     </li>
                     <li class="flex items-start group transition-all hover:translate-x-2">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125"></i>
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-3 transition-transform group-hover:scale-125 flex-shrink-0"></i>
                         <span>Garantie décennale et assurance professionnelle</span>
                     </li>
                 </ul>
@@ -730,62 +730,49 @@
         
         {# 3D Carousel Slider #}
         <div class="banner">
-            <div class="slider" style="--quantity: 8">
+            <div class="slider" style="--quantity: 6">
                 {# Image 1 #}
                 <div class="item" style="--position: 1">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
+                        <img src="{{ asset('img/1.png') }}" alt="Chantier 1" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
                 
                 {# Image 2 #}
                 <div class="item" style="--position: 2">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-red-600/30"></i>
+                        <img src="{{ asset('img/2.png') }}" alt="Chantier 2" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
                 
                 {# Image 3 #}
                 <div class="item" style="--position: 3">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+                        <img src="{{ asset('img/3.png') }}" alt="Chantier 3" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
                 
                 {# Image 4 #}
                 <div class="item" style="--position: 4">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
+                        <img src="{{ asset('img/4.png') }}" alt="Chantier 4" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
                 
                 {# Image 5 #}
                 <div class="item" style="--position: 5">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-red-600/30"></i>
+                        <img src="{{ asset('img/5.png') }}" alt="Chantier 5" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
                 
                 {# Image 6 #}
                 <div class="item" style="--position: 6">
                     <div class="service-image">
-                        <i class="fas fa-image text-5xl text-yellow-600/30"></i>
+                        <img src="{{ asset('img/6.png') }}" alt="Chantier 6" class="w-full h-full object-cover rounded-lg">
                     </div>
                 </div>
-                
-                {# Image 7 #}
-                <div class="item" style="--position: 7">
-                    <div class="service-image">
-                        <i class="fas fa-image text-5xl text-orange-600/30"></i>
-                    </div>
-                </div>
-                
-                {# Image 8 #}
-                <div class="item" style="--position: 8">
-                    <div class="service-image">
-                        <i class="fas fa-image text-5xl text-red-600/30"></i>
-                    </div>
-                </div>
+            </div>
             </div>
         </div>
     </div>
