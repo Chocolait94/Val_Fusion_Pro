@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" style="overflow-y: scroll;">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,19 +41,22 @@
             font-family: 'Inter', sans-serif;
             padding-top: 0;
             overflow-x: hidden !important;
-            overflow-y: scroll !important;
-            width: 100vw;
-            max-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             margin: 0;
         }
         
         html {
             overflow-x: hidden !important;
-            overflow-y: scroll !important;
-            width: 100vw;
-            max-width: 100vw;
+            width: 100%;
+            max-width: 100%;
             margin: 0;
             padding: 0;
+        }
+        
+        /* Empêcher tous les débordements horizontaux */
+        section, div, main, header, footer {
+            max-width: 100%;
         }
         
         /* Compensation pour le header fixed */

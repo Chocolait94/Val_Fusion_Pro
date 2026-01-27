@@ -4,6 +4,7 @@
 
 {% block body %}
 <style>
+    /* Animations */
     @keyframes float-home {
         0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
         33% { transform: translateY(-30px) translateX(10px) rotate(5deg); }
@@ -68,7 +69,7 @@
 </style>
 
 {# Hero Section - Style Maquette Pure #}
-<section class="relative text-white overflow-hidden h-screen flex items-center justify-center" style="z-index: 1;">
+<section class="relative text-white h-screen flex items-center justify-center" style="z-index: 1;">
     {# BTP Background Pattern - Texture béton/construction #}
     <div class="absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
     <div class="absolute inset-0 opacity-10" style="background-image: 
@@ -88,7 +89,7 @@
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50"></div>
     
     {# Floating Particles #}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute inset-0 pointer-events-none">
         <div class="particle w-2 h-2 top-[10%] left-[15%] animate-float-home" style="animation-delay: 0s;"></div>
         <div class="particle w-3 h-3 top-[20%] left-[80%] animate-float-home" style="animation-delay: 1s;"></div>
         <div class="particle w-1.5 h-1.5 top-[40%] left-[10%] animate-float-home" style="animation-delay: 2s;"></div>
@@ -168,9 +169,9 @@
 </style>
 
 {# About Section - Design Épuré #}
-<section id="about" class="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden" style="z-index: 2;">
+<section id="about" class="relative py-16 sm:py-24 lg:py-32 bg-white" style="z-index: 2;">
     {# Decorative Background Elements #}
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-20 right-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-red-50 rounded-full blur-3xl opacity-30 animate-pulse-glow"></div>
         <div class="absolute bottom-20 left-10 w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-blue-50 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
     </div>
@@ -202,7 +203,7 @@
 </section>
 
 {# Fusionner Section - Style Minimaliste #}
-<section id="fusionner" class="relative py-16 sm:py-24 lg:py-32 bg-gray-50 overflow-hidden" style="z-index: 3;">
+<section id="fusionner" class="relative py-16 sm:py-24 lg:py-32 bg-gray-50" style="z-index: 3;">
     {# Decorative Background #}
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-1/4 left-5 sm:left-10 w-56 h-56 sm:w-72 sm:h-72 bg-gradient-to-br from-red-100 to-orange-100 rounded-full blur-3xl opacity-40 animate-float-home"></div>
@@ -244,9 +245,9 @@
 </section>
 
 {# Services Section - 3D Image Slider Carousel #}
-<section id="services" class="relative py-8 sm:py-12 lg:py-16 bg-white overflow-hidden" style="z-index: 4;">
+<section id="services" class="relative py-8 sm:py-12 lg:py-16 bg-white" style="z-index: 4;">
     {# Fond dynamique avec éléments animés #}
-    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white pointer-events-none overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white pointer-events-none">
         {# Cercles flottants avec bordures colorées #}
         <div class="absolute top-10 left-10 w-40 h-40 border-2 border-blue-300/40 rounded-full animate-float-slow"></div>
         <div class="absolute top-20 right-20 w-32 h-32 border-2 border-red-300/40 rounded-full animate-float-medium"></div>
@@ -324,6 +325,49 @@
         </div>
     </div>
 </section>
+{# Interview Section - Il nous parles de nous #}
+<section id="interview" class="relative py-16 sm:py-24 lg:py-32 bg-gray-100" style="z-index: 5;">
+    {# Decorative Background Elements #}
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-16 left-16 w-48 h-48 border-2 border-gray-300/40 rounded-full animate-float-slow"></div>
+        <div class="absolute bottom-16 right-16 w-40 h-40 border-2 border-gray-300/40 rounded-full animate-float-medium" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 sm:mb-16 lg:mb-20" data-aos="fade-up">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-10 sm:mb-12 lg:mb-16 relative inline-block px-4">
+                Ils parlent de nous !
+                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-red-600 rounded-full"></div>
+            </h2>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
+                Découvrez l'interview exclusive de VAL FUSION de nos fondateurs Jessica DEFRANCE et Kadir GORDUK, où ils partagent leur vision, leurs valeurs et les ambitions qui animent VAL FUSION GROUPE.
+            </p>
+        </div>
+        <div class="flex justify-center" data-aos="fade-up" data-aos-delay="200">
+            <a href="https://www.paris-normandie.fr/videos/eure/val-fusion-le-groupe-de-leure-qui-vous-aide-a-developper-votre-entreprise?param01=3533p5r&param02=01490263&param03=32" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="card-shimmer block relative w-full max-w-3xl mx-auto group hover:shadow-2xl hover:shadow-red-500/30 transition-all duration-500 hover:-translate-y-4 overflow-hidden rounded-xl sm:rounded-2xl" 
+               style="aspect-ratio: 16/9;">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center text-white">
+                    <i class="fas fa-play-circle text-6xl sm:text-8xl mb-6 opacity-90 group-hover:scale-110 transition-transform duration-300"></i>
+                    <p class="text-xl sm:text-2xl font-bold mb-2 px-4 text-center">Interview Paris Normandie</p>
+                    <p class="text-sm sm:text-base opacity-90 px-4 text-center">Cliquez pour voir la vidéo</p>
+                    <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-external-link-alt mr-2"></i>Lien externe
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/Z1srPv7lOy9C27hHQ+Xp8a4MxAQdNuN5UFsKABK7+YAMdCBBp8z+F+1p" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
 
 <style>
 /* Nouveau Slider CSS */
