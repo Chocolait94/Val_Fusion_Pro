@@ -11,19 +11,10 @@
     --danger-color: #f44336;
 }
 
-/* RESET COMPLET POUR ÉLIMINER BARRE BLANCHE */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box !important;
-}
-
-html {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    box-sizing: border-box;
 }
 
 body {
@@ -31,23 +22,6 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--light-bg);
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Empêcher tout débordement */
-section, div, main, header, footer, article, aside, nav {
-    max-width: 100% !important;
-}
-
-/* Wrapper global */
-#app, .app-wrapper {
-    overflow-x: hidden !important;
-    max-width: 100% !important;
-    width: 100% !important;
 }
 
 .container {
