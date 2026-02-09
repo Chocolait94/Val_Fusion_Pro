@@ -1,28 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue Chez VAL FUSION GROUPE{% endblock %}
+{% block title %}VAL FUSION GROUPE - Fusionnez avec le futur{% endblock %}
 
 {% block body %}
 <style>
+    /* ============================================
+       ANIMATIONS PREMIUM - OPTIMISÉES
+       ============================================ */
+    
     @keyframes float-home {
-        0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-        33% { transform: translateY(-30px) translateX(10px) rotate(5deg); }
-        66% { transform: translateY(-15px) translateX(-10px) rotate(-5deg); }
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg);
+        }
+        33% { 
+            transform: translateY(-30px) translateX(10px) rotate(5deg);
+        }
+        66% { 
+            transform: translateY(-15px) translateX(-10px) rotate(-5deg);
+        }
     }
     
     @keyframes pulse-glow {
-        0%, 100% { box-shadow: 0 0 30px rgba(255, 8, 68, 0.6); }
-        50% { box-shadow: 0 0 60px rgba(255, 8, 68, 0.9); }
+        0%, 100% { 
+            box-shadow: 0 0 30px rgba(255, 8, 68, 0.6);
+            filter: brightness(1);
+        }
+        50% { 
+            box-shadow: 0 0 60px rgba(255, 8, 68, 0.9), 0 0 90px rgba(255, 8, 68, 0.5);
+            filter: brightness(1.2);
+        }
     }
     
     @keyframes shimmer {
-        0% { transform: translateX(-100%) rotate(45deg); }
-        100% { transform: translateX(200%) rotate(45deg); }
+        0% { 
+            transform: translateX(-100%) rotate(45deg);
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% { 
+            transform: translateX(200%) rotate(45deg);
+            opacity: 0;
+        }
     }
     
     @keyframes particle-float {
-        0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
-        50% { transform: translateY(-100px) translateX(50px); opacity: 0.6; }
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) scale(1);
+            opacity: 0.3;
+        }
+        50% { 
+            transform: translateY(-100px) translateX(50px) scale(1.5);
+            opacity: 0.7;
+        }
+    }
+    
+    @keyframes glow-pulse {
+        0%, 100% {
+            filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.4));
+            transform: scale(1);
+        }
+        50% {
+            filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5));
+            transform: scale(1.02);
+        }
     }
     
     .animate-float-home {
@@ -33,13 +75,20 @@
         animation: pulse-glow 2.5s ease-in-out infinite;
     }
     
-    .particle {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        pointer-events: none;
+    .animate-glow-pulse {
+        animation: glow-pulse 3s ease-in-out infinite;
     }
     
+    /* Particules améliorées avec gradient radial */
+    .particle {
+        position: absolute;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(1px);
+    }
+    
+    /* Card shimmer effet premium */
     .card-shimmer {
         position: relative;
         overflow: hidden;
@@ -49,76 +98,114 @@
         content: '';
         position: absolute;
         top: -50%;
-        left: -50%;
-        width: 50%;
+        left: -150%;
+        width: 100%;
         height: 200%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-        transform: translateX(-100%) rotate(45deg);
+        background: linear-gradient(
+            90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.1), 
+            rgba(255, 255, 255, 0.5), 
+            rgba(255, 255, 255, 0.1), 
+            transparent
+        );
+        transform: rotate(45deg);
         transition: all 0.6s;
     }
     
     .card-shimmer:hover::before {
-        animation: shimmer 1.5s;
+        animation: shimmer 1.8s ease-in-out;
     }
     
+    /* Glassmorphism moderne */
+    .glass-effect {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    
+    /* Parallax optimisé - sans bugs */
     .parallax-layer {
-        transform: translateZ(0);
         will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+    
+    /* Fix pour éviter les bugs de scroll */
+    .no-scroll-transform {
+        transform: none !important;
     }
 </style>
 
-{# Hero Section - Style Maquette Pure #}
+{# Hero Section - Premium Design #}
 <section class="relative text-white overflow-hidden h-screen flex items-center justify-center">
-    {# BTP Background Pattern - Texture béton/construction #}
+    {# BTP Background Pattern - Texture béton/construction avec overlay gradient animé #}
     <div class="absolute inset-0 bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900"></div>
     <div class="absolute inset-0 opacity-10" style="background-image: 
         repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px),
         repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,.05) 2px, rgba(255,255,255,.05) 4px);
         background-size: 100px 100px;">
     </div>
-    <div class="absolute inset-0" style="background: radial-gradient(circle at 30% 40%, rgba(251, 146, 60, 0.1) 0%, transparent 50%), 
-        radial-gradient(circle at 70% 60%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);">
+    
+    {# Gradient animé d'overlay #}
+    <div class="absolute inset-0" style="background: 
+        radial-gradient(circle at 30% 40%, rgba(251, 146, 60, 0.15) 0%, transparent 50%), 
+        radial-gradient(circle at 70% 60%, rgba(239, 68, 68, 0.15) 0%, transparent 50%);
+        animation: gradient-shift 8s ease infinite;">
     </div>
     
-    {# Background Video #}
-    <video autoplay muted loop playsinline class="parallax-layer absolute inset-0 w-full h-full object-cover">
+    {# Background Video avec meilleur effet #}
+    <video autoplay muted loop playsinline class="parallax-layer absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-soft-light">
         <source src="{{ asset('img/video 4k.mp4') }}" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo.
     </video>
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
     
-    {# Floating Particles #}
+    {# Floating Particles améliorées #}
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="particle w-2 h-2 top-[10%] left-[15%] animate-float-home" style="animation-delay: 0s;"></div>
-        <div class="particle w-3 h-3 top-[20%] left-[80%] animate-float-home" style="animation-delay: 1s;"></div>
-        <div class="particle w-1.5 h-1.5 top-[40%] left-[10%] animate-float-home" style="animation-delay: 2s;"></div>
-        <div class="particle w-2.5 h-2.5 top-[60%] left-[70%] animate-float-home" style="animation-delay: 1.5s;"></div>
-        <div class="particle w-2 h-2 top-[80%] left-[30%] animate-float-home" style="animation-delay: 3s;"></div>
-        <div class="particle w-3 h-3 top-[15%] left-[50%] animate-float-home" style="animation-delay: 2.5s;"></div>
-        <div class="particle w-1.5 h-1.5 top-[70%] left-[85%] animate-float-home" style="animation-delay: 0.5s;"></div>
+        <div class="particle w-2 h-2 top-[10%] left-[15%]" style="animation: particle-float 6s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 0s;"></div>
+        <div class="particle w-3 h-3 top-[20%] left-[80%]" style="animation: particle-float 7s ease-in-out infinite, float-home 6s ease-in-out infinite; animation-delay: 1s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[40%] left-[10%]" style="animation: particle-float 5s ease-in-out infinite, float-home 4s ease-in-out infinite; animation-delay: 2s;"></div>
+        <div class="particle w-2.5 h-2.5 top-[60%] left-[70%]" style="animation: particle-float 8s ease-in-out infinite, float-home 5.5s ease-in-out infinite; animation-delay: 1.5s;"></div>
+        <div class="particle w-2 h-2 top-[80%] left-[30%]" style="animation: particle-float 6.5s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 3s;"></div>
+        <div class="particle w-3 h-3 top-[15%] left-[50%]" style="animation: particle-float 7.5s ease-in-out infinite, float-home 6s ease-in-out infinite; animation-delay: 2.5s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[70%] left-[85%]" style="animation: particle-float 5.5s ease-in-out infinite, float-home 4.5s ease-in-out infinite; animation-delay: 0.5s;"></div>
+        <div class="particle w-2 h-2 top-[35%] left-[90%]" style="animation: particle-float 6s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 1.8s;"></div>
     </div>
     
-    {# Content #}
+    {# Content avec animations améliorées #}
     <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8">
         <div class="mb-6 sm:mb-8" data-aos="zoom-in" data-aos-duration="800">
-            <img src="{{ asset('img/Val_Fusion_groupe-removebg-preview.png') }}" alt="Val Fusion Groupe" class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto object-contain" style="filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.5));">
+            <img src="{{ asset('img/Val_Fusion_groupe-removebg-preview.png') }}" 
+                 alt="Val Fusion Groupe" 
+                 class="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 mx-auto object-contain animate-glow-pulse">
         </div>
         <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight tracking-tight neon-text"
             data-aos="fade-up" 
             data-aos-duration="1000">
             VAL FUSION GROUPE
         </h1>
-        <h2 class="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-700 neon-subtitle"
+        <h2 class="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-200 neon-subtitle"
             data-aos="fade-up" 
             data-aos-delay="200" 
             data-aos-duration="1000">
             Bienvenue dans notre univers !
         </h2>
         <div class="mt-8 sm:mt-12" data-aos="fade-up" data-aos-delay="400">
-            <a href="#services" class="inline-flex items-center gap-2 sm:gap-3 bg-red-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-red-700 transition-all duration-500 shadow-2xl hover:shadow-red-900/50 transform hover:scale-110 hover:-translate-y-2 group">
-                <span>Découvrir nos services</span>
-                <i class="fas fa-arrow-down text-base sm:text-xl group-hover:translate-y-2 transition-transform duration-300"></i>
+            <a href="#services" class="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base lg:text-lg hover:from-red-700 hover:to-red-800 transition-all duration-500 shadow-2xl hover:shadow-red-900/60 transform hover:scale-110 hover:-translate-y-2 group relative overflow-hidden">
+                <span class="relative z-10">Découvrir nos services</span>
+                <i class="fas fa-arrow-down text-base sm:text-xl group-hover:translate-y-2 transition-transform duration-300 relative z-10"></i>
+                {# Effet de brillance au survol #}
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
             </a>
+        </div>
+        
+        {# Scroll indicator animé #}
+        <div class="mt-16 sm:mt-20 animate-bounce" data-aos="fade-up" data-aos-delay="600">
+            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-2 mx-auto">
+                <div class="w-1 h-2 bg-white rounded-full animate-pulse"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -130,15 +217,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 0 20px rgba(255, 8, 68, 0.6))
-            drop-shadow(0 0 40px rgba(255, 8, 68, 0.4));
+    filter: drop-shadow(0 0 20px rgba(255, 8, 68, 0.7))
+            drop-shadow(0 0 40px rgba(255, 8, 68, 0.5))
+            drop-shadow(0 0 60px rgba(255, 8, 68, 0.3));
     animation: gradient-shift 4s ease infinite;
+    text-shadow: 0 0 80px rgba(255, 8, 68, 0.3);
 }
 
 .neon-subtitle {
-    color: #e5e7eb;
+    color: #f3f4f6;
     text-shadow: 
-        0 2px 10px rgba(0, 0, 0, 0.5);
+        0 2px 10px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
 }
 
 @keyframes gradient-shift {
@@ -165,36 +256,55 @@
 .floating {
     animation: float 3s ease-in-out infinite;
 }
+
+/* Effet de perspective 3D sur hover */
+.hover-3d {
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.hover-3d:hover {
+    transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.05);
+}
 </style>
 
-{# About Section - Design Épuré #}
-<section id="about" class="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden">
-    {# Decorative Background Elements #}
+{# About Section - Design Premium #}
+<section id="about" class="relative py-16 sm:py-24 lg:py-32 bg-white overflow-hidden no-scroll-transform">
+    {# Decorative Background Elements améliorés #}
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
-        <div class="absolute top-20 right-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-red-50 rounded-full blur-3xl opacity-30 animate-pulse-glow"></div>
-        <div class="absolute bottom-20 left-10 w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-blue-50 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-20 right-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-red-50 to-red-100 rounded-full blur-3xl opacity-40 animate-pulse-glow"></div>
+        <div class="absolute bottom-20 left-10 w-56 h-56 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full blur-3xl opacity-40 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+        {# Éléments géométriques supplémentaires #}
+        <div class="absolute top-1/3 left-1/4 w-32 h-32 bg-red-100/20 rounded-lg rotate-45 blur-xl"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-40 h-40 bg-blue-100/20 rounded-lg -rotate-12 blur-xl" style="animation: float 4s ease-in-out infinite;"></div>
     </div>
     
     <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16 lg:mb-20" data-aos="fade-up">
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-8 sm:mb-12 leading-tight relative inline-block px-4">
                 VAL FUSION GROUPE
-                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-red-600 rounded-full"></div>
+                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
+                {# Effet de brillance sur le titre #}
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-red-400/10 to-transparent animate-shimmer-slow"></div>
             </h2>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4" data-aos="fade-up" data-aos-delay="100">
                 Le Groupe VAL FUSION réunit plusieurs pôles complémentaires dédiés au BTP et aux services associés.
             </p>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4" data-aos="fade-up" data-aos-delay="200">
                 Notre mission est d'apporter une offre intégrée et innovante alliant construction, gestion, sécurité, formation et services.
             </p>
-            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-8 sm:mb-12 px-4">
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-8 sm:mb-12 px-4" data-aos="fade-up" data-aos-delay="300">
                 Nous accompagnons nos clients avec professionnalisme, proximité et sens de l'innovation.
             </p>
             
-            <div class="flex justify-center floating" data-aos="zoom-in" data-aos-delay="100">
-                <div class="card-shimmer overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl max-w-xs sm:max-w-sm md:max-w-md w-full mx-4 group hover:shadow-red-500/30 transition-all duration-500 hover:-translate-y-4">
-                    <img src="{{ asset('img/Val Fusion Groupe.png') }}" alt="Val Fusion Groupe" 
-                    class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700">
+            <div class="flex justify-center floating" data-aos="zoom-in" data-aos-delay="400">
+                <div class="card-shimmer overflow-hidden rounded-xl sm:rounded-2xl shadow-2xl max-w-xs sm:max-w-sm md:max-w-md w-full mx-4 group hover:shadow-red-500/40 transition-all duration-700 hover:-translate-y-6 relative">
+                    {# Border gradient animé #}
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 blur-sm transition-all duration-700 animate-gradient-rotate"></div>
+                    <div class="relative bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+                        <img src="{{ asset('img/Val Fusion Groupe.png') }}" alt="Val Fusion Groupe" 
+                        class="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-1000">
+                    </div>
                 </div>
             </div>
         </div>
@@ -243,10 +353,10 @@
     </div>
 </section>
 
-{# Services Section - Les Entités #}
-<section id="services" class="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white overflow-visible" style="isolation: isolate;">
+{# Services Section - Les Entités - OPTIMISÉ SANS BUGS #}
+<section id="services" class="relative py-16 sm:py-24 lg:py-32 bg-gradient-to-br from-gray-50 via-blue-50/30 to-white overflow-visible no-scroll-transform">
     {# Fond dynamique avec éléments animés #}
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index: 0;">
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
         {# Cercles flottants avec bordures colorées #}
         <div class="absolute top-10 left-10 w-40 h-40 border-2 border-blue-300/40 rounded-full animate-float-slow"></div>
         <div class="absolute top-20 right-20 w-32 h-32 border-2 border-red-300/40 rounded-full animate-float-medium"></div>
@@ -257,17 +367,17 @@
         <div class="absolute top-1/4 left-1/3 w-24 h-24 bg-gradient-to-br from-blue-200/30 to-transparent rounded-lg rotate-12 animate-pulse-slow"></div>
         <div class="absolute top-2/3 right-1/4 w-32 h-32 bg-gradient-to-br from-red-200/30 to-transparent rounded-lg -rotate-12 animate-pulse-slow" style="animation-delay: 1.5s;"></div>
         
-        {# Effets de lumière dynamique #}
-        <div class="absolute top-1/3 left-5 sm:left-10 lg:left-20 w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-gradient-to-br from-blue-200 to-cyan-100 rounded-full blur-3xl opacity-25 animate-pulse-glow" style="animation-delay: 0.5s;"></div>
-        <div class="absolute bottom-1/3 right-5 sm:right-10 lg:right-20 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-red-200 to-pink-100 rounded-full blur-3xl opacity-25 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-white to-blue-50 rounded-full blur-3xl opacity-60 animate-pulse-glow" style="animation-delay: 2s;"></div>
+        {# Effets de lumière dynamique améliorés #}
+        <div class="absolute top-1/3 left-5 sm:left-10 lg:left-20 w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 bg-gradient-to-br from-blue-200 to-cyan-100 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 0.5s;"></div>
+        <div class="absolute bottom-1/3 right-5 sm:right-10 lg:right-20 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-gradient-to-br from-red-200 to-pink-100 rounded-full blur-3xl opacity-30 animate-pulse-glow" style="animation-delay: 1.5s;"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-gradient-to-br from-white to-blue-50 rounded-full blur-3xl opacity-70 animate-pulse-glow" style="animation-delay: 2s;"></div>
     </div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="z-index: 1;">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-10 sm:mb-12 relative inline-block px-4">
                 Les Entités 
-                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-red-600 rounded-full"></div>
+                <div class="absolute -bottom-3 sm:-bottom-4 left-1/2 -translate-x-1/2 w-32 sm:w-40 h-1 sm:h-1.5 bg-gradient-to-r from-transparent via-red-600 to-transparent rounded-full"></div>
             </h2>
             <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-4xl mx-auto mb-6 sm:mb-8 px-4">
                 Découvrez nos différentes branches qui font vibrer le cœur de VAL FUSION.
@@ -275,586 +385,265 @@
             </p>
         </div>
         
-        {# Slider 3D Coverflow des Entités avec Autoplay #}
-        <div class="entites-slider-container max-w-5xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-            <div class="entites-slider autoplay-active">
-                <input type="radio" name="entites" id="entite1" class="autoplay-radio">
-                <input type="radio" name="entites" id="entite2" class="autoplay-radio">
-                <input type="radio" name="entites" id="entite3" class="autoplay-radio">
-                <input type="radio" name="entites" id="entite4" class="autoplay-radio">
-                <input type="radio" name="entites" id="entite-play" checked>
-                
-                <div class="slider-wrapper">
-                    <div class="slide-content slide-1">
-                        <a href="{{ path('app_val_btp') }}" class="slide-link">
-                            <div class="slide-card">
-                                <div class="slide-image">
-                                    <img src="{{ asset('img/Val_BTP.png') }}" alt="VAL BTP">
-                                </div>
-                                <div class="slide-info">
-                                    <h3>VAL BTP</h3>
-                                    <p>Construction générale</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="slide-content slide-2">
-                        <a href="{{ path('app_val_concept') }}" class="slide-link">
-                            <div class="slide-card">
-                                <div class="slide-image">
-                                    <img src="{{ asset('img/Val_concept.png') }}" alt="VAL CONCEPT">
-                                </div>
-                                <div class="slide-info">
-                                    <h3>VAL CONCEPT</h3>
-                                    <p>Gestion BTP</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="slide-content slide-3">
-                        <a href="{{ path('app_val_securikom') }}" class="slide-link">
-                            <div class="slide-card">
-                                <div class="slide-image">
-                                    <img src="{{ asset('img/Val_securikom.png') }}" alt="VAL SECURIKOM">
-                                </div>
-                                <div class="slide-info">
-                                    <h3>VAL SECURIKOM</h3>
-                                    <p>Sécurité</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="slide-content slide-4">
-                        <a href="{{ path('app_val_formation') }}" class="slide-link">
-                            <div class="slide-card">
-                                <div class="slide-image">
-                                    <img src="{{ asset('img/Val_formation.png') }}" alt="VAL FORMATION">
-                                </div>
-                                <div class="slide-info">
-                                    <h3>VAL FORMATION</h3>
-                                    <p>Formation BTP</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+        {# Nouveau Slider Avancé avec Transitions #}
+        <div class="container-slider max-w-6xl mx-auto" id="container-entites" data-aos="fade-up" data-aos-delay="100">
+            <div class="caption-slider" id="slider-caption">
+                <div class="caption-heading">
+                    <h1>VAL BTP</h1>
                 </div>
-                
-                <div class="slider-controls">
-                    <label for="entite1" class="control-btn"></label>
-                    <label for="entite2" class="control-btn"></label>
-                    <label for="entite3" class="control-btn"></label>
-                    <label for="entite4" class="control-btn"></label>
+                <div class="caption-subhead">
+                    <span>Construction générale</span>
                 </div>
+                <a class="btn-slider" href="{{ path('app_val_btp') }}">En savoir plus</a>
             </div>
+            
+            <div class="left-col-slider" id="left-col-slider">
+                <div id="left-slider-entites"></div>
+            </div>
+            
+            <ul class="nav-slider">
+                <li class="slide-up"> 
+                    <a href="#" id="up_button">&lt;</a>
+                </li>
+                <li class="slide-down"> 
+                    <a href="#" id="down_button">&gt;</a>
+                </li>
+            </ul>
         </div>
     </div>
 </section>
 
 <style>
 /* ==========================
-   SLIDER 3D COVERFLOW - Section Entités
+   NOUVEAU SLIDER AVANCÉ - Section Entités
    ========================== */
 
-.entites-slider-container {
-    padding: 40px 20px 80px;
-    perspective: 1200px;
-}
-
-.entites-slider {
-    position: relative;
-    width: 100%;
-}
-
-.entites-slider input[type="radio"] {
-    display: none;
-}
-
-.slider-wrapper {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-}
-
-.slide-content {
+.caption-slider {
     position: absolute;
-    width: 400px;
-    transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-    transform-origin: center;
+    top: 50%;
+    left: 8rem;
+    z-index: 9;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: 500ms ease opacity, 500ms ease transform;
+    transform: translateY(60px);
 }
 
-.slide-link {
+.caption-slider.current-caption {
+    transition-delay: 1000ms;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.caption-slider.previous-caption {
+    transform: translateY(-60px);
+}
+
+.caption-slider .caption-heading h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    text-indent: -0.2rem;
+    letter-spacing: .2rem;
+    font-weight: 300;
+    color: #9ca3af;
+}
+
+.caption-slider .caption-subhead {
+    font-size: 1rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #9ca3af;
+    letter-spacing: 4px;
+    word-spacing: .1rem;
+    margin-bottom: 2.5rem;
     display: block;
+}
+
+.caption-slider a.btn-slider {
+    color: #333;
+    font-size: 0.8rem;
     text-decoration: none;
+    background-color: white;
+    padding: .5rem 1rem;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+    position: relative;
+    z-index: 9;
+    transition: 250ms ease-in background-color, 500ms ease-in color;
+    border-radius: 4px;
+    display: inline-block;
 }
 
-.slide-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: all 0.4s ease;
+.caption-slider a.btn-slider:hover {
+    background-color: black;
+    color: white;
 }
 
-.slide-link:hover .slide-card {
-    transform: translateY(-10px);
-    box-shadow: 0 30px 80px rgba(220, 38, 38, 0.3);
-}
-
-.slide-image {
+.container-slider {
     width: 100%;
-    height: 350px;
+    height: 600px;
+    background-color: #2C302E;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
-    padding: 30px;
+    position: relative;
+    margin: 2rem auto;
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-.slide-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    transition: transform 0.4s ease;
+.left-col-slider {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center top;
+    position: relative;
 }
 
-.slide-link:hover .slide-image img {
-    transform: scale(1.08);
+.left-col-slider .slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    opacity: 0;
+    transition: 1000ms cubic-bezier(1.000, 0.040, 0.355, 1.000) transform, 
+                1000ms cubic-bezier(0.680, -0.550, 0.265, 1.550) clip-path;
+    transform: translateY(-100%) scale(1);
+    z-index: -1;
 }
 
-.slide-info {
-    padding: 25px;
+.left-col-slider .slide.previous {
+    z-index: 1;
+    opacity: 1;
+    transform: translateY(0);
+    animation-delay: 1s;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    transition: 3s ease transform;
+    will-change: transform;
+}
+
+.left-col-slider .slide.previous.change {
+    transform: translateY(50%);
+}
+
+.left-col-slider .slide.next {
+    transform: translateY(-100%);
+    z-index: 3;
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+
+.left-col-slider .slide.current {
+    opacity: 1;
+    transform: translateY(0) scale(1.25);
+    z-index: 2;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.nav-slider {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-slider a {
+    color: rgba(250, 250, 250, 1);
+    font-size: 3rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+    font-weight: 300 !important;
+}
+
+.nav-slider:hover .slide-up,
+.nav-slider:hover .slide-down {
+    opacity: .5;
+    transform: translateX(0);
+}
+
+.nav-slider .slide-up,
+.nav-slider .slide-down {
+    display: block;
+    position: absolute;
     text-align: center;
-    background: linear-gradient(to bottom, white, #f9fafb);
+    padding: 1rem;
+    opacity: 0;
+    transition: .25s ease opacity, .25s ease transform;
+    z-index: 99;
 }
 
-.slide-info h3 {
-    font-size: 24px;
-    font-weight: 800;
-    color: #1f2937;
-    margin-bottom: 8px;
-}
-
-.slide-info p {
-    font-size: 16px;
-    color: #6b7280;
-    font-weight: 500;
-}
-
-/* Positions par défaut (slide 1 actif) */
-#entite1:checked ~ .slider-wrapper .slide-1 {
-    transform: translateX(0) translateZ(0) scale(1);
+.nav-slider .slide-up:hover,
+.nav-slider .slide-down:hover {
     opacity: 1;
-    z-index: 4;
 }
 
-#entite1:checked ~ .slider-wrapper .slide-2 {
-    transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
+.nav-slider .slide-up {
+    top: 50%;
+    left: 0;
+    transform: translateX(-100%);
 }
 
-#entite1:checked ~ .slider-wrapper .slide-3 {
-    transform: translateX(650px) translateZ(-350px) rotateY(-45deg) scale(0.7);
-    opacity: 0.4;
-    z-index: 2;
-}
-
-#entite1:checked ~ .slider-wrapper .slide-4 {
-    transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-/* Slide 2 actif */
-#entite2:checked ~ .slider-wrapper .slide-2 {
-    transform: translateX(0) translateZ(0) scale(1);
-    opacity: 1;
-    z-index: 4;
-}
-
-#entite2:checked ~ .slider-wrapper .slide-1 {
-    transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-#entite2:checked ~ .slider-wrapper .slide-3 {
-    transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-#entite2:checked ~ .slider-wrapper .slide-4 {
-    transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-    opacity: 0.4;
-    z-index: 2;
-}
-
-/* Slide 3 actif */
-#entite3:checked ~ .slider-wrapper .slide-3 {
-    transform: translateX(0) translateZ(0) scale(1);
-    opacity: 1;
-    z-index: 4;
-}
-
-#entite3:checked ~ .slider-wrapper .slide-2 {
-    transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-#entite3:checked ~ .slider-wrapper .slide-1 {
-    transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-    opacity: 0.4;
-    z-index: 2;
-}
-
-#entite3:checked ~ .slider-wrapper .slide-4 {
-    transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-/* Slide 4 actif */
-#entite4:checked ~ .slider-wrapper .slide-4 {
-    transform: translateX(0) translateZ(0) scale(1);
-    opacity: 1;
-    z-index: 4;
-}
-
-#entite4:checked ~ .slider-wrapper .slide-3 {
-    transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-    opacity: 0.6;
-    z-index: 3;
-}
-
-#entite4:checked ~ .slider-wrapper .slide-2 {
-    transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-    opacity: 0.4;
-    z-index: 2;
-}
-
-#entite4:checked ~ .slider-wrapper .slide-1 {
-    transform: translateX(650px) translateZ(-350px) rotateY(-45deg) scale(0.7);
-    opacity: 0.4;
-    z-index: 2;
-}
-
-/* Contrôles */
-.slider-controls {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 40px;
-}
-
-.control-btn {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #cbd5e1;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-
-.control-btn:hover {
-    background: #94a3b8;
-    transform: scale(1.2);
-}
-
-#entite1:checked ~ .slider-controls label:nth-child(1),
-#entite2:checked ~ .slider-controls label:nth-child(2),
-#entite3:checked ~ .slider-controls label:nth-child(3),
-#entite4:checked ~ .slider-controls label:nth-child(4) {
-    background: #dc2626;
-    border-color: #dc2626;
-    transform: scale(1.4);
+.nav-slider .slide-down {
+    top: 50%;
+    right: 0;
+    transform: translateX(100%);
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
-    .slider-wrapper {
-        height: 450px;
-    }
-    
-    .slide-content {
-        width: 350px;
-    }
-    
-    .slide-image {
-        height: 300px;
-        padding: 25px;
-    }
-    
-    #entite1:checked ~ .slider-wrapper .slide-2,
-    #entite2:checked ~ .slider-wrapper .slide-1,
-    #entite2:checked ~ .slider-wrapper .slide-3,
-    #entite3:checked ~ .slider-wrapper .slide-2,
-    #entite3:checked ~ .slider-wrapper .slide-4,
-    #entite4:checked ~ .slider-wrapper .slide-3 {
-        transform: translateX(320px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-    }
-    
-    #entite1:checked ~ .slider-wrapper .slide-4,
-    #entite2:checked ~ .slider-wrapper .slide-4,
-    #entite3:checked ~ .slider-wrapper .slide-1,
-    #entite4:checked ~ .slider-wrapper .slide-2 {
-        transform: translateX(-320px) translateZ(-200px) rotateY(35deg) scale(0.85);
-    }
-}
-
 @media (max-width: 768px) {
-    .slider-wrapper {
-        height: 400px;
+    .container-slider {
+        height: 500px;
     }
     
-    .slide-content {
-        width: 280px;
+    .caption-slider {
+        left: 2rem;
     }
     
-    .slide-image {
-        height: 250px;
-        padding: 20px;
+    .caption-slider .caption-heading h1 {
+        font-size: 2.5rem;
     }
     
-    .slide-info h3 {
-        font-size: 20px;
+    .caption-slider .caption-subhead {
+        font-size: 0.9rem;
     }
     
-    .slide-info p {
-        font-size: 14px;
-    }
-    
-    /* Masquer les slides latérales sur mobile */
-    .slide-content {
-        opacity: 0 !important;
-        pointer-events: none;
-    }
-    
-    #entite1:checked ~ .slider-wrapper .slide-1,
-    #entite2:checked ~ .slider-wrapper .slide-2,
-    #entite3:checked ~ .slider-wrapper .slide-3,
-    #entite4:checked ~ .slider-wrapper .slide-4 {
-        transform: translateX(0) translateZ(0) scale(1) !important;
-        opacity: 1 !important;
-        pointer-events: auto;
+    .nav-slider a {
+        font-size: 2rem;
     }
 }
 
 @media (max-width: 480px) {
-    .slider-wrapper {
-        height: 380px;
+    .container-slider {
+        height: 400px;
     }
     
-    .slide-content {
-        width: 260px;
+    .caption-slider {
+        left: 1rem;
     }
     
-    .slide-image {
-        height: 220px;
-        padding: 15px;
+    .caption-slider .caption-heading h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
     }
     
-    .slide-info {
-        padding: 20px;
+    .caption-slider .caption-subhead {
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
     }
     
-    .slide-info h3 {
-        font-size: 18px;
+    .nav-slider a {
+        font-size: 1.5rem;
     }
-    
-    .control-btn {
-        width: 14px;
-        height: 14px;
-    }
-}
-
-/* ==========================
-   AUTOPLAY ANIMATIONS
-   ========================== */
-
-/* Animation pour les bullets */
-@keyframes bullet-autoplay {
-    0%, 22% {
-        background: #dc2626;
-        border-color: #dc2626;
-        transform: scale(1.4);
-    }
-    25%, 100% {
-        background: #cbd5e1;
-        border-color: transparent;
-        transform: scale(1);
-    }
-}
-
-/* Animation pour faire défiler les slides */
-@keyframes slide-autoplay-1 {
-    0%, 22% {
-        transform: translateX(0) translateZ(0) scale(1);
-        opacity: 1;
-        z-index: 4;
-    }
-    25%, 47% {
-        transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    50%, 72% {
-        transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-    75%, 97% {
-        transform: translateX(650px) translateZ(-350px) rotateY(-45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-    100% {
-        transform: translateX(0) translateZ(0) scale(1);
-        opacity: 1;
-        z-index: 4;
-    }
-}
-
-@keyframes slide-autoplay-2 {
-    0%, 22% {
-        transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    25%, 47% {
-        transform: translateX(0) translateZ(0) scale(1);
-        opacity: 1;
-        z-index: 4;
-    }
-    50%, 72% {
-        transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    75%, 97% {
-        transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-    100% {
-        transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-}
-
-@keyframes slide-autoplay-3 {
-    0%, 22% {
-        transform: translateX(650px) translateZ(-350px) rotateY(-45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-    25%, 47% {
-        transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    50%, 72% {
-        transform: translateX(0) translateZ(0) scale(1);
-        opacity: 1;
-        z-index: 4;
-    }
-    75%, 97% {
-        transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    100% {
-        transform: translateX(650px) translateZ(-350px) rotateY(-45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-}
-
-@keyframes slide-autoplay-4 {
-    0%, 22% {
-        transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    25%, 47% {
-        transform: translateX(-650px) translateZ(-350px) rotateY(45deg) scale(0.7);
-        opacity: 0.4;
-        z-index: 2;
-    }
-    50%, 72% {
-        transform: translateX(380px) translateZ(-200px) rotateY(-35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-    75%, 97% {
-        transform: translateX(0) translateZ(0) scale(1);
-        opacity: 1;
-        z-index: 4;
-    }
-    100% {
-        transform: translateX(-380px) translateZ(-200px) rotateY(35deg) scale(0.85);
-        opacity: 0.6;
-        z-index: 3;
-    }
-}
-
-/* Appliquer autoplay quand entite-play est checked */
-#entite-play:checked ~ .slider-wrapper .slide-1 {
-    animation: slide-autoplay-1 16s infinite ease-in-out;
-}
-
-#entite-play:checked ~ .slider-wrapper .slide-2 {
-    animation: slide-autoplay-2 16s infinite ease-in-out;
-}
-
-#entite-play:checked ~ .slider-wrapper .slide-3 {
-    animation: slide-autoplay-3 16s infinite ease-in-out;
-}
-
-#entite-play:checked ~ .slider-wrapper .slide-4 {
-    animation: slide-autoplay-4 16s infinite ease-in-out;
-}
-
-/* Animer les bullets en autoplay */
-#entite-play:checked ~ .slider-controls .control-btn:nth-child(1) {
-    animation: bullet-autoplay 16s infinite 0s;
-}
-
-#entite-play:checked ~ .slider-controls .control-btn:nth-child(2) {
-    animation: bullet-autoplay 16s infinite 4s;
-}
-
-#entite-play:checked ~ .slider-controls .control-btn:nth-child(3) {
-    animation: bullet-autoplay 16s infinite 8s;
-}
-
-#entite-play:checked ~ .slider-controls .control-btn:nth-child(4) {
-    animation: bullet-autoplay 16s infinite 12s;
-}
-
-/* Arrêter l'autoplay quand l'utilisateur clique sur un bullet */
-#entite1:checked ~ .slider-wrapper .slide-content,
-#entite2:checked ~ .slider-wrapper .slide-content,
-#entite3:checked ~ .slider-wrapper .slide-content,
-#entite4:checked ~ .slider-wrapper .slide-content {
-    animation: none !important;
-}
-
-#entite1:checked ~ .slider-controls .control-btn,
-#entite2:checked ~ .slider-controls .control-btn,
-#entite3:checked ~ .slider-controls .control-btn,
-#entite4:checked ~ .slider-controls .control-btn {
-    animation: none !important;
 }
 
 /* Animation pour le fond */
@@ -1222,15 +1011,15 @@
 </style>
 
 {# Interview Section - Ils parlent de nous #}
-<section id="interview" class="relative py-16 sm:py-24 lg:py-32 bg-white overflow-visible" style="isolation: isolate;">
+<section id="interview" class="relative py-16 sm:py-24 lg:py-32 bg-white overflow-visible">
     {# Effets de fond #}
-    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 opacity-60" style="z-index: 0;"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 opacity-60"></div>
     
     {# Éléments décoratifs #}
-    <div class="absolute top-10 left-10 w-64 h-64 bg-gradient-to-br from-red-100 to-pink-50 rounded-full blur-3xl opacity-20 animate-pulse-slow" style="z-index: 0;"></div>
-    <div class="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-br from-blue-100 to-cyan-50 rounded-full blur-3xl opacity-20 animate-pulse-slow" style="animation-delay: 1s; z-index: 0;"></div>
+    <div class="absolute top-10 left-10 w-64 h-64 bg-gradient-to-br from-red-100 to-pink-50 rounded-full blur-3xl opacity-20 animate-pulse-slow"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-br from-blue-100 to-cyan-50 rounded-full blur-3xl opacity-20 animate-pulse-slow" style="animation-delay: 1s;"></div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="z-index: 1;">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12 sm:mb-16" data-aos="fade-up">
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-red-600 mb-6 sm:mb-8 relative inline-block px-4">
                 Ils Parlent de Nous
@@ -1283,23 +1072,52 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ============================================
+    // FIX CRITIQUE : Empêcher les bugs de scroll sur la section services
+    // ============================================
+    const servicesSection = document.querySelector('#services');
+    if (servicesSection) {
+        // Forcer transform none de manière permanente
+        const forceNoTransform = () => {
+            servicesSection.style.transform = 'none';
+            servicesSection.style.willChange = 'auto';
+        };
+        
+        // Appliquer immédiatement
+        forceNoTransform();
+        
+        // Surveiller les changements de style
+        const observer = new MutationObserver(() => {
+            if (servicesSection.style.transform && servicesSection.style.transform !== 'none') {
+                forceNoTransform();
+            }
+        });
+        
+        observer.observe(servicesSection, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+        
+        // Vérifier périodiquement (backup)
+        setInterval(forceNoTransform, 100);
+    }
+    
     // Parallax effect for video background
     const videoElement = document.querySelector('.parallax-layer');
     
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         if (videoElement && scrolled < window.innerHeight) {
-            const speed = 0.5;
+            const speed = 0.3; // Réduit pour plus de fluidité
             videoElement.style.transform = `translate3d(0, ${scrolled * speed}px, 0)`;
         }
     });
     
-    // 3D tilt effect on service cards in orbital section
+    // 3D tilt effect on service cards
     const serviceCards = document.querySelectorAll('.service-card');
     
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', () => {
-            // Pause orbital rotation on hover
             const orbitCard = card.closest('.orbit-card');
             if (orbitCard) {
                 orbitCard.style.animationPlayState = 'paused';
@@ -1307,7 +1125,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         card.addEventListener('mouseleave', () => {
-            // Resume orbital rotation
             const orbitCard = card.closest('.orbit-card');
             if (orbitCard) {
                 orbitCard.style.animationPlayState = 'running';
@@ -1332,36 +1149,267 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Animated number counters (if you add stats section later)
-    const animateValue = (element, start, end, duration) => {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            element.textContent = Math.floor(progress * (end - start) + start);
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
-    };
-    
     // Intersection Observer for scroll animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
     
-    const observer = new IntersectionObserver((entries) => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                // Animation au scroll
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
     
     // Observe card-shimmer elements
-    document.querySelectorAll('.card-shimmer').forEach(el => observer.observe(el));
+    document.querySelectorAll('.card-shimmer').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        intersectionObserver.observe(el);
+    });
+    
+    // ============================================
+    // Effet de curseur personnalisé (optionnel)
+    // ============================================
+    const createCursor = () => {
+        const cursor = document.createElement('div');
+        cursor.classList.add('custom-cursor');
+        document.body.appendChild(cursor);
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Effet au survol des liens et boutons
+        document.querySelectorAll('a, button, .slide-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-hover'));
+        });
+    };
+    
+    // Activer seulement sur desktop
+    if (window.innerWidth > 1024) {
+        createCursor();
+    }
 });
 </script>
+
+<style>
+/* Curseur personnalisé */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #dc2626;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.cursor-hover {
+    width: 40px;
+    height: 40px;
+    background: rgba(220, 38, 38, 0.1);
+    border-color: #dc2626;
+}
+
+/* Animations supplémentaires */
+@keyframes gradient-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer-slow {
+    0%, 100% {
+        opacity: 0;
+        left: -100%;
+    }
+    50% {
+        opacity: 0.3;
+        left: 100%;
+    }
+}
+
+.animate-gradient-rotate {
+    animation: gradient-rotate 3s linear infinite;
+}
+
+.animate-shimmer-slow {
+    animation: shimmer-slow 6s ease-in-out infinite;
+}
+</style>
+
+<script>
+// Slider Entités - Animation avancée
+(function() {
+    const slideData = [
+        {
+            'src': '{{ asset('img/Val_BTP.png') }}',
+            'title': 'VAL BTP',
+            'copy': 'Construction générale',
+            'link': '{{ path('app_val_btp') }}'
+        },
+        {
+            'src': '{{ asset('img/Val_concept.png') }}', 
+            'title': 'VAL CONCEPT',
+            'copy': 'Gestion BTP',
+            'link': '{{ path('app_val_concept') }}'
+        },
+        {
+            'src': '{{ asset('img/Val_securikom.png') }}', 
+            'title': 'VAL SECURIKOM',
+            'copy': 'Sécurité',
+            'link': '{{ path('app_val_securikom') }}'
+        },
+        {
+            'src': '{{ asset('img/Val_formation.png') }}', 
+            'title': 'VAL FORMATION',
+            'copy': 'Formation BTP',
+            'link': '{{ path('app_val_formation') }}'
+        }
+    ];
+
+    let slides = [],
+        captions = [];
+
+    let autoplay = setInterval(function(){
+        nextSlide();
+    }, 5000);
+
+    const container = document.getElementById('container-entites');
+    const leftSlider = document.getElementById('left-slider-entites');
+    const downButton = document.getElementById('down_button');
+    const upButton = document.getElementById('up_button');
+    const sliderCaption = document.getElementById('slider-caption');
+
+    if (!container || !leftSlider || !downButton || !upButton || !sliderCaption) {
+        return; // Exit if elements don't exist
+    }
+
+    downButton.addEventListener('click', function(e){
+        e.preventDefault();
+        clearInterval(autoplay);
+        nextSlide();
+        autoplay = setInterval(function(){
+            nextSlide();
+        }, 5000);
+    });
+
+    upButton.addEventListener('click', function(e){
+        e.preventDefault();
+        clearInterval(autoplay);
+        previousSlide();
+        autoplay = setInterval(function(){
+            nextSlide();
+        }, 5000);
+    });
+
+    // Create slides
+    for (let i = 0; i < slideData.length; i++){
+        let slide = document.createElement('div'),
+            caption = document.createElement('div'),
+            slideTitle = document.createElement('div'),
+            slideSubhead = document.createElement('div'),
+            slideButton = document.createElement('a');
+        
+        slide.classList.add('slide');
+        slide.setAttribute('style', 'background:url(' + slideData[i].src + ')');
+        caption.classList.add('caption-slider');
+        slideTitle.classList.add('caption-heading');
+        slideTitle.innerHTML = '<h1>' + slideData[i].title + '</h1>';
+        slideSubhead.classList.add('caption-subhead');
+        slideSubhead.innerHTML = '<span>' + slideData[i].copy + '</span>';
+        slideButton.classList.add('btn-slider');
+        slideButton.href = slideData[i].link;
+        slideButton.textContent = 'En savoir plus';
+        
+        switch(i){
+            case 0:
+                slide.classList.add('current');
+                caption.classList.add('current-caption');
+                break;
+            case 1:
+                slide.classList.add('next');
+                caption.classList.add('next-caption');
+                break;
+            case slideData.length - 1:
+                slide.classList.add('previous');
+                caption.classList.add('previous-caption');
+                break;
+            default:
+                break;       
+        }
+        
+        caption.appendChild(slideTitle);
+        caption.appendChild(slideSubhead);
+        caption.appendChild(slideButton);
+        slides.push(slide);
+        captions.push(caption);
+        leftSlider.appendChild(slide);
+        container.appendChild(caption);
+    }
+
+    // Hide the initial caption from HTML
+    sliderCaption.style.display = 'none';
+
+    function nextSlide(){
+        slides[0].classList.remove('current');
+        slides[0].classList.add('previous', 'change');
+        slides[1].classList.remove('next');
+        slides[1].classList.add('current');
+        slides[2].classList.add('next');
+        let last = slides.length - 1;
+        slides[last].classList.remove('previous');
+        
+        captions[0].classList.remove('current-caption');
+        captions[0].classList.add('previous-caption', 'change');
+        captions[1].classList.remove('next-caption');
+        captions[1].classList.add('current-caption');
+        captions[2].classList.add('next-caption');
+        let lastCaption = captions.length - 1;
+        captions[lastCaption].classList.remove('previous-caption');
+        
+        let placeholder = slides.shift();
+        let captionsPlaceholder = captions.shift();
+        slides.push(placeholder); 
+        captions.push(captionsPlaceholder);
+    }
+
+    function previousSlide(){
+        let last = slides.length - 1;
+        
+        slides[0].classList.remove('current');
+        slides[0].classList.add('next');
+        slides[last].classList.remove('previous');
+        slides[last].classList.add('current');
+        slides[last - 1].classList.add('previous');
+        
+        captions[0].classList.remove('current-caption');
+        captions[0].classList.add('next-caption');
+        captions[last].classList.remove('previous-caption');
+        captions[last].classList.add('current-caption');
+        captions[last - 1].classList.add('previous-caption');
+        
+        let placeholder = slides.pop();
+        let captionsPlaceholder = captions.pop();
+        slides.unshift(placeholder); 
+        captions.unshift(captionsPlaceholder);
+    }
+})();
+</script>
+
 {% endblock %}

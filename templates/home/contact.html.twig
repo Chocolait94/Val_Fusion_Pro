@@ -1,71 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contactez-nous - VAL FUSION{% endblock %}
+{% block title %}Contact - VAL Fusion{% endblock %}
 
 {% block body %}
 <style>
-/* Animations personnalisées pour la page contact */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
+/* ============================================
+   ANIMATIONS PREMIUM CONTACT PAGE
+   ============================================ */
+@keyframes pulse-border {
     0%, 100% {
-        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
     }
     50% {
-        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+    }
+}
+
+@keyframes float-icon {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
     }
 }
 
@@ -78,253 +34,314 @@
     }
 }
 
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
+/* Fix scroll bugs */
+section {
+    transform: none !important;
+}
+
+/* Optimisation Mobile */
+@media (max-width: 768px) {
+    * {
+        animation-duration: 0.3s !important;
     }
-    50% {
-        transform: translateY(-10px);
+    
+    .btn-contact {
+        min-height: 48px;
+        padding: 1rem 2rem !important;
+        width: 100%;
+        font-size: 1rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+    
+    h2 {
+        font-size: 1.875rem !important;
+    }
+    
+    /* Form inputs touch-friendly */
+    .form-input {
+        min-height: 48px;
+        font-size: 16px !important; /* Évite le zoom iOS */
+    }
+    
+    /* Cards contact full width */
+    .contact-card {
+        margin-bottom: 1rem;
+    }
+    
+    /* Icons plus petites sur mobile */
+    .contact-icon {
+        width: 4rem !important;
+        height: 4rem !important;
     }
 }
 
-.animate-fadeInUp {
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fadeInDown {
-    animation: fadeInDown 0.8s ease-out forwards;
-}
-
-.animate-slideInLeft {
-    animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slideInRight {
-    animation: slideInRight 0.8s ease-out forwards;
-}
-
-.animate-scaleIn {
-    animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.animate-bounce {
-    animation: bounce 2s ease-in-out infinite;
-}
-
-.input-focus {
-    transition: all 0.3s ease;
-}
-
-.input-focus:focus {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
-}
-
-.card-hover {
+/* Bouton contact premium */
+.btn-contact {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card-hover:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.icon-bounce {
-    transition: all 0.3s ease;
-}
-
-.info-item:hover .icon-bounce {
-    animation: bounce 0.6s ease;
-}
-
-.bg-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    background-size: 1000px 100%;
+.btn-contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     animation: shimmer 3s infinite;
 }
 
-.text-gradient {
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.btn-contact:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5);
+}
+
+/* Input focus effect */
+.form-input:focus {
+    animation: pulse-border 1.5s ease-in-out;
+}
+
+/* Card hover effect */
+.contact-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+}
+
+.contact-card:hover .contact-icon {
+    animation: float-icon 2s ease-in-out infinite;
 }
 </style>
 
 {# Hero Section #}
-<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-white pt-32 pb-16 overflow-hidden" style="z-index: 1;">
-    <div class="absolute inset-0 bg-shimmer"></div>
-    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-red-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+<section class="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-violet-900">
+    {# Pattern animé #}
+    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 40px 40px;"></div>
     
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-        <h1 class="text-4xl lg:text-5xl font-bold mb-4 text-gradient animate-fadeInDown" style="opacity: 0;">
-            Erê Werê *
+    {# Gradient overlay #}
+    <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/40 to-purple-900/40"></div>
+    
+    {# Particules flottantes #}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-3 h-3 bg-purple-400/50 rounded-full" style="animation: float 6s ease-in-out infinite;"></div>
+        <div class="absolute top-40 right-20 w-2 h-2 bg-indigo-400/50 rounded-full" style="animation: float 7s ease-in-out infinite 1s;"></div>
+        <div class="absolute bottom-40 left-1/4 w-4 h-4 bg-violet-400/50 rounded-full" style="animation: float 5s ease-in-out infinite 2s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight" 
+            data-aos="fade-up" 
+            data-aos-duration="1000">
+            <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-violet-400 bg-clip-text text-transparent">
+                Erê Werê *
+            </span>
         </h1>
-        <p class="text-xl text-gray-300 animate-fadeInUp" style="animation-delay: 0.2s; opacity: 0;">
-            Vous souhaitez obtenir un devis, vous inscrire à notre formation ou nous poser une question ?
-        </p>
-        <p class="text-lg text-gray-400 mt-2 animate-fadeInUp" style="animation-delay: 0.4s; opacity: 0;">
-            Remplissez le formulaire ou contactez-nous directement via les informations ci-dessous.
+        
+        <p class="text-xl md:text-2xl text-purple-200 max-w-3xl mx-auto mb-8" 
+           data-aos="fade-up" 
+           data-aos-delay="200">
+            Une question ? Un projet ? Notre équipe est à votre écoute
         </p>
     </div>
 </section>
 
-{# Contact Section #}
-<section class="relative py-20 bg-gray-50 overflow-hidden" style="z-index: 2;">
+{# Section Informations de Contact #}
+<section class="py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {# Contact Form #}
-            <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInLeft border border-gray-200" style="opacity: 0;">
-                <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center ml-2">
-                    <i class="fas fa-envelope text-red-600 mr-3"></i>
-                    Envoyez-nous un message
-                </h2>
-                
-                {% for message in app.flashes('success') %}
-                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-6 animate-scaleIn">
-                        <i class="fas fa-check-circle mr-2"></i>
-                        {{ message }}
-                    </div>
-                {% endfor %}
-                
-                {{ form_start(contactForm, {'attr': {'class': 'space-y-6'}}) }}
-                    <div class="form-group">
-                        {{ form_label(contactForm.name, 'Nom *', {'label_attr': {'class': 'block text-sm font-semibold text-gray-700 mb-2'}}) }}
-                        {{ form_widget(contactForm.name, {'attr': {'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent input-focus transition-all'}}) }}
-                        {{ form_errors(contactForm.name) }}
-                    </div>
-                    
-                    <div class="form-group">
-                        {{ form_label(contactForm.email, 'Adresse électronique *', {'label_attr': {'class': 'block text-sm font-semibold text-gray-700 mb-2'}}) }}
-                        {{ form_widget(contactForm.email, {'attr': {'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent input-focus transition-all'}}) }}
-                        {{ form_errors(contactForm.email) }}
-                    </div>
-                    
-                    <div class="form-group">
-                        {{ form_label(contactForm.message, 'Message *', {'label_attr': {'class': 'block text-sm font-semibold text-gray-700 mb-2'}}) }}
-                        {{ form_widget(contactForm.message, {'attr': {'class': 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none input-focus transition-all', 'rows': '6'}}) }}
-                        {{ form_errors(contactForm.message) }}
-                    </div>
-                    
-                    <div class="flex items-start">
-                        {{ form_widget(contactForm.consent, {'attr': {'class': 'mt-1 mr-2 w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 transition-all'}}) }}
-                        {{ form_label(contactForm.consent, 'Je consens par la présente à ce que ces données soient stockées et traitées dans le but d\'établir un contact. Je sais que je peux révoquer mon consentement à tout moment. *', {'label_attr': {'class': 'text-sm text-gray-600'}}) }}
-                        {{ form_errors(contactForm.consent) }}
-                    </div>
-                    
-                    <div class="pt-4">
-                        <button type="submit" class="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-2xl flex items-center justify-center group">
-                            <span>Envoyer</span>
-                            <i class="fas fa-paper-plane ml-2 transform group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform"></i>
-                        </button>
-                    </div>
-                    
-                    <p class="text-xs text-gray-500 mt-4">* Indique les champs obligatoires</p>
-                    <p class="text-xs text-gray-400 mt-2">* Oui viens</p>
-                {{ form_end(contactForm) }}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            {# Téléphone #}
+            <div class="contact-card bg-white rounded-2xl p-8 text-center shadow-lg" data-aos="fade-up">
+                <div class="contact-icon w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-phone-alt text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Téléphone</h3>
+                <p class="text-gray-600 mb-4">Lundi - Vendredi : 9h - 18h</p>
+                <a href="tel:+33232405803" class="text-indigo-600 hover:text-indigo-700 font-semibold text-lg">
+                    02 32 40 58 03
+                </a>
             </div>
             
-            {# Contact Info #}
-            <div class="space-y-8">
-                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInRight border border-gray-200" style="animation-delay: 0.2s; opacity: 0;">
-                    <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center ml-2">
-                        <i class="fas fa-info-circle text-red-600 mr-3"></i>
-                        Nos coordonnées
-                    </h2>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0 ml-8">
-                                <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full icon-bounce transition-all group-hover:bg-blue-200">
-                                    <i class="fas fa-phone text-blue-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-semibold text-gray-700 mb-1">Téléphone</p>
-                                <a href="tel:0232405803" class="text-lg text-blue-600 hover:text-blue-800 font-medium transition-colors">
-                                    02.32.40.58.03
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0 ml-8">
-                                <div class="flex items-center justify-center w-12 h-12 bg-green-100 rounded-full icon-bounce transition-all group-hover:bg-green-200">
-                                    <i class="fas fa-envelope text-green-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-semibold text-gray-700 mb-1">Courriel</p>
-                                <a href="mailto:contact@valfusion.fr" class="text-lg text-green-600 hover:text-green-800 font-medium transition-colors">
-                                    contact@valfusion.fr
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start info-item group">
-                            <div class="flex-shrink-0 ml-8">
-                                <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full icon-bounce transition-all group-hover:bg-purple-200">
-                                    <i class="fas fa-map-marker-alt text-purple-600 text-xl"></i>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-semibold text-gray-700 mb-1">Adresse</p>
-                                <p class="text-lg text-gray-600">
-                                    101 Rue Grande<br>
-                                    Val-De-Reuil, 27100<br>
-                                    Normandie, France
-                                </p>
-                            </div>
-                        </div>
+            {# Email #}
+            <div class="contact-card bg-white rounded-2xl p-8 text-center shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="contact-icon w-20 h-20 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-envelope text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Email</h3>
+                <p class="text-gray-600 mb-4">Réponse sous 24h</p>
+                <a href="mailto:contact@valfusion.fr" class="text-indigo-600 hover:text-indigo-700 font-semibold text-lg">
+                    contact@valfusion.fr
+                </a>
+            </div>
+            
+            {# Adresse #}
+            <div class="contact-card bg-white rounded-2xl p-8 text-center shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="contact-icon w-20 h-20 bg-gradient-to-br from-violet-500 to-fuchsia-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-map-marker-alt text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Adresse</h3>
+                <p class="text-gray-600 mb-4">Nos bureaux</p>
+                <p class="text-gray-800 font-semibold">
+                    101 Rue Grande<br>
+                    27100 Val-de-Reuil
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Section Formulaire de Contact #}
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Envoyez-nous un <span class="text-indigo-600">Message</span>
+            </h2>
+            <div class="w-24 h-1.5 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+            <p class="text-lg text-gray-700">
+                Remplissez le formulaire ci-dessous et nous vous répondrons dans les plus brefs délais
+            </p>
+        </div>
+        
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl p-8 md:p-12 shadow-xl" data-aos="fade-up" data-aos-delay="200">
+            {{ form_start(contactForm, {'attr': {'class': 'space-y-6'}}) }}
+            
+            {# Nom #}
+            <div>
+                {{ form_label(contactForm['name'], null, {'label_attr': {'class': 'block text-sm font-semibold text-gray-900 mb-2'}}) }}
+                {{ form_widget(contactForm['name'], {'attr': {'class': 'form-input w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 transition-all duration-300', 'placeholder': 'Votre nom'}}) }}
+                {{ form_errors(contactForm['name']) }}
+            </div>
+            
+            {# Email #}
+            <div>
+                {{ form_label(contactForm['email'], null, {'label_attr': {'class': 'block text-sm font-semibold text-gray-900 mb-2'}}) }}
+                {{ form_widget(contactForm['email'], {'attr': {'class': 'form-input w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 transition-all duration-300', 'placeholder': 'votre.email@exemple.com'}}) }}
+                {{ form_errors(contactForm['email']) }}
+            </div>
+            
+            {# Message #}
+            <div>
+                {{ form_label(contactForm['message'], null, {'label_attr': {'class': 'block text-sm font-semibold text-gray-900 mb-2'}}) }}
+                {{ form_widget(contactForm['message'], {'attr': {'class': 'form-input w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-200 transition-all duration-300', 'rows': '6', 'placeholder': 'Décrivez votre projet ou votre demande...'}}) }}
+                {{ form_errors(contactForm['message']) }}
+            </div>
+            
+            {# RGPD #}
+            <div class="bg-white rounded-xl p-6 border-2 border-indigo-100">
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0 mt-1">
+                        {{ form_widget(contactForm['consent'], {'attr': {'class': 'w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'}}) }}
+                    </div>
+                    <div class="flex-1">
+                        {{ form_label(contactForm['consent'], null, {'label_attr': {'class': 'text-sm text-gray-700'}}) }}
+                        {{ form_errors(contactForm['consent']) }}
                     </div>
                 </div>
-                
-                {# Map Placeholder #}
-                <div class="bg-white rounded-2xl shadow-xl p-8 card-hover animate-slideInRight" style="animation-delay: 0.4s; opacity: 0;">
-                    <h2 class="text-2xl font-bold text-gradient mb-6 flex items-center">
-                        <i class="fas fa-map-marked-alt text-red-600 mr-3"></i>
-                        Où nous trouver
-                    </h2>
-                    <div class="rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:shadow-2xl hover:scale-105">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2603.7!2d1.2098!3d49.2683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e1323e8f9f8f8f%3A0x9f9f9f9f9f9f9f9f!2s101%20Rue%20Grande%2C%2027100%20Val-de-Reuil%2C%20France!5e0!3m2!1sfr!2sfr!4v1234567890123!5m2!1sfr!2sfr"
-                            width="100%" 
-                            height="350" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade"
-                            class="w-full">
-                        </iframe>
+            </div>
+            
+            {# Bouton Submit #}
+            <div class="text-center">
+                <button type="submit" class="btn-contact inline-flex items-center justify-center gap-3 px-12 py-4 text-white rounded-full font-bold text-lg shadow-2xl">
+                    <span class="relative z-10">Envoyer le message</span>
+                    <svg class="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </button>
+            </div>
+            
+            {{ form_end(contactForm) }}
+        </div>
+    </div>
+    {# Ere were * : Oui viens #}
+    <div class="text-center mt-12 text-sm text-gray-500 italic" data-aos="fade-up" data-aos-delay="400">
+        <p>
+            *Oui viens
+        </p>
+    </div>
+</section>
+
+{# Section Localisation - Google Maps #}
+<section class="py-20 bg-gradient-to-br from-gray-50 to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Notre <span class="text-indigo-600">Localisation</span>
+            </h2>
+            <div class="w-24 h-1.5 bg-indigo-600 mx-auto rounded-full mb-6"></div>
+            <p class="text-lg text-gray-700 mb-2">
+                Siège Social - VAL FUSION GROUPE
+            </p>
+            <p class="text-base text-gray-600">
+                <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>
+                101 Rue Grande, 27100 Val de Reuil, France
+            </p>
+        </div>
+        
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+            <div class="relative w-full" style="height: 500px;">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2612.076!2d1.202!3d49.265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e1d9d9d9d9d9d9%3A0x9d9d9d9d9d9d9d9!2s101%20Rue%20Grande%2C%2027100%20Val-de-Reuil%2C%20France!5e0!3m2!1sfr!2sfr!4v1234567890123!5m2!1sfr!2sfr" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="w-full h-full">
+                </iframe>
+            </div>
+            
+            <div class="p-8 bg-gradient-to-r from-indigo-50 to-purple-50">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Adresse</h4>
+                            <p class="text-gray-600 text-sm">101 Rue Grande<br>27100 Val de Reuil</p>
+                        </div>
                     </div>
-                </div>
-                
-                {# Business Hours #}
-                <div class="bg-gradient-to-br from-red-600 to-red-700 text-white rounded-2xl shadow-xl p-8 card-hover relative overflow-hidden animate-slideInRight" style="animation-delay: 0.6s; opacity: 0;">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                    <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                     
-                    <h2 class="text-2xl font-bold mb-6 flex items-center relative z-10">
-                        <i class="fas fa-clock mr-3"></i>
-                        Horaires d'ouverture
-                    </h2>
-                    <div class="space-y-3 relative z-10">
-                        <div class="flex justify-between border-b border-white/20 pb-2 transition-all hover:border-white/40 hover:pl-2">
-                            <span>Lundi - Vendredi</span>
-                            <span class="font-semibold">9h00 - 18h00</span>
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-clock text-white text-xl"></i>
+                            </div>
                         </div>
-                        <div class="flex justify-between border-b border-white/20 pb-2 transition-all hover:border-white/40 hover:pl-2">
-                            <span>Samedi</span>
-                            <span class="font-semibold">9h00 - 18h00</span>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Horaires</h4>
+                            <p class="text-gray-600 text-sm">Lun-Sam: 8h00 - 18h00</p>
+                            <p class="text-gray-600 text-sm">Dim: fermé</p>
                         </div>
-                        <div class="flex justify-between transition-all hover:pl-2">
-                            <span>Dimanche</span>
-                            <span class="font-semibold">Fermé</span>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-route text-white text-xl"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-gray-900 mb-1">Itinéraire</h4>
+                            <a href="https://www.google.com/maps/dir//101+Rue+Grande,+27100+Val-de-Reuil" 
+                               target="_blank" 
+                               class="text-indigo-600 hover:text-indigo-700 font-semibold text-sm inline-flex items-center">
+                                Obtenir l'itinéraire
+                                <i class="fas fa-external-link-alt ml-1 text-xs"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -334,62 +351,25 @@
 </section>
 
 <script>
-// Animation au scroll avec Intersection Observer
 document.addEventListener('DOMContentLoaded', function() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    // Observer tous les éléments avec animations
-    document.querySelectorAll('[style*="opacity: 0"]').forEach(el => {
-        observer.observe(el);
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        section.style.transform = 'none';
+        section.style.willChange = 'auto';
     });
-
-    // Animation des inputs au focus
-    const inputs = document.querySelectorAll('.input-focus');
-    inputs.forEach(input => {
+    
+    // Animation sur le formulaire
+    const formInputs = document.querySelectorAll('.form-input');
+    formInputs.forEach(input => {
         input.addEventListener('focus', function() {
-            this.parentElement.querySelector('label')?.classList.add('text-red-600');
+            this.parentElement.classList.add('transform', 'scale-[1.02]');
         });
         
         input.addEventListener('blur', function() {
-            if (!this.value) {
-                this.parentElement.querySelector('label')?.classList.remove('text-red-600');
-            }
-        });
-    });
-
-    // Animation du bouton d'envoi
-    const submitBtn = document.querySelector('button[type="submit"]');
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function(e) {
-            if (this.closest('form').checkValidity()) {
-                this.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Envoi en cours...';
-            }
-        });
-    }
-
-    // Animation des cartes info au hover
-    const infoItems = document.querySelectorAll('.info-item');
-    infoItems.forEach(item => {
-        item.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateX(5px)';
-        });
-        
-        item.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateX(0)';
+            this.parentElement.classList.remove('transform', 'scale-[1.02]');
         });
     });
 });
 </script>
+
 {% endblock %}

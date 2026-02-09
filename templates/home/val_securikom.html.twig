@@ -1,633 +1,431 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}VAL SECURIKOM - Équipements de protection{% endblock %}
+{% block title %}VAL Sécurikom - Équipements de Protection Individuelle{% endblock %}
 
 {% block body %}
 <style>
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes bounceIn {
+/* ============================================
+   ANIMATIONS PREMIUM VAL SÉCURIKOM
+   ============================================ */
+@keyframes radarScan {
     0% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-    70% {
-        transform: scale(0.9);
+        transform: rotate(0deg);
     }
     100% {
-        transform: scale(1);
+        transform: rotate(360deg);
     }
 }
 
-@keyframes rotateIn {
-    from {
-        opacity: 0;
-        transform: rotate(-200deg) scale(0);
-    }
-    to {
-        opacity: 1;
-        transform: rotate(0) scale(1);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.5);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes float {
+@keyframes shieldPulse {
     0%, 100% {
-        transform: translateY(0);
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
     }
     50% {
-        transform: translateY(-20px);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.8;
         transform: scale(1.05);
+        filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.8));
     }
 }
 
-@keyframes shimmer {
+@keyframes alertBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes securitySweep {
     0% {
-        background-position: -1000px 0;
+        left: -100%;
     }
     100% {
-        background-position: 1000px 0;
+        left: 100%;
     }
 }
 
-@keyframes slideInBottom {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
+/* Fix scroll bugs */
+section {
+    transform: none !important;
+}
+
+/* Optimisation Mobile */
+@media (max-width: 768px) {
+    * {
+        animation-duration: 0.3s !important;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    
+    .btn-security {
+        min-height: 48px;
+        padding: 1rem 2rem !important;
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 2.5rem !important;
+        line-height: 1.2;
+    }
+    
+    h2 {
+        font-size: 1.875rem !important;
+    }
+    
+    /* Radar effects réduits sur mobile */
+    .radar-effect {
+        width: 80%;
+        height: 80%;
+    }
+    
+    /* Meilleur espacement */
+    .group {
+        margin-bottom: 1rem;
     }
 }
 
-@keyframes pageEntrance {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.page-wrapper {
-    animation: pageEntrance 0.5s ease-out;
-}
-
-.animate-fadeInUp {
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.animate-fadeInDown {
-    animation: fadeInDown 0.8s ease-out forwards;
-}
-
-.animate-slideInLeft {
-    animation: slideInLeft 0.8s ease-out forwards;
-}
-
-.animate-slideInRight {
-    animation: slideInRight 0.8s ease-out forwards;
-}
-
-.animate-scaleIn {
-    animation: scaleIn 0.6s ease-out forwards;
-}
-
-.animate-bounceIn {
-    animation: bounceIn 0.8s ease-out forwards;
-}
-
-.animate-rotateIn {
-    animation: rotateIn 1s ease-out forwards;
-}
-
-.animate-zoomIn {
-    animation: zoomIn 0.6s ease-out forwards;
-}
-
-.animate-slideInBottom {
-    animation: slideInBottom 0.8s ease-out forwards;
-}
-
-.animate-float {
-    animation: float 3s ease-in-out infinite;
-}
-
-.animate-pulse {
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.card-hover {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+/* Effet radar */
+.radar-effect {
     position: relative;
-    overflow: hidden;
 }
 
-.card-hover:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-.card-hover::before {
+.radar-effect::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.6s ease;
+    background: conic-gradient(from 0deg, transparent 0%, rgba(239, 68, 68, 0.3) 50%, transparent 100%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: radarScan 4s linear infinite;
 }
 
-.card-hover:hover::before {
-    left: 100%;
-}
-
-.icon-bounce {
-    transition: transform 0.3s ease;
-}
-
-.card-hover:hover .icon-bounce {
-    animation: float 1s ease-in-out infinite;
-}
-
-.bg-shimmer {
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    background-size: 1000px 100%;
-    animation: shimmer 3s infinite;
-}
-
-.text-gradient {
-    background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+/* Texte sécurisé */
+.security-text {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 50%, #f87171 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    filter: drop-shadow(0 4px 8px rgba(220, 38, 38, 0.3));
 }
 
-.hero-icon-entrance {
-    animation: rotateIn 1s ease-out forwards;
-    opacity: 0;
-}
-
-.product-card-header {
-    transition: transform 0.3s ease;
-}
-
-.card-hover:hover .product-card-header {
-    transform: scale(1.1);
-}
-
-.check-icon {
-    transition: all 0.3s ease;
-}
-
-.card-hover:hover .check-icon {
-    transform: scale(1.2) rotate(360deg);
-}
-
-.feature-card {
+/* Bouton sécurité premium */
+.btn-security {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.feature-card:hover {
-    transform: translateY(-12px) scale(1.05);
-}
-
-.feature-icon {
-    transition: all 0.4s ease;
-}
-
-.feature-card:hover .feature-icon {
-    transform: scale(1.2) rotate(360deg);
-}
-
-.pulse-circle {
-    position: absolute;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
-    animation: pulse 3s ease-in-out infinite;
-}
-
-.pulse-circle:first-child {
-    top: 10%;
-    right: 10%;
-}
-
-.pulse-circle:last-child {
-    bottom: 10%;
-    left: 10%;
-}
-
-.icon-float {
-    animation: float 2s ease-in-out infinite;
-}
-
-.shimmer-btn {
-    position: relative;
-    overflow: hidden;
-}
-
-.shimmer-btn::before {
+.btn-security::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: shimmer 2s infinite;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+    animation: securitySweep 3s linear infinite;
 }
 
-/* Stagger delays */
-.stagger-1 { animation-delay: 0.1s !important; }
-.stagger-2 { animation-delay: 0.2s !important; }
-.stagger-3 { animation-delay: 0.3s !important; }
-.stagger-4 { animation-delay: 0.4s !important; }
-.stagger-5 { animation-delay: 0.5s !important; }
-.stagger-6 { animation-delay: 0.6s !important; }
-.stagger-7 { animation-delay: 0.7s !important; }
-.stagger-8 { animation-delay: 0.8s !important; }
-.stagger-9 { animation-delay: 0.9s !important; }
-.stagger-10 { animation-delay: 1s !important; }
+.btn-security:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(220, 38, 38, 0.4);
+}
+
+/* Badge alerte */
+.alert-badge {
+    animation: alertBlink 2s ease-in-out infinite;
+}
+
+/* Ligne de sécurité */
+.security-line {
+    position: relative;
+}
+
+.security-line::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: repeating-linear-gradient(
+        90deg,
+        #dc2626 0px,
+        #dc2626 10px,
+        #fef2f2 10px,
+        #fef2f2 20px
+    );
+}
 </style>
 
-<div class="page-wrapper">
-{# Hero Section #}
-<section class="relative bg-gradient-to-br from-red-900 via-red-800 to-gray-900 text-white py-20 lg:py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=1920')"></div>
-    <div class="absolute inset-0 bg-shimmer"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 bg-red-500 opacity-10 rounded-full blur-3xl animate-pulse"></div>
-    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gray-500 opacity-10 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+{# Hero Section VAL Sécurikom #}
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-red-950 via-red-900 to-gray-900">
+    {# Pattern de sécurité #}
+    <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.03) 10px, rgba(255,255,255,.03) 20px);"></div>
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full mb-6 hero-icon-entrance">
-                    <i class="fas fa-shield-alt text-4xl text-white"></i>
+    {# Gradient overlay #}
+    <div class="absolute inset-0 bg-gradient-to-br from-red-900/40 to-gray-900/40"></div>
+    
+    {# Éléments de sécurité animés #}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-16 h-16 border-4 border-red-500/30 rounded-full radar-effect"></div>
+        <div class="absolute top-40 right-20 w-12 h-12 border-4 border-red-500/30 rounded-full radar-effect" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-1/4 w-20 h-20 border-4 border-red-500/30 rounded-full radar-effect" style="animation-delay: 2s;"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {# Logo avec animation #}
+        <div class="mb-8" data-aos="zoom-in" data-aos-duration="800" style="animation: shieldPulse 3s ease-in-out infinite;">
+            <img src="{{ asset('img/Val_Securikom.png') }}" 
+                 alt="VAL Sécurikom" 
+                 class="w-40 h-40 md:w-56 md:h-56 mx-auto object-contain drop-shadow-2xl hover:scale-110 transition-transform duration-500">
+        </div>
+        
+        {# Titre principal #}
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-tight security-line" 
+            data-aos="fade-up" 
+            data-aos-duration="1000">
+            <span class="bg-gradient-to-r from-red-400 via-red-500 to-red-600 bg-clip-text text-transparent">
+                VAL SÉCURIKOM
+            </span>
+        </h1>
+        
+        <h2 class="text-2xl md:text-3xl lg:text-4xl text-red-100 mb-6 font-bold" 
+            data-aos="fade-up" 
+            data-aos-delay="200">
+            Équipements de Protection Individuelle
+        </h2>
+        
+        <p class="text-lg md:text-xl text-red-200 max-w-3xl mx-auto mb-12" 
+           data-aos="fade-up" 
+           data-aos-delay="300">
+            Leader dans la vente d'équipements de protection individuelle (EPI).
+            Des solutions complètes pour garantir la sécurité de vos équipes sur le terrain.
+        </p>
+        
+        {# CTA Buttons #}
+        <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
+            <a href="#services" 
+               class="btn-security inline-flex items-center justify-center gap-3 px-8 py-4 text-white rounded-full font-bold text-lg shadow-2xl">
+                <span class="relative z-10">Nos Services</span>
+                <svg class="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+            </a>
+            <a href="#contact" 
+               class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-full font-bold text-lg hover:bg-white/20 transition-all duration-300">
+                Devis gratuit
+            </a>
+        </div>
+    </div>
+    
+    {# Scroll indicator #}
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <svg class="w-8 h-8 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+    </div>
+</section>
+
+{# Section Services #}
+<section id="services" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                Nos <span class="text-red-600">Produits & Services</span>
+            </h2>
+            <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full mb-8"></div>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+                Une large gamme de matériels de sécurité pour garantir la protection des travailleurs et la conformité réglementaire sur vos chantiers
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-hard-hat text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Équipements de Protection</h3>
+                    <p class="text-gray-600 mb-6">
+                        Casques, gants, lunettes, gilets, chaussures de sécurité. Nos EPI couvrent l'ensemble des besoins en protection pour le BTP, l'industrie, les hôpitaux et les transporteurs.
+                    </p>
                 </div>
-                <h1 class="text-4xl lg:text-6xl font-bold mb-6 text-gradient animate-bounceIn stagger-2" style="opacity: 0;">VAL SECURIKOM</h1>
-                <h2 class="text-2xl lg:text-3xl font-semibold text-red-200 mb-6 animate-slideInRight stagger-4" style="opacity: 0;">
-                    Sécurisez votre environnement de travail avec VAL SECURIKOM
-                </h2>
-                <p class="text-lg text-gray-200 leading-relaxed mb-4 animate-fadeInUp stagger-6" style="opacity: 0;">
-                    Chez VAL FUSION GROUPE, nous savons que la sécurité au travail est primordiale. C'est pourquoi notre société, à travers sa marque VAL SECURIKOM, se positionne comme un leader dans la vente d'équipements de protection individuelle (EPI).
-                </p>
-                <p class="text-lg text-gray-200 leading-relaxed animate-fadeInUp stagger-7" style="opacity: 0;">
-                    Que vous soyez un artisan ou un représentant d'une entreprise, nous avons les solutions nécessaires pour garantir la sécurité de vos équipes sur le terrain.
-                </p>
             </div>
             
-            <div class="rounded-2xl animate-zoomIn stagger-5 flex items-center justify-center" style="opacity: 0;">
-                <img src="{{ asset('img/Securikom.png') }}" alt="Securikom" class="w-3/4 h-auto rounded-2xl">
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-fire-extinguisher text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Extincteurs</h3>
+                    <p class="text-gray-600 mb-6">
+                        Extincteurs choisis pour répondre aux risques spécifiques de chaque chantier. Faciles d'utilisation et conformes aux normes en vigueur.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-first-aid text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Trousses de Premiers Secours</h3>
+                    <p class="text-gray-600 mb-6">
+                        Trousses complètes et conformes aux obligations légales sur chantier. Tout le nécessaire pour intervenir rapidement en cas de blessure légère.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-toolbox text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Kits de Sécurité</h3>
+                    <p class="text-gray-600 mb-6">
+                        Kits prêts à l'emploi regroupant les éléments essentiels pour débuter vos chantiers en toute sécurité. Solution simple et économique.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="400">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chalkboard-teacher text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Formations EPI</h3>
+                    <p class="text-gray-600 mb-6">
+                        Formations sur les équipements de protection. Nos formateurs expérimentés vous guideront à travers les meilleures pratiques de sécurité.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="500">
+                <div class="p-8">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-handshake text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Conseil & Accompagnement</h3>
+                    <p class="text-gray-600 mb-6">
+                        Service client professionnel pour vous accompagner dans le choix des équipements adaptés à vos besoins spécifiques.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-{# Presentation Section #}
-<section class="relative py-20 bg-white overflow-hidden" style="z-index: 2;">
+{# Section Engagements #}
+<section class="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-red-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                Nos <span class="text-red-600">Engagements</span>
+            </h2>
+            <div class="w-24 h-1.5 bg-red-600 mx-auto rounded-full mb-8"></div>
+            <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+                Des équipements de protection de haute qualité, alliant robustesse et confort
+            </p>
+        </div>
+        
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {# EPI complets #}
-            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 text-center shadow-xl feature-card animate-fadeInUp stagger-1 border border-red-200" style="opacity: 0;">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-red-500 rounded-full mb-6 feature-icon">
-                    <i class="fas fa-vest text-3xl text-white"></i>
-                </div>
-                <h3 class="text-xl font-bold text-red-600 mb-4">Une gamme complète d'EPI</h3>
-                <p class="text-gray-700 text-sm leading-relaxed">
-                    Équipements de protection individuelle allant des vêtements de sécurité renforcés aux équipements ergonomiques.
-                </p>
-            </div>
-            
-            {# Nos engagements #}
-            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 text-center shadow-xl feature-card animate-fadeInUp stagger-2 border border-blue-200" style="opacity: 0;">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-500 rounded-full mb-6 feature-icon">
+            <div class="text-center" data-aos="fade-up" data-aos-delay="0">
+                <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fas fa-certificate text-3xl text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold text-red-600 mb-4">Nos engagements</h3>
-                <p class="text-gray-700 text-sm leading-relaxed">
-                    Équipements de haute qualité, certifiés et conformes aux réglementations de sécurité au travail.
-                </p>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Produits Certifiés</h3>
+                <p class="text-gray-600">Tous nos produits respectent les réglementations en matière de sécurité au travail</p>
             </div>
             
-            {# Formations #}
-            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 text-center shadow-xl feature-card animate-fadeInUp stagger-3 border border-green-200" style="opacity: 0;">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-green-500 rounded-full mb-6 feature-icon">
-                    <i class="fas fa-chalkboard-teacher text-3xl text-white"></i>
+            <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-shield-alt text-3xl text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold text-red-600 mb-4">Formations EPI</h3>
-                <p class="text-gray-700 text-sm leading-relaxed">
-                    Nos formateurs expérimentés vous guident à travers les meilleures pratiques de sécurité.
-                </p>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Haute Qualité</h3>
+                <p class="text-gray-600">Équipements robustes et confortables pour une efficacité quotidienne optimale</p>
             </div>
             
-            {# Partenaire de confiance #}
-            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center shadow-xl feature-card animate-fadeInUp stagger-4 border border-purple-200" style="opacity: 0;">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-500 rounded-full mb-6 feature-icon">
+            <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-user-graduate text-3xl text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Formations Expertes</h3>
+                <p class="text-gray-600">Formateurs expérimentés pour garantir les meilleures pratiques de sécurité</p>
+            </div>
+            
+            <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fas fa-handshake text-3xl text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold text-red-600 mb-4">Partenaire de confiance</h3>
-                <p class="text-gray-700 text-sm leading-relaxed">
-                    Service client professionnel et accompagnement personnalisé pour vos besoins en sécurité.
+                <h3 class="text-xl font-bold text-gray-900 mb-3">Partenaire de Confiance</h3>
+                <p class="text-gray-600">Service client professionnel pour vous accompagner dans vos choix</p>
+            </div>
+        </div>
+        
+        <div class="mt-16 bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-up" data-aos-delay="400">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-gray-900 mb-6">
+                    Sécurisez votre environnement de travail avec VAL SECURIKOM
+                </h3>
+                <p class="text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
+                    Chez VAL FUSION GROUPE, nous savons que la sécurité au travail est primordiale. 
+                    C'est pourquoi notre société, à travers sa marque VAL SECURIKOM, se positionne comme un leader 
+                    dans la vente d'équipements de protection individuelle (EPI). 
+                    Que vous soyez un artisan ou un représentant d'une entreprise, nous avons les solutions 
+                    nécessaires pour garantir la sécurité de vos équipes sur le terrain.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-{# Description Section #}
-<section class="relative py-20 bg-gray-50 overflow-hidden" style="z-index: 3;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto text-center space-y-6">
-            <p class="text-lg text-gray-700 leading-relaxed animate-fadeInUp stagger-1" style="opacity: 0;">
-                VAL SECURIKOM offre une large gamme d'équipements de protection individuelle allant des vêtements de sécurité renforcés aux équipements de protection ergonomiques.
-            </p>
-            <p class="text-lg text-gray-700 leading-relaxed animate-fadeInUp stagger-2" style="opacity: 0;">
-                Nos produits sont conçus non seulement pour respecter les normes les plus strictes en matière de sécurité, mais aussi pour favoriser le confort et l'efficacité de vos employés lors de leur travail quotidien.
-            </p>
-            <p class="text-lg text-gray-700 leading-relaxed animate-fadeInUp stagger-3" style="opacity: 0;">
-                Nous nous engageons à fournir des équipements de protection de haute qualité, alliant robustesse et confort. Tous nos produits sont certifiés et respectent les réglementations en matière de sécurité au travail, afin que vous puissiez opérer en toute sérénité.
-            </p>
-            <p class="text-xl font-semibold text-red-700 animate-scaleIn stagger-4" style="opacity: 0;">
-                En choisissant VAL SECURIKOM, vous optez pour un partenaire fiable qui vous fournira les meilleurs équipements de protection individuelle, accompagnés d'un service client professionnel.
-            </p>
-        </div>
-    </div>
-</section>
-
-{# Produits Section #}
-<section class="relative py-20 bg-white overflow-hidden" style="z-index: 4;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold text-gradient mb-6 animate-scaleIn" style="opacity: 0;">Découvrez Nos Produits et Services</h2>
-            <p class="text-lg text-gray-700 leading-relaxed mb-4 max-w-4xl mx-auto animate-fadeInUp stagger-2" style="opacity: 0;">
-                Chez VAL SECURIKOM, nous mettons à votre disposition une large gamme de matériels de sécurité indispensables pour garantir la protection des travailleurs et la conformité réglementaire sur vos chantiers.
-            </p>
-            <p class="text-lg text-gray-700 leading-relaxed mb-4 max-w-4xl mx-auto animate-fadeInUp stagger-3" style="opacity: 0;">
-                Chaque équipement est soigneusement sélectionné afin d'assurer fiabilité, efficacité et respect des normes en vigueur.
-            </p>
-            <p class="text-xl font-semibold text-gray-900 max-w-4xl mx-auto animate-bounceIn stagger-4" style="opacity: 0;">
-                Notre objectif : vous offrir des solutions complètes et pratiques pour un environnement de travail sûr et maîtrisé.
-            </p>
-        </div>
-        
-        <div class="mb-12">
-            <h3 class="text-3xl font-bold text-red-600 mb-8 text-center animate-scaleIn stagger-5" style="opacity: 0;">Nos produits phares</h3>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {# EPI #}
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover animate-fadeInUp stagger-6 border border-gray-200" style="opacity: 0;">
-                <div class="bg-gradient-to-br from-red-500 to-red-600 h-48 flex items-center justify-center product-card-header">
-                    <i class="fas fa-hard-hat text-6xl text-white icon-bounce"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-red-600 mb-4">Équipements de Protection Individuelle (EPI)</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Casques, gants, lunettes, gilets, chaussures de sécurité… nos EPI couvrent l'ensemble des besoins en protection, que ce soit pour le BTP, l'industrie, les hôpitaux ou encore les transporteurs.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Chaque équipement est certifié et sélectionné pour offrir confort, robustesse et efficacité, en toutes situations de travail.
-                    </p>
-                    <ul class="mt-4 space-y-2">
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Casques et protections crâniennes</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Gants de sécurité multi-usage</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Chaussures et bottes de protection</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            {# Extincteurs #}
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover animate-fadeInUp stagger-7 border border-gray-200" style="opacity: 0;">
-                <div class="bg-gradient-to-br from-orange-500 to-orange-600 h-48 flex items-center justify-center product-card-header">
-                    <i class="fas fa-fire-extinguisher text-6xl text-white icon-bounce"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-red-600 mb-4">Extincteurs</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Nos extincteurs sont choisis pour répondre aux risques spécifiques de chaque chantier (feu électrique, matériaux inflammables, etc.).
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Faciles d'utilisation et conformes aux normes en vigueur, ils garantissent une intervention rapide et efficace en cas d'incendie.
-                    </p>
-                    <ul class="mt-4 space-y-2">
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Extincteurs poudre ABC</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Extincteurs CO2 pour feux électriques</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Maintenance et vérification</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            {# Trousses de premiers secours #}
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-8" style="opacity: 0;">
-                <div class="bg-gradient-to-br from-green-500 to-green-600 h-48 flex items-center justify-center product-card-header">
-                    <i class="fas fa-first-aid text-6xl text-white icon-bounce"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-red-600 mb-4">Trousses de premiers secours</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Nos trousses de premiers secours sont complètes et conformes aux obligations légales sur chantier.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Elles contiennent tout le nécessaire pour intervenir rapidement en cas de blessure légère.
-                    </p>
-                    <ul class="mt-4 space-y-2">
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Pansements et compresses stériles</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Désinfectants et solutions antiseptiques</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Équipement de secours d'urgence</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            {# Kits de démarrage #}
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover animate-fadeInUp stagger-9" style="opacity: 0;">
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center product-card-header">
-                    <i class="fas fa-box-open text-6xl text-white icon-bounce"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold text-red-600 mb-4">Kits de démarrage chantier</h3>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Prêts à l'emploi, nos kits regroupent les éléments essentiels pour débuter vos chantiers en toute sécurité.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mb-4">
-                        Ils incluent le matériel de prévention et de protection indispensable dès la première mise en place.
-                    </p>
-                    <ul class="mt-4 space-y-2">
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Kit EPI complet pour débutant</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Signalétique et balisage de chantier</span>
-                        </li>
-                        <li class="flex items-start group transition-all hover:translate-x-2">
-                            <i class="fas fa-check-circle text-green-500 mt-1 mr-2 check-icon"></i>
-                            <span class="text-gray-700">Trousse de secours intégrée</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{# CTA Section #}
-<section class="py-20 bg-gradient-to-br from-red-600 to-red-800 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-20">
-        <div class="pulse-circle"></div>
-        <div class="pulse-circle" style="animation-delay: 0.5s;"></div>
-    </div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-white animate-scaleIn" style="opacity: 0;">Prêt à sécuriser votre environnement de travail ?</h2>
-        <p class="text-lg lg:text-xl mb-8 max-w-3xl mx-auto text-white animate-fadeInUp stagger-2" style="opacity: 0;">
-            N'attendez plus pour assurer la sécurité de votre équipe. Contactez-nous dès aujourd'hui pour découvrir notre offre complète.
+{# Section Contact CTA #}
+<section class="py-20 bg-gradient-to-r from-red-600 to-red-700">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6" data-aos="fade-up">
+            Faites le choix d'un partenaire de confiance
+        </h2>
+        <p class="text-xl text-white/90 mb-10" data-aos="fade-up" data-aos-delay="100">
+            N'attendez plus pour assurer la sécurité de votre équipe. 
+            Contactez-nous dès aujourd'hui pour découvrir notre offre complète d'EPI.
         </p>
-        <a href="{{ path('app_contact') }}" class="inline-flex items-center gap-3 bg-white text-red-700 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-110 shimmer-btn animate-bounceIn stagger-3 group" style="opacity: 0;">
-            <span>Contactez-nous</span>
-            <i class="fas fa-arrow-right transition-transform group-hover:translate-x-2"></i>
+        <a href="{{ path('app_contact') }}" 
+           class="btn-security inline-flex items-center justify-center gap-3 px-10 py-5 bg-red-800 text-white rounded-full font-bold text-lg shadow-2xl hover:bg-red-900"
+           data-aos="fade-up" 
+           data-aos-delay="200">
+            <span class="relative z-10">Nos produits</span>
+            <svg class="w-6 h-6 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
         </a>
     </div>
 </section>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Trigger entrance animations on scroll
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-            }
-        });
-    }, observerOptions);
-
-    // Observe all animated elements
-    const animatedElements = document.querySelectorAll('[style*="opacity: 0"]');
-    animatedElements.forEach(el => observer.observe(el));
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+        section.style.transform = 'none';
+        section.style.willChange = 'auto';
+    });
     
-    // Add enhanced hover effects to cards
-    const cards = document.querySelectorAll('.card-hover, .feature-card');
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-12px) scale(1.02)';
-        });
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href.length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
         });
     });
 });
 </script>
+
 {% endblock %}
