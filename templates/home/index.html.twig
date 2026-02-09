@@ -514,7 +514,7 @@
             </div>
             
             <div class="left-col-slider" id="left-col-slider">
-                <div id="left-slider-entites"></div>
+                <div id="left-slider-entites" style="position:relative;width:100%;height:100%;"></div>
             </div>
             
             <ul class="nav-slider">
@@ -598,7 +598,7 @@
 
 .container-slider {
     width: 100%;
-    height: 600px;
+    height: 500px;
     background-color: #2C302E;
     display: flex;
     position: relative;
@@ -621,14 +621,21 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-position: center !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
     opacity: 0;
     transition: 1000ms cubic-bezier(1.000, 0.040, 0.355, 1.000) transform, 
-                1000ms cubic-bezier(0.680, -0.550, 0.265, 1.550) clip-path;
+                1000ms cubic-bezier(0.680, -0.550, 0.265, 1.550) clip-path,
+                800ms ease opacity;
     transform: translateY(-100%) scale(1);
     z-index: -1;
+    overflow: hidden;
+}
+
+.left-col-slider .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
 }
 
 .left-col-slider .slide.previous {
@@ -654,7 +661,7 @@
 
 .left-col-slider .slide.current {
     opacity: 1;
-    transform: translateY(0) scale(1.25);
+    transform: translateY(0) scale(1);
     z-index: 2;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
@@ -718,7 +725,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .container-slider {
-        height: 500px;
+        height: 400px;
     }
     
     .caption-slider {
@@ -740,7 +747,7 @@
 
 @media (max-width: 480px) {
     .container-slider {
-        height: 400px;
+        height: 350px;
     }
     
     .caption-slider {
@@ -1401,7 +1408,11 @@ document.addEventListener('DOMContentLoaded', function() {
             slideButton = document.createElement('a');
         
         slide.classList.add('slide');
-        slide.setAttribute('style', 'background:url(' + slideData[i].src + ')');
+        let slideImg = document.createElement('img');
+        slideImg.src = slideData[i].src;
+        slideImg.alt = slideData[i].title;
+        slideImg.loading = (i === 0) ? 'eager' : 'lazy';
+        slide.appendChild(slideImg);
         caption.classList.add('caption-slider');
         slideTitle.classList.add('caption-heading');
         slideTitle.innerHTML = '<h1>' + slideData[i].title + '</h1>';
@@ -1441,6 +1452,10 @@ document.addEventListener('DOMContentLoaded', function() {
     sliderCaption.style.display = 'none';
 
     function nextSlide(){
+        // Nettoyer les classes change de tous les slides
+        slides.forEach(function(s){ s.classList.remove('change'); });
+        captions.forEach(function(c){ c.classList.remove('change'); });
+        
         slides[0].classList.remove('current');
         slides[0].classList.add('previous', 'change');
         slides[1].classList.remove('next');
@@ -1464,6 +1479,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function previousSlide(){
+        // Nettoyer les classes change de tous les slides
+        slides.forEach(function(s){ s.classList.remove('change'); });
+        captions.forEach(function(c){ c.classList.remove('change'); });
+        
         let last = slides.length - 1;
         
         slides[0].classList.remove('current');
