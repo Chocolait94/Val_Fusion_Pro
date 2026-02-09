@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (cookieNotice) {
                 cookieNotice.classList.add('show');
             }
-        }, 1000);
+        }, 2000); // Augmenté à 2 secondes pour être moins intrusif
     }
 });
 
@@ -88,17 +88,46 @@ forms.forEach(form => {
 
 // ===== ANIMATIONS POUR VAL BTP =====
 
-// Intersection Observer pour les animations au scroll
+// Détection du type d'appareil pour optimiser les performances
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const isTablet = /iPad|Android/i.test(navigator.userAgent) && window.innerWidth > 768;
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Configuration adaptative des animations
+const animationConfig = {
+    mobile: {
+        threshold: 0.2,
+        rootMargin: '0px 0px -30px 0px',
+        sequentialDelay: 400
+    },
+    tablet: {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px', 
+        sequentialDelay: 300
+    },
+    desktop: {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px',
+        sequentialDelay: 200
+    }
+};
+
+// Choisir la configuration selon l'appareil
+const config = isMobile ? animationConfig.mobile : 
+               isTablet ? animationConfig.tablet : 
+               animationConfig.desktop;
+
+// Intersection Observer pour les animations au scroll - Optimisé
 const btpScrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !prefersReducedMotion) {
             entry.target.classList.add('btp-visible');
             console.log('Animation déclenchée pour:', entry.target);
         }
     });
 }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: config.threshold,
+    rootMargin: config.rootMargin
 });
 
 // Observer tous les éléments avec animation au scroll
@@ -114,31 +143,41 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Observer ajouté pour:', el);
     });
     
-    // Animation séquentielle pour les éléments de la galerie
+    // Animation séquentielle pour les éléments de la galerie - Adaptative
     const galleryItems = document.querySelectorAll('.btp-gallery-item');
     const galleryObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !prefersReducedMotion) {
                 setTimeout(() => {
                     entry.target.classList.add('btp-visible');
-                }, index * 100); // Délai progressif
+                }, index * config.sequentialDelay); // Utilise la configuration adaptative
             }
         });
     }, {
-        threshold: 0.1
+        threshold: config.threshold
     });
     
     galleryItems.forEach(item => galleryObserver.observe(item));
     
-    // Effet parallaxe simple pour le hero
+    // Effet parallaxe simple pour le hero - Optimisé pour la performance
     const heroSection = document.querySelector('.relative.bg-gradient-to-br');
     if (heroSection) {
-        window.addEventListener('scroll', () => {
+        let ticking = false;
+        
+        function updateParallax() {
             const scrolled = window.pageYOffset;
-            const rate = scrolled * 0.5;
+            const rate = scrolled * 0.3; // Réduit de 0.5 à 0.3 pour un effet plus doux
             
             if (scrolled <= heroSection.offsetHeight) {
                 heroSection.style.transform = `translateY(${rate}px)`;
+            }
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
             }
         });
     }
@@ -175,8 +214,49 @@ document.addEventListener('DOMContentLoaded', function() {
         type();
     }
     
-    // Smooth reveal au chargement de la page
+    // Smooth reveal au chargement de la page - Plus doux
     setTimeout(() => {
         document.body.style.opacity = '1';
-    }, 100);
+    }, 300); // Augmenté à 300ms pour éviter les saccades
+    
+    // ===== OPTIMISATIONS PERFORMANCE SUPPLÉMENTAIRES =====
+    
+    // Détection de performance faible et ajustements automatiques
+    const performanceObserver = new PerformanceObserver((list) => {
+        const longTasks = list.getEntries().filter(entry => entry.duration > 50);
+        if (longTasks.length > 3) {
+            // Performance faible détectée - Réduire les animations
+            console.log('Performance faible détectée - Optimisation automatique');
+            document.documentElement.style.setProperty('--animation-speed', '0.5x');
+            
+            // Désactiver les particules
+            const particles = document.querySelectorAll('.particle, .particles-container');
+            particles.forEach(particle => particle.style.display = 'none');
+        }
+    });
+    
+    // Observer les tâches longues si supporté
+    if (window.PerformanceObserver && PerformanceObserver.supportedEntryTypes.includes('longtask')) {
+        performanceObserver.observe({ entryTypes: ['longtask'] });
+    }
+    
+    // Pause les animations quand l'onglet n'est pas visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            document.documentElement.style.animationPlayState = 'paused';
+        } else {
+            document.documentElement.style.animationPlayState = 'running';
+        }
+    });
+    
+    // Débouncer le scroll pour optimiser les performances
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(() => {
+            // Logique de scroll optimisée ici
+        }, 16); // ~60fps
+    }, { passive: true });
 });

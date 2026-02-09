@@ -13,21 +13,21 @@
             transform: translateY(0px) translateX(0px) rotate(0deg);
         }
         33% { 
-            transform: translateY(-30px) translateX(10px) rotate(5deg);
+            transform: translateY(-20px) translateX(5px) rotate(2deg);
         }
         66% { 
-            transform: translateY(-15px) translateX(-10px) rotate(-5deg);
+            transform: translateY(-10px) translateX(-5px) rotate(-2deg);
         }
     }
     
     @keyframes pulse-glow {
         0%, 100% { 
-            box-shadow: 0 0 30px rgba(255, 8, 68, 0.6);
+            box-shadow: 0 0 20px rgba(255, 8, 68, 0.4);
             filter: brightness(1);
         }
         50% { 
-            box-shadow: 0 0 60px rgba(255, 8, 68, 0.9), 0 0 90px rgba(255, 8, 68, 0.5);
-            filter: brightness(1.2);
+            box-shadow: 0 0 40px rgba(255, 8, 68, 0.7), 0 0 60px rgba(255, 8, 68, 0.3);
+            filter: brightness(1.1);
         }
     }
     
@@ -58,25 +58,25 @@
     
     @keyframes glow-pulse {
         0%, 100% {
-            filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.4));
+            filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.3));
             transform: scale(1);
         }
         50% {
-            filter: drop-shadow(0 0 30px rgba(220, 38, 38, 0.8)) drop-shadow(0 0 50px rgba(220, 38, 38, 0.5));
-            transform: scale(1.02);
+            filter: drop-shadow(0 0 20px rgba(220, 38, 38, 0.6)) drop-shadow(0 0 35px rgba(220, 38, 38, 0.3));
+            transform: scale(1.01);
         }
     }
     
     .animate-float-home {
-        animation: float-home 5s ease-in-out infinite;
+        animation: float-home 8s ease-in-out infinite;
     }
     
     .animate-pulse-glow {
-        animation: pulse-glow 2.5s ease-in-out infinite;
+        animation: pulse-glow 4s ease-in-out infinite;
     }
     
     .animate-glow-pulse {
-        animation: glow-pulse 3s ease-in-out infinite;
+        animation: glow-pulse 5s ease-in-out infinite;
     }
     
     /* Particules améliorées avec gradient radial */
@@ -136,6 +136,122 @@
     .no-scroll-transform {
         transform: none !important;
     }
+    
+    /* ============================================
+       RESPONSIVE ANIMATIONS & PERFORMANCE
+       ============================================ */
+    
+    /* Respecter les préférences d'accessibilité */
+    @media (prefers-reduced-motion: reduce) {
+        .animate-float-home,
+        .animate-pulse-glow,
+        .animate-glow-pulse,
+        .particles-container .particle {
+            animation: none !important;
+        }
+        
+        .card-shimmer:hover::before {
+            animation: none !important;
+        }
+        
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    
+    /* Tablettes et écrans moyens */
+    @media (max-width: 1024px) {
+        .animate-float-home {
+            animation-duration: 12s !important;
+        }
+        
+        .animate-pulse-glow {
+            animation-duration: 6s !important;
+        }
+        
+        .animate-glow-pulse {
+            animation-duration: 8s !important;
+        }
+        
+        /* Réduire l'intensité des effets */
+        @keyframes glow-pulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(220, 38, 38, 0.2));
+                transform: scale(1);
+            }
+            50% {
+                filter: drop-shadow(0 0 15px rgba(220, 38, 38, 0.4));
+                transform: scale(1.005);
+            }
+        }
+    }
+    
+    /* Mobiles et petits écrans */
+    @media (max-width: 768px) {
+        /* Ralentir encore plus les animations sur mobile */
+        .animate-float-home {
+            animation-duration: 15s !important;
+        }
+        
+        .animate-pulse-glow {
+            animation-duration: 8s !important;
+        }
+        
+        .animate-glow-pulse {
+            animation-duration: 10s !important;
+        }
+        
+        /* Réduire le nombre de particules sur mobile */
+        .particles-container .particle:nth-child(n+5) {
+            display: none;
+        }
+        
+        /* Désactiver certains effets coûteux */
+        .glass-effect {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Simplifier les animations de particules */
+        .particle {
+            animation-duration: 20s !important;
+        }
+    }
+    
+    /* Très petits écrans */
+    @media (max-width: 480px) {
+        /* Désactiver les particules sur très petits écrans */
+        .particles-container {
+            display: none;
+        }
+        
+        /* Réduire drastiquement les effets */
+        .animate-pulse-glow,
+        .animate-glow-pulse {
+            animation: none !important;
+        }
+        
+        /* Simplifier les animations float */
+        .animate-float-home {
+            animation: simple-float 20s ease-in-out infinite;
+        }
+        
+        @keyframes simple-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    }
+    
+    /* Écrans haute résolution - optimiser la performance */
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .parallax-layer {
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+    }
 </style>
 
 {# Hero Section - Premium Design #}
@@ -162,16 +278,16 @@
     </video>
     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60"></div>
     
-    {# Floating Particles améliorées #}
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="particle w-2 h-2 top-[10%] left-[15%]" style="animation: particle-float 6s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 0s;"></div>
-        <div class="particle w-3 h-3 top-[20%] left-[80%]" style="animation: particle-float 7s ease-in-out infinite, float-home 6s ease-in-out infinite; animation-delay: 1s;"></div>
-        <div class="particle w-1.5 h-1.5 top-[40%] left-[10%]" style="animation: particle-float 5s ease-in-out infinite, float-home 4s ease-in-out infinite; animation-delay: 2s;"></div>
-        <div class="particle w-2.5 h-2.5 top-[60%] left-[70%]" style="animation: particle-float 8s ease-in-out infinite, float-home 5.5s ease-in-out infinite; animation-delay: 1.5s;"></div>
-        <div class="particle w-2 h-2 top-[80%] left-[30%]" style="animation: particle-float 6.5s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 3s;"></div>
-        <div class="particle w-3 h-3 top-[15%] left-[50%]" style="animation: particle-float 7.5s ease-in-out infinite, float-home 6s ease-in-out infinite; animation-delay: 2.5s;"></div>
-        <div class="particle w-1.5 h-1.5 top-[70%] left-[85%]" style="animation: particle-float 5.5s ease-in-out infinite, float-home 4.5s ease-in-out infinite; animation-delay: 0.5s;"></div>
-        <div class="particle w-2 h-2 top-[35%] left-[90%]" style="animation: particle-float 6s ease-in-out infinite, float-home 5s ease-in-out infinite; animation-delay: 1.8s;"></div>
+    {# Floating Particles améliorées - Ralentites et optimisées #}
+    <div class="absolute inset-0 overflow-hidden pointer-events-none particles-container">
+        <div class="particle w-2 h-2 top-[10%] left-[15%]" style="animation: particle-float 12s ease-in-out infinite, float-home 10s ease-in-out infinite; animation-delay: 0s;"></div>
+        <div class="particle w-3 h-3 top-[20%] left-[80%]" style="animation: particle-float 15s ease-in-out infinite, float-home 12s ease-in-out infinite; animation-delay: 2s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[40%] left-[10%]" style="animation: particle-float 10s ease-in-out infinite, float-home 8s ease-in-out infinite; animation-delay: 4s;"></div>
+        <div class="particle w-2.5 h-2.5 top-[60%] left-[70%]" style="animation: particle-float 16s ease-in-out infinite, float-home 11s ease-in-out infinite; animation-delay: 3s;"></div>
+        <div class="particle w-2 h-2 top-[80%] left-[30%]" style="animation: particle-float 13s ease-in-out infinite, float-home 10s ease-in-out infinite; animation-delay: 6s;"></div>
+        <div class="particle w-3 h-3 top-[15%] left-[50%]" style="animation: particle-float 14s ease-in-out infinite, float-home 12s ease-in-out infinite; animation-delay: 5s;"></div>
+        <div class="particle w-1.5 h-1.5 top-[70%] left-[85%]" style="animation: particle-float 11s ease-in-out infinite, float-home 9s ease-in-out infinite; animation-delay: 1s;"></div>
+        <div class="particle w-2 h-2 top-[35%] left-[90%]" style="animation: particle-float 12s ease-in-out infinite, float-home 10s ease-in-out infinite; animation-delay: 3.6s;"></div>
     </div>
     
     {# Content avec animations améliorées #}

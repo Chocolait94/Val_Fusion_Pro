@@ -52,10 +52,20 @@ section {
     transform: none !important;
 }
 
-/* Optimisation Mobile */
+/* Optimisation Mobile - Améliorée */
+@media (max-width: 1024px) {
+    * {
+        animation-duration: 5s !important;
+    }
+}
+
 @media (max-width: 768px) {
     * {
-        animation-duration: 0.3s !important;
+        animation-duration: 7s !important;
+    }
+    
+    .animate-bounce, .animate-pulse {
+        animation: none !important;
     }
     
     .btn-formation {

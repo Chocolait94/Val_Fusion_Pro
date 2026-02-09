@@ -19,7 +19,7 @@
 @keyframes blueprintReveal {
     0% {
         opacity: 0;
-        transform: scale(0.8) rotate(-5deg);
+        transform: scale(0.9) rotate(-2deg);
     }
     100% {
         opacity: 1;
@@ -32,7 +32,7 @@
         transform: translateX(0) rotate(0deg);
     }
     50% {
-        transform: translateX(10px) rotate(5deg);
+        transform: translateX(5px) rotate(2deg);
     }
 }
 
@@ -50,11 +50,24 @@ section {
     transform: none !important;
 }
 
-/* Optimisation Mobile */
-@media (max-width: 768px) {
-    /* Performance mobile */
+/* Optimisation Mobile - Améliorée */
+@media (max-width: 1024px) {
+    /* Ralentir sur tablettes */
     * {
-        animation-duration: 0.3s !important;
+        animation-duration: 5s !important;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Performance mobile optimisée */
+    * {
+        animation-duration: 7s !important;
+    }
+    
+    /* Désactiver animations complexes */
+    .animate-bounce,
+    .animate-pulse {
+        animation: none !important;
     }
     
     .btn-concept {
