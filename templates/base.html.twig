@@ -167,6 +167,118 @@
 
     {% include 'partials/footer.html.twig' %}
 
+    <!-- Bannière de consentement des cookies -->
+    <div id="cookieNotice" class="cookie-notice">
+        <div class="cookie-notice-container">
+            <div class="cookie-notice-content">
+                <div class="cookie-notice-icon">
+                    <i class="fas fa-cookie-bite"></i>
+                </div>
+                <div class="cookie-notice-text">
+                    <h3 class="cookie-notice-title">🍪 Gestion des Cookies</h3>
+                    <p class="cookie-notice-description">
+                        Nous utilisons des cookies pour améliorer votre expérience de navigation, 
+                        analyser le trafic du site et personnaliser le contenu. En cliquant sur "Accepter", 
+                        vous consentez à l'utilisation de tous les cookies. 
+                        <a href="{{ path('app_politique') }}" class="cookie-link">En savoir plus</a>
+                    </p>
+                </div>
+            </div>
+            <div class="cookie-notice-actions">
+                <button onclick="acceptCookies()" class="cookie-btn cookie-btn-accept">
+                    <i class="fas fa-check"></i> Accepter
+                </button>
+                <button onclick="refuseCookies()" class="cookie-btn cookie-btn-refuse">
+                    <i class="fas fa-times"></i> Refuser
+                </button>
+                <button onclick="openCookieSettings()" class="cookie-btn cookie-btn-settings">
+                    <i class="fas fa-cog"></i> Personnaliser
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de paramètres des cookies -->
+    <div id="cookieSettingsModal" class="cookie-modal">
+        <div class="cookie-modal-content">
+            <div class="cookie-modal-header">
+                <h2><i class="fas fa-cookie-bite"></i> Paramètres des Cookies</h2>
+                <button onclick="closeCookieSettings()" class="cookie-modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cookie-modal-body">
+                <p class="cookie-modal-intro">
+                    En utilisant notre site, vous acceptez notre utilisation de cookies. 
+                    Vous pouvez personnaliser vos préférences ci-dessous :
+                </p>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h3>🔒 Cookies essentiels</h3>
+                            <p>Nécessaires au fonctionnement du site (toujours actifs)</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h3>📊 Cookies analytiques</h3>
+                            <p>Nous aident à comprendre comment vous utilisez notre site</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="analyticsCookies" checked>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h3>🎯 Cookies marketing</h3>
+                            <p>Utilisés pour personnaliser la publicité</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="marketingCookies">
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div class="cookie-category-info">
+                            <h3>⚙️ Cookies de préférences</h3>
+                            <p>Mémorisent vos choix et préférences</p>
+                        </div>
+                        <label class="cookie-switch">
+                            <input type="checkbox" id="preferencesCookies" checked>
+                            <span class="cookie-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="cookie-modal-footer">
+                <button onclick="saveAllCookies()" class="cookie-btn cookie-btn-accept">
+                    <i class="fas fa-check"></i> Tout accepter
+                </button>
+                <button onclick="saveCookieSettings()" class="cookie-btn cookie-btn-primary">
+                    <i class="fas fa-save"></i> Enregistrer mes choix
+                </button>
+                <button onclick="rejectAllCookies()" class="cookie-btn cookie-btn-refuse">
+                    <i class="fas fa-ban"></i> Tout refuser
+                </button>
+            </div>
+        </div>
+    </div>
+
     {% block javascripts %}
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
