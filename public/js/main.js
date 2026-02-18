@@ -41,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const hasConsent = localStorage.getItem("cookieConsent");
     
     if (!hasConsent && cookieNotice) {
-        // L'utilisateur n'a jamais fait de choix, afficher la banniere apres 1 seconde
+        // L'utilisateur n'a jamais fait de choix, afficher le popup apres 0.8 seconde
         setTimeout(() => {
             cookieNotice.classList.add("show");
-        }, 1000);
+            document.body.style.overflow = "hidden"; // Bloquer le scroll tant que le popup est visible
+        }, 800);
     } else {
         // L'utilisateur a deja fait un choix, ne rien afficher
         if (cookieNotice) {
@@ -108,14 +109,17 @@ function refuseCookies() {
 function hideCookieNotice() {
     const cookieNotice = document.getElementById("cookieNotice");
     if (cookieNotice) {
-        // Animation de sortie
-        cookieNotice.classList.remove("show");
-        cookieNotice.style.animation = "slideOutDown 0.4s ease-in forwards";
+        // Animation de sortie (fondu)
+        cookieNotice.style.transition = "opacity 0.3s ease";
+        cookieNotice.style.opacity = "0";
         
         // Cacher completement apres l'animation
         setTimeout(() => {
-            cookieNotice.style.display = "none";
-        }, 400);
+            cookieNotice.classList.remove("show");
+            cookieNotice.style.opacity = "";
+            cookieNotice.style.transition = "";
+            document.body.style.overflow = "";
+        }, 300);
     }
 }
 
