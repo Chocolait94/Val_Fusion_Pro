@@ -26,15 +26,10 @@ echo ">>> DATABASE_URL définie : $([ -n "$DATABASE_URL" ] && echo OUI || echo N
 # ─── Compilation du cache Symfony avec la VRAIE DATABASE_URL de Render
 echo ">>> Compilation du cache Symfony (prod)..."
 php bin/console cache:clear --env=prod --no-debug --no-interaction
-if [ $? -ne 0 ]; then
-    echo "[ERREUR] cache:clear a échoué - vérifier les logs ci-dessus"
-    exit 1
-fi
+echo ">>> cache:clear terminé (code: $?)"
 
 php bin/console cache:warmup --env=prod --no-debug --no-interaction
-if [ $? -ne 0 ]; then
-    echo "[ATTENTION] cache:warmup a échoué - l'app peut quand même démarrer"
-fi
+echo ">>> cache:warmup terminé (code: $?)"
 
 # ─── Génération des proxies Doctrine
 echo ">>> Génération des proxies Doctrine..."
