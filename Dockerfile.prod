@@ -27,8 +27,10 @@ WORKDIR /var/www/html
 # ─── Copie du code source ─────────────────────────────────────────────────────
 COPY . .
 
-# ─── Dépendances PHP (sans dev, optimisées) ───────────────────────────────────
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-ansi
+# ─── Dépendances PHP (sans dev, sans auto-scripts qui échouent en build) ──────
+ENV APP_ENV=prod
+ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-ansi --no-scripts
 
 # ─── Permissions ──────────────────────────────────────────────────────────────
 RUN mkdir -p var/cache var/log && \
