@@ -1,36 +1,60 @@
 #!/bin/bash
-# Ne pas utiliser set -e : on veut contrôler les erreurs manuellement
 
 echo "=========================================="
 echo "  VAL Fusion Pro - Démarrage production"
 echo "=========================================="
 
-# ─── Aller dans le répertoire du projet
 cd /var/www/html
 
-# ─── Permissions sur var/
+# ─── Permissions
 mkdir -p var/cache/prod var/log
 chown -R www-data:www-data var/
 chmod -R 775 var/
 
-# ─── Attendre que la base de données soit prête (max 60 secondes)
+# ─── Vérification des variables d'environnement obligatoires
+if [ -z "$APP_SECRET" ]; then
+    echo "[ERREUR] APP_SECRET n'est pas définie dans Render Environment Variables !"
+fi
+
+if [ -z "$DATABASE_URL" ]; then
+    echo "[ERREUR] DATABASE_URL n'est pas définie dans Render Environment Variables !"
+fi
+
+echo ">>> APP_ENV = $APP_ENV"
+echo ">>> DATABASE_URL définie : $([ -n "$DATABASE_URL" ] && echo OUI || echo NON)"
+
+# ─── Compilation du cache Symfony avec la VRAIE DATABASE_URL de Render
+echo ">>> Compilation du cache Symfony (prod)..."
+php bin/console cache:clear --env=prod --no-debug --no-interaction
+if [ $? -ne 0 ]; then
+    echo "[ERREUR] cache:clear a échoué - vérifier les logs ci-dessus"
+    exit 1
+fi
+
+php bin/console cache:warmup --env=prod --no-debug --no-interaction
+if [ $? -ne 0 ]; then
+    echo "[ATTENTION] cache:warmup a échoué - l'app peut quand même démarrer"
+fi
+
+# ─── Génération des proxies Doctrine
+echo ">>> Génération des proxies Doctrine..."
+php bin/console doctrine:orm:generate-proxies --env=prod --no-interaction 2>/dev/null || true
+
+# ─── Attendre la base de données (max 60 secondes)
 echo ">>> Attente de la base de données..."
 for i in $(seq 1 20); do
     php bin/console doctrine:query:sql "SELECT 1" --env=prod > /dev/null 2>&1 && echo ">>> BDD prête !" && break
-    echo "    Attente BDD ($i/20)..."
+    echo "    Tentative $i/20..."
     sleep 3
 done
 
-# ─── Exécuter les migrations
-echo ">>> Exécution des migrations..."
-php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration --env=prod
-if [ $? -ne 0 ]; then
-    echo "[ATTENTION] Les migrations ont échoué, vérifier DATABASE_URL"
-fi
+# ─── Migrations
+echo ">>> Migrations..."
+php bin/console doctrine:migrations:migrate --env=prod --no-interaction --allow-no-migration
 
-# ─── Assets Symfony
-echo ">>> Installation des assets..."
-php bin/console assets:install public --no-interaction --env=prod
+# ─── Assets
+php bin/console assets:install public --env=prod --no-interaction 2>/dev/null || true
 
-echo ">>> Démarrage Nginx + PHP-FPM via Supervisord..."
+echo ">>> Démarrage Supervisord (Nginx + PHP-FPM)..."
 exec /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf
+

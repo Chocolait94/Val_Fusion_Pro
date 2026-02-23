@@ -1,0 +1,13 @@
+.git
+.gitignore
+docker-compose.yml
+compose.override.yaml
+Makefile
+README*.md
+SECURITY_AUDIT.md
+.env.local
+.env.*.local
+.env.dev
+var/
+node_modules/
+*.md
