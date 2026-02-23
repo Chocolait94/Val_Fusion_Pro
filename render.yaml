@@ -1,0 +1,54 @@
+# ============================================================
+#  render.yaml — Blueprint Render pour VAL Fusion Pro
+#  Documentation : https://render.com/docs/blueprint-spec
+# ============================================================
+
+services:
+  - type: web
+    name: val-fusion-pro
+    env: docker
+    dockerfilePath: ./Dockerfile.prod
+    region: frankfurt          # Europe (le plus proche)
+    plan: free                 # Changer en "starter" pour la prod
+
+    # Port exposé par le container
+    ports:
+      - port: 80
+        protocol: http
+
+    # Variables d'environnement (à compléter dans le dashboard Render)
+    envVars:
+      - key: APP_ENV
+        value: prod
+
+      # Généré automatiquement par Render (clé secrète Symfony)
+      - key: APP_SECRET
+        generateValue: true
+
+      # URL de connexion BDD (fournie automatiquement si vous utilisez
+      # la base PostgreSQL ci-dessous, sinon renseigner manuellement)
+      - key: DATABASE_URL
+        fromDatabase:
+          name: val-fusion-db
+          property: connectionString
+
+      # Mailer : null par défaut, configurer SMTP si besoin
+      - key: MAILER_DSN
+        value: null://null
+
+      # URL publique du site (remplacer par votre domaine Render)
+      - key: DEFAULT_URI
+        value: https://val-fusion-pro.onrender.com
+
+    # Healthcheck (Render vérifie que l'app répond)
+    healthCheckPath: /
+
+# ─── Base de données PostgreSQL gratuite ─────────────────────────────────────
+# Render propose PostgreSQL gratuitement (recommandé).
+# La DATABASE_URL est injectée automatiquement ci-dessus.
+# ─────────────────────────────────────────────────────────────────────────────
+databases:
+  - name: val-fusion-db
+    databaseName: valfusion
+    plan: free
+    region: frankfurt

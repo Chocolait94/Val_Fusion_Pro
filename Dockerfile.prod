@@ -1,0 +1,52 @@
+FROM php:8.2-fpm
+
+# ─── Dépendances système ───────────────────────────────────────────────────────
+RUN apt-get update && apt-get install -y \
+    nginx \
+    supervisor \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    libpq-dev \
+    zip \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
+
+# ─── Extensions PHP ───────────────────────────────────────────────────────────
+RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd zip
+
+# ─── Composer ─────────────────────────────────────────────────────────────────
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# ─── Répertoire de travail ────────────────────────────────────────────────────
+WORKDIR /var/www/html
+
+# ─── Copie du code source ─────────────────────────────────────────────────────
+COPY . .
+
+# ─── Dépendances PHP (sans dev, optimisées) ───────────────────────────────────
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-ansi
+
+# ─── Permissions ──────────────────────────────────────────────────────────────
+RUN mkdir -p var/cache var/log && \
+    chown -R www-data:www-data var/ && \
+    chmod -R 775 var/
+
+# ─── Configuration Nginx ──────────────────────────────────────────────────────
+COPY docker/nginx/render.conf /etc/nginx/sites-available/default
+RUN rm -f /etc/nginx/sites-enabled/default && \
+    ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# ─── Configuration Supervisor ─────────────────────────────────────────────────
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# ─── Script de démarrage ──────────────────────────────────────────────────────
+COPY docker/php/start.sh /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE 80
+
+CMD ["/start.sh"]

@@ -19,15 +19,29 @@ final class Version20251222143410 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE business_entity (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT NOT NULL, details LONGTEXT DEFAULT NULL, icon VARCHAR(255) DEFAULT NULL, display_order INT NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
-        $this->addSql('CREATE TABLE contact (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, message LONGTEXT NOT NULL, consent TINYINT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8mb4');
+        // Utilisation de l'API Schema Doctrine (compatible MySQL et PostgreSQL)
+        $businessEntity = $schema->createTable('business_entity');
+        $businessEntity->addColumn('id', 'integer', ['autoincrement' => true]);
+        $businessEntity->addColumn('name', 'string', ['length' => 255]);
+        $businessEntity->addColumn('description', 'text');
+        $businessEntity->addColumn('details', 'text', ['notnull' => false]);
+        $businessEntity->addColumn('icon', 'string', ['length' => 255, 'notnull' => false]);
+        $businessEntity->addColumn('display_order', 'integer');
+        $businessEntity->setPrimaryKey(['id']);
+
+        $contact = $schema->createTable('contact');
+        $contact->addColumn('id', 'integer', ['autoincrement' => true]);
+        $contact->addColumn('name', 'string', ['length' => 255]);
+        $contact->addColumn('email', 'string', ['length' => 255]);
+        $contact->addColumn('message', 'text');
+        $contact->addColumn('consent', 'boolean');
+        $contact->addColumn('created_at', 'datetime');
+        $contact->setPrimaryKey(['id']);
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE business_entity');
-        $this->addSql('DROP TABLE contact');
+        $schema->dropTable('contact');
+        $schema->dropTable('business_entity');
     }
 }
