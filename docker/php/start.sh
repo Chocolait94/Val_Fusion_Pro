@@ -43,9 +43,9 @@ for i in $(seq 1 20); do
     sleep 3
 done
 
-# ─── Migrations
+# ─── Migrations (non-fatal : l'app démarre même si la BDD est inaccessible)
 echo ">>> Migrations..."
-php bin/console doctrine:migrations:migrate --env=prod --no-interaction --allow-no-migration
+php bin/console doctrine:migrations:migrate --env=prod --no-interaction --allow-no-migration || echo "[ATTENTION] Migrations échouées - vérifier DATABASE_URL"
 
 # ─── Assets
 php bin/console assets:install public --env=prod --no-interaction 2>/dev/null || true
